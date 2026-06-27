@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #f8fffe;
+  background: var(--brand-cream);
   padding: 2rem 1.5rem;
   gap: 1.25rem;
 }
@@ -12,20 +12,18 @@
 /* ── Logo + tagline ── */
 .top {
   text-align: center;
-}
-
-.wordmark {
-  font-size: 2.5rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--teal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tagline {
-  margin-top: 0.375rem;
-  font-size: 0.9375rem;
+  margin-top: 0.5rem;
+  font-size: 0.8125rem;
   color: var(--gray-600);
-  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ── Card ── */
@@ -64,7 +62,7 @@
 
 .modeTabActive {
   background: white;
-  color: var(--teal);
+  color: var(--brand-purple);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
@@ -110,7 +108,7 @@
 
 .forgot {
   font-size: 0.875rem;
-  color: var(--teal);
+  color: var(--brand-purple);
   font-weight: 500;
   cursor: pointer;
   text-align: right;
@@ -122,7 +120,7 @@
 }
 
 .primaryBtn {
-  background: var(--teal);
+  background: var(--brand-purple);
   color: white;
   border: none;
   border-radius: 0.75rem;
@@ -136,7 +134,7 @@
 }
 
 .primaryBtn:hover {
-  background: var(--teal-dark);
+  background: var(--brand-dark);
 }
 
 /* ── Divider ── */
@@ -198,7 +196,7 @@
 }
 
 .link {
-  color: var(--teal);
+  color: var(--brand-purple);
   cursor: pointer;
 }
 

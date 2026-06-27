@@ -2,26 +2,24 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f8fffe;
+  background: var(--brand-cream);
 }
 
 .header {
   text-align: center;
   padding: 3rem 1.5rem 1.5rem;
-}
-
-.wordmark {
-  font-size: 2.75rem;
-  font-weight: 700;
-  letter-spacing: -0.04em;
-  color: var(--teal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .tagline {
-  margin-top: 0.5rem;
-  font-size: 1rem;
+  margin-top: 0.625rem;
+  font-size: 0.8125rem;
   color: var(--gray-600);
-  font-style: italic;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .main {
@@ -29,7 +27,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem 1.5rem 2rem;
+  padding: 1.5rem 1.5rem 2rem;
 }
 
 .prompt {
@@ -60,7 +58,7 @@
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.14);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.18);
 }
 
 .card:active {
@@ -73,7 +71,7 @@
 }
 
 .cardHelp {
-  background: var(--purple);
+  background: var(--brand-purple);
   color: white;
 }
 
@@ -111,10 +109,6 @@
 @media (max-width: 600px) {
   .cards {
     flex-direction: column;
-  }
-
-  .wordmark {
-    font-size: 2.25rem;
   }
 
   .header {

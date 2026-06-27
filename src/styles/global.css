@@ -5,19 +5,35 @@
 }
 
 :root {
-  --teal: #1D9E75;
-  --teal-dark: #085041;
-  --teal-light: #E1F5EE;
-  --purple: #534AB7;
-  --purple-dark: #3C3489;
-  --purple-light: #EEEDFE;
+  /* ── Elliss brand palette (from brand identity guide) ── */
+  --brand-dark:   #1B0C42;   /* Darkest navy — backgrounds, deep contrast */
+  --brand-purple: #5240B8;   /* Primary brand purple */
+  --brand-mid:    #7B66CC;   /* Medium purple — secondary UI */
+  --brand-soft:   #A898DC;   /* Soft lavender — borders, subtle accents */
+  --brand-grape:  #872280;   /* Grape / magenta — accent */
+  --brand-peach:  #E8906A;   /* Warm peach — warm accent */
+  --brand-cream:  #FAF5EE;   /* Warm cream — light backgrounds */
+  --brand-flame:  #F5A020;   /* Torch flame gold */
+  --brand-light:  #EDE8FF;   /* Light purple tint — card backgrounds */
+
+  /* ── Functional interface colors ── */
+  --teal:         #1D9E75;   /* Give / volunteer interface */
+  --teal-dark:    #085041;
+  --teal-light:   #E1F5EE;
+  --purple:       #5240B8;   /* Help interface — now matches brand purple */
+  --purple-dark:  #1B0C42;
+  --purple-light: #EDE8FF;
+
+  /* ── Neutrals ── */
   --gray-100: #f8f9fa;
   --gray-200: #e9ecef;
   --gray-600: #6c757d;
   --gray-800: #343a40;
   --gray-900: #212529;
-  --white: #ffffff;
-  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --white:    #ffffff;
+
+  /* ── Typography & layout ── */
+  --font:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --radius: 1.25rem;
 }
 

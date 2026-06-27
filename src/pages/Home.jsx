@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import styles from './Home.module.css'
+import EllissLogo from '../components/EllissLogo'
 
 export default function Home() {
   const navigate = useNavigate()
@@ -7,8 +8,8 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <div className={styles.wordmark}>elliss</div>
-        <p className={styles.tagline}>Kind. Benevolent. Here to help.</p>
+        <EllissLogo size={48} />
+        <p className={styles.tagline}>Kind Hearts. Better Lives.</p>
       </header>
 
       <main className={styles.main}>
@@ -42,7 +43,7 @@ export default function Home() {
       </main>
 
       <footer className={styles.footer}>
-        <p>elliss.app &middot; Built with purpose</p>
+        <p>elliss.app &middot; Kind Hearts. Better Lives.</p>
       </footer>
     </div>
   )

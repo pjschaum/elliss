@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import s from './Auth.module.css'
+import EllissLogo from '../components/EllissLogo'
 
 export default function Auth() {
   const navigate = useNavigate()
@@ -19,8 +20,8 @@ export default function Auth() {
   return (
     <div className={s.page}>
       <div className={s.top}>
-        <div className={s.wordmark}>elliss</div>
-        <p className={s.tagline}>Kind. Benevolent. Here to help.</p>
+        <EllissLogo size={44} />
+        <p className={s.tagline}>Kind Hearts. Better Lives.</p>
       </div>
 
       <div className={s.card}>
