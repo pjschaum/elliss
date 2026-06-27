@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Background circle — brand purple -->
-  <circle cx="32" cy="32" r="32" fill="#5240B8"/>
-  <!-- Torch flame -->
-  <path d="M32 10 C27 18 24 24 24 29 C24 35.6 27.6 40 32 40 C36.4 40 40 35.6 40 29 C40 24 37 18 32 10 Z" fill="#F5A020"/>
+  <!-- Background: brand plum -->
+  <circle cx="32" cy="32" r="32" fill="#5A2860"/>
+  <!-- Flame: brand gold -->
+  <path d="M32 8 C26 18 23 25 23 31 C23 38.2 27 43 32 43 C37 43 41 38.2 41 31 C41 25 38 18 32 8Z" fill="#F0B428"/>
   <!-- Inner flame highlight -->
-  <path d="M32 16 C29.5 21 28 25 28 29 C28 32.3 29.8 35 32 35 C34.2 35 36 32.3 36 29 C36 25 34.5 21 32 16 Z" fill="rgba(255,255,255,0.25)"/>
-  <!-- Torch stem -->
-  <rect x="29" y="40" width="6" height="16" rx="3" fill="white"/>
+  <path d="M32 15 C29 21 28 26 28 31 C28 34.8 29.8 38 32 38 C34.2 38 36 34.8 36 31 C36 26 35 21 32 15Z" fill="rgba(255,255,255,0.25)"/>
+  <!-- Stem -->
+  <rect x="29.5" y="43" width="5" height="13" rx="2.5" fill="white"/>
   <!-- Base -->
-  <rect x="25" y="54" width="14" height="4" rx="2" fill="white"/>
+  <rect x="25" y="55" width="14" height="4" rx="2" fill="white"/>
 </svg>

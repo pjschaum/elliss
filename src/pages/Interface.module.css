@@ -5,11 +5,11 @@
 }
 
 .give {
-  background: #f0fdf8;
+  background: #f0fdf8;   /* teal-tinted — volunteer side */
 }
 
 .help {
-  background: #f5f4ff;
+  background: var(--brand-light);  /* soft plum — help side */
 }
 
 /* Header */

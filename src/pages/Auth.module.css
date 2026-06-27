@@ -62,7 +62,7 @@
 
 .modeTabActive {
   background: white;
-  color: var(--brand-purple);
+  color: var(--brand-plum);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
@@ -108,7 +108,7 @@
 
 .forgot {
   font-size: 0.875rem;
-  color: var(--brand-purple);
+  color: var(--brand-plum);
   font-weight: 500;
   cursor: pointer;
   text-align: right;
@@ -120,7 +120,7 @@
 }
 
 .primaryBtn {
-  background: var(--brand-purple);
+  background: var(--brand-plum);
   color: white;
   border: none;
   border-radius: 0.75rem;
@@ -134,7 +134,7 @@
 }
 
 .primaryBtn:hover {
-  background: var(--brand-dark);
+  background: var(--brand-dark, #3A1040);
 }
 
 /* ── Divider ── */
@@ -196,7 +196,7 @@
 }
 
 .link {
-  color: var(--brand-purple);
+  color: var(--brand-plum);
   cursor: pointer;
 }
 
