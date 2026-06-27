@@ -63,6 +63,10 @@
   width: 100%;
 }
 
+.mainWithNav {
+  padding-bottom: calc(2rem + 70px);
+}
+
 .title {
   font-size: 1.875rem;
   font-weight: 700;

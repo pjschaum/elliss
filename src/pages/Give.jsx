@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Interface.module.css'
 import g from './Give.module.css'
+import BottomNav from '../components/BottomNav'
 
+/* ── Mock event data ── */
 const CATEGORIES = ['All', 'Food Bank', 'Environment', 'Education', 'Youth', 'Seniors', 'Animals', 'Health']
 
 const EVENTS = [
@@ -68,8 +70,9 @@ const EVENTS = [
   },
 ]
 
-export default function Give() {
-  const navigate = useNavigate()
+/* ── Tab content ── */
+
+function VolunteerTab() {
   const [location, setLocation] = useState('')
   const [radius, setRadius] = useState('10')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -79,81 +82,134 @@ export default function Give() {
     : EVENTS.filter(e => e.tags.includes(activeCategory))
 
   return (
+    <>
+      <h1 className={styles.title}>Volunteer Events</h1>
+      <p className={styles.subtitle}>Find opportunities near you.</p>
+
+      <div className={g.searchCard}>
+        <div className={g.searchRow}>
+          <span className={g.searchIcon}>📍</span>
+          <input
+            className={g.searchInput}
+            type="text"
+            placeholder="Enter zip code or city"
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+          />
+          <select
+            className={g.radiusSelect}
+            value={radius}
+            onChange={e => setRadius(e.target.value)}
+          >
+            <option value="5">5 mi</option>
+            <option value="10">10 mi</option>
+            <option value="25">25 mi</option>
+            <option value="50">50 mi</option>
+          </select>
+        </div>
+        <button className={g.searchBtn}>Search</button>
+      </div>
+
+      <div className={g.filters}>
+        {CATEGORIES.map(cat => (
+          <button
+            key={cat}
+            className={`${g.chip} ${activeCategory === cat ? g.chipActive : ''}`}
+            onClick={() => setActiveCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <p className={g.resultsCount}>{filtered.length} opportunities near you</p>
+
+      <div className={g.eventList}>
+        {filtered.map(event => (
+          <div key={event.id} className={g.eventCard}>
+            <div className={g.orgLogo} style={{ background: event.color }}>
+              {event.initials}
+            </div>
+            <div className={g.eventInfo}>
+              <div className={g.eventHeader}>
+                <span className={g.orgName}>{event.org}</span>
+                <span className={g.distance}>📍 {event.distance}</span>
+              </div>
+              <h3 className={g.eventTitle}>{event.title}</h3>
+              <p className={g.eventMeta}>📅 {event.date} · {event.time}</p>
+              <div className={g.tagRow}>
+                {event.tags.map(tag => (
+                  <span key={tag} className={g.tag}>{tag}</span>
+                ))}
+                <span className={g.spots}>{event.spots} spots left</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
+  )
+}
+
+function PlaceholderTab({ title, icon, desc }) {
+  return (
+    <>
+      <h1 className={styles.title}>{title}</h1>
+      <div className={g.placeholder}>
+        <div className={g.placeholderIcon}>{icon}</div>
+        <p className={g.placeholderTitle}>Coming soon</p>
+        <p className={g.placeholderDesc}>{desc}</p>
+      </div>
+    </>
+  )
+}
+
+/* ── Main page ── */
+
+export default function Give() {
+  const navigate = useNavigate()
+  const [activeTab, setActiveTab] = useState('volunteer')
+
+  return (
     <div className={`${styles.page} ${styles.give}`}>
       <header className={styles.header}>
-        <button className={styles.back} onClick={() => navigate('/')}>← Back</button>
+        <button className={styles.back} onClick={() => navigate('/home')}>← Back</button>
         <div className={styles.wordmark}>elliss</div>
       </header>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>Volunteer Events</h1>
-        <p className={styles.subtitle}>Find opportunities near you.</p>
-
-        {/* Search */}
-        <div className={g.searchCard}>
-          <div className={g.searchRow}>
-            <span className={g.searchIcon}>📍</span>
-            <input
-              className={g.searchInput}
-              type="text"
-              placeholder="Enter zip code or city"
-              value={location}
-              onChange={e => setLocation(e.target.value)}
-            />
-            <select
-              className={g.radiusSelect}
-              value={radius}
-              onChange={e => setRadius(e.target.value)}
-            >
-              <option value="5">5 mi</option>
-              <option value="10">10 mi</option>
-              <option value="25">25 mi</option>
-              <option value="50">50 mi</option>
-            </select>
-          </div>
-          <button className={g.searchBtn}>Search</button>
-        </div>
-
-        {/* Category filters */}
-        <div className={g.filters}>
-          {CATEGORIES.map(cat => (
-            <button
-              key={cat}
-              className={`${g.chip} ${activeCategory === cat ? g.chipActive : ''}`}
-              onClick={() => setActiveCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-
-        {/* Results */}
-        <p className={g.resultsCount}>{filtered.length} opportunities near you</p>
-
-        <div className={g.eventList}>
-          {filtered.map(event => (
-            <div key={event.id} className={g.eventCard}>
-              <div className={g.orgLogo} style={{ background: event.color }}>
-                {event.initials}
-              </div>
-              <div className={g.eventInfo}>
-                <div className={g.eventHeader}>
-                  <span className={g.orgName}>{event.org}</span>
-                  <span className={g.distance}>📍 {event.distance}</span>
-                </div>
-                <h3 className={g.eventTitle}>{event.title}</h3>
-                <p className={g.eventMeta}>📅 {event.date} · {event.time}</p>
-                <div className={g.tagRow}>
-                  {event.tags.map(tag => (
-                    <span key={tag} className={g.tag}>{tag}</span>
-                  ))}
-                  <span className={g.spots}>{event.spots} spots left</span>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <main className={`${styles.main} ${styles.mainWithNav}`}>
+        {activeTab === 'volunteer' && <VolunteerTab />}
+        {activeTab === 'donate' && (
+          <PlaceholderTab
+            title="Donate"
+            icon="💝"
+            desc="Support causes and organizations you care about directly through the app."
+          />
+        )}
+        {activeTab === 'activity' && (
+          <PlaceholderTab
+            title="My Activity"
+            icon="📋"
+            desc="Track your volunteer hours, past events, and impact over time."
+          />
+        )}
+        {activeTab === 'notifications' && (
+          <PlaceholderTab
+            title="Alerts"
+            icon="🔔"
+            desc="Stay updated on upcoming events, reminders, and messages from organizations."
+          />
+        )}
+        {activeTab === 'account' && (
+          <PlaceholderTab
+            title="My Account"
+            icon="👤"
+            desc="Manage your profile, preferences, and connected accounts."
+          />
+        )}
       </main>
+
+      <BottomNav variant="give" active={activeTab} onChange={setActiveTab} />
     </div>
   )
 }
