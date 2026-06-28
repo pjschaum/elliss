@@ -1,22 +1,15 @@
-/* ── Canela Text Trial (brand display font — purchase full license before launch) ── */
+/* ── Chanticleer Roman NF (brand display font — free for commercial use, 1001Fonts FFC) ── */
 @font-face {
-  font-family: 'Canela Text Trial';
-  src: url('/fonts/CanelaText-Regular.otf') format('opentype');
+  font-family: 'Chanticleer Roman NF';
+  src: url('/fonts/ChanticleerRoman-Regular.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Canela Text Trial';
-  src: url('/fonts/CanelaText-Bold.otf') format('opentype');
+  font-family: 'Chanticleer Roman NF';
+  src: url('/fonts/ChanticleerRoman-Bold.ttf') format('truetype');
   font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Canela Text Trial';
-  src: url('/fonts/CanelaText-Light.otf') format('opentype');
-  font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
@@ -54,7 +47,7 @@
   --gray-900:  #212529;
 
   /* ── Typography ── */
-  --font-brand: 'Canela Text Trial', Georgia, serif;   /* Logo & headings */
+  --font-brand: 'Chanticleer Roman NF', Georgia, serif;   /* Logo & headings */
   --font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 
   /* ── Layout ── */
