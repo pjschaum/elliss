@@ -5,11 +5,11 @@
 }
 
 .give {
-  background: #f0fdf8;   /* teal-tinted — volunteer side */
+  background: var(--give-light);   /* light purple tint — Give side */
 }
 
 .help {
-  background: var(--brand-light);  /* soft plum — help side */
+  background: var(--help-light);   /* light green tint — Help side */
 }
 
 /* Header */
@@ -40,12 +40,12 @@
 
 .give .back,
 .give .wordmark {
-  color: var(--teal);
+  color: var(--give);
 }
 
 .help .back,
 .help .wordmark {
-  color: var(--purple);
+  color: var(--help-dark);
 }
 
 .wordmark {

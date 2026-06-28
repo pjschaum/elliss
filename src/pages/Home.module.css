@@ -2,7 +2,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--brand-cream);
+  background: var(--bg);
 }
 
 .header {
@@ -66,12 +66,12 @@
 }
 
 .cardGive {
-  background: var(--teal);
+  background: var(--give);
   color: white;
 }
 
 .cardHelp {
-  background: var(--brand-plum);
+  background: var(--help-dark);
   color: white;
 }
 

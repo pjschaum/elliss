@@ -19,7 +19,7 @@ const RESOURCES = [
     id: 1,
     org: 'Greater Chicago Food Depository',
     initials: 'GC',
-    color: '#1D9E75',
+    color: '#92c19d',
     category: 'Food & Meals',
     desc: 'Access to 700+ food pantries, soup kitchens, and meal programs across Chicagoland. No income verification required at many sites.',
     detail: 'Open Mon–Sat · Multiple locations',

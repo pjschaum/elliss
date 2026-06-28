@@ -4,8 +4,8 @@
   "description": "Kind Hearts. Better Lives.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FAF5EE",
-  "theme_color": "#5A2860",
+  "background_color": "#f8f8f6",
+  "theme_color": "#2b4b81",
   "icons": [
     {
       "src": "/icon-192.png",

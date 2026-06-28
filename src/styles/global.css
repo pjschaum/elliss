@@ -1,3 +1,26 @@
+/* ── Canela Text Trial (brand display font — purchase full license before launch) ── */
+@font-face {
+  font-family: 'Canela Text Trial';
+  src: url('/fonts/CanelaText-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Canela Text Trial';
+  src: url('/fonts/CanelaText-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Canela Text Trial';
+  src: url('/fonts/CanelaText-Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -5,40 +28,43 @@
 }
 
 :root {
-  /* ── Elliss brand palette (pixel-sampled from brand identity PNG) ── */
-  --brand-plum:   #5A2860;   /* Primary brand purple — logo text & torch stem */
-  --brand-flame:  #F0B428;   /* Torch flame gold */
-  --brand-mid:    #8B5C96;   /* Mid purple — secondary elements */
-  --brand-soft:   #C4A8D0;   /* Soft lavender — borders, subtle accents */
-  --brand-light:  #F5EEF8;   /* Light purple tint — card/page backgrounds */
-  --brand-cream:  #FAF5EE;   /* Warm cream — app background */
-  --brand-dark:   #3A1040;   /* Darkest plum — deep contrast */
+  /* ── Elliss brand palette (Samantha Schaum's logo files, June 2026) ── */
+  --brand-blue:       #2b4b81;   /* Primary — wordmark, torch stem, nav active */
+  --brand-blue-dark:  #1e3560;   /* Deep contrast / hover */
+  --brand-blue-light: #e8edf6;   /* Subtle blue tint */
 
-  /* ── Functional interface colors ── */
-  --teal:         #1D9E75;   /* Give / volunteer — distinct from brand purple */
-  --teal-dark:    #085041;
-  --teal-light:   #E1F5EE;
-  --purple:       #5A2860;   /* Help interface — matches brand plum */
-  --purple-dark:  #3A1040;
-  --purple-light: #F5EEF8;
+  /* ── Give side — purple flame ── */
+  --give:        #76479c;
+  --give-dark:   #5d3580;
+  --give-light:  #f0ebf7;
+
+  /* ── Help side — green flame ── */
+  --help:        #92c19d;
+  --help-dark:   #5e8f6a;
+  --help-light:  #e8f5eb;
 
   /* ── Neutrals ── */
-  --gray-100: #f8f9fa;
-  --gray-200: #e9ecef;
-  --gray-600: #6c757d;
-  --gray-800: #343a40;
-  --gray-900: #212529;
-  --white:    #ffffff;
+  --text:      #2c2c2e;   /* Dark charcoal body text */
+  --bg:        #f8f8f6;   /* Warm off-white app background */
+  --white:     #ffffff;
+  --gray-100:  #f8f9fa;
+  --gray-200:  #e9ecef;
+  --gray-600:  #6c757d;
+  --gray-800:  #343a40;
+  --gray-900:  #212529;
 
-  /* ── Typography & layout ── */
-  --font:   -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* ── Typography ── */
+  --font-brand: 'Canela Text Trial', Georgia, serif;   /* Logo & headings */
+  --font:       -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* ── Layout ── */
   --radius: 1.25rem;
 }
 
 body {
   font-family: var(--font);
-  background: var(--white);
-  color: var(--gray-900);
+  background: var(--bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

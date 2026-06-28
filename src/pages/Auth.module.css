@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: var(--brand-cream);
+  background: var(--bg);
   padding: 2rem 1.5rem;
   gap: 1.25rem;
 }
@@ -62,7 +62,7 @@
 
 .modeTabActive {
   background: white;
-  color: var(--brand-plum);
+  color: var(--brand-blue);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
@@ -99,7 +99,7 @@
 }
 
 .input:focus {
-  border-color: var(--teal);
+  border-color: var(--brand-blue);
 }
 
 .input::placeholder {
@@ -108,7 +108,7 @@
 
 .forgot {
   font-size: 0.875rem;
-  color: var(--brand-plum);
+  color: var(--brand-blue);
   font-weight: 500;
   cursor: pointer;
   text-align: right;
@@ -120,7 +120,7 @@
 }
 
 .primaryBtn {
-  background: var(--brand-plum);
+  background: var(--brand-blue);
   color: white;
   border: none;
   border-radius: 0.75rem;
@@ -134,7 +134,7 @@
 }
 
 .primaryBtn:hover {
-  background: var(--brand-dark, #3A1040);
+  background: var(--brand-blue-dark);
 }
 
 /* ── Divider ── */
@@ -196,7 +196,7 @@
 }
 
 .link {
-  color: var(--brand-plum);
+  color: var(--brand-blue);
   cursor: pointer;
 }
 

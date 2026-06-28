@@ -13,7 +13,7 @@
 }
 
 .searchBar:focus-within {
-  border-color: var(--purple);
+  border-color: var(--help);
 }
 
 .searchIcon {
@@ -81,13 +81,13 @@
 }
 
 .chip:hover {
-  border-color: var(--purple);
-  color: var(--purple);
+  border-color: var(--help);
+  color: var(--help);
 }
 
 .chipActive {
-  background: var(--purple);
-  border-color: var(--purple);
+  background: var(--help);
+  border-color: var(--help);
   color: white;
 }
 
@@ -170,8 +170,8 @@
 .categoryBadge {
   font-size: 0.75rem;
   font-weight: 600;
-  background: var(--purple-light);
-  color: var(--purple-dark);
+  background: var(--help-light);
+  color: var(--help-dark);
   border-radius: 2rem;
   padding: 0.2rem 0.625rem;
 }
@@ -207,7 +207,7 @@
   font-size: 0.75rem;
   font-weight: 600;
   background: #F5EEF8;
-  color: var(--purple);
+  color: var(--help);
   border-radius: 2rem;
   padding: 0.2rem 0.625rem;
 }
@@ -253,7 +253,7 @@
 
 /* ── Primary action button ── */
 .actionBtn {
-  background: var(--purple);
+  background: var(--help);
   color: white;
   border: none;
   border-radius: 0.625rem;
@@ -268,7 +268,7 @@
 }
 
 .actionBtn:hover {
-  background: var(--purple-dark);
+  background: var(--help-dark);
 }
 
 /* ── Empty state ── */

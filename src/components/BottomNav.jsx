@@ -18,7 +18,7 @@ const HELP_TABS = [
 
 export default function BottomNav({ variant, active, onChange }) {
   const tabs = variant === 'give' ? GIVE_TABS : HELP_TABS
-  const activeColor = variant === 'give' ? 'var(--teal)' : 'var(--purple)'
+  const activeColor = variant === 'give' ? 'var(--give)' : 'var(--help-dark)'
 
   return (
     <nav className={s.nav}>

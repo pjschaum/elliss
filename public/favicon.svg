@@ -1,10 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Background: brand plum -->
-  <circle cx="32" cy="32" r="32" fill="#5A2860"/>
-  <!-- Flame: brand gold -->
-  <path d="M32 8 C26 18 23 25 23 31 C23 38.2 27 43 32 43 C37 43 41 38.2 41 31 C41 25 38 18 32 8Z" fill="#F0B428"/>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="fg" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="20%" stop-color="#76479c"/>
+      <stop offset="80%" stop-color="#92c19d"/>
+    </linearGradient>
+  </defs>
+  <!-- Background: brand blue -->
+  <circle cx="32" cy="32" r="32" fill="#2b4b81"/>
+  <!-- Flame: gradient purple → green -->
+  <path d="M32 8 C26 18 23 25 23 31 C23 38.2 27 43 32 43 C37 43 41 38.2 41 31 C41 25 38 18 32 8Z" fill="url(#fg)"/>
   <!-- Inner flame highlight -->
-  <path d="M32 15 C29 21 28 26 28 31 C28 34.8 29.8 38 32 38 C34.2 38 36 34.8 36 31 C36 26 35 21 32 15Z" fill="rgba(255,255,255,0.25)"/>
+  <path d="M32 15 C29 21 28 26 28 31 C28 34.8 29.8 38 32 38 C34.2 38 36 34.8 36 31 C36 26 35 21 32 15Z" fill="rgba(255,255,255,0.22)"/>
   <!-- Stem -->
   <rect x="29.5" y="43" width="5" height="13" rx="2.5" fill="white"/>
   <!-- Base -->

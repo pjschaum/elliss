@@ -44,7 +44,7 @@
   border: none;
   background: transparent;
   font-size: 0.875rem;
-  color: var(--teal);
+  color: var(--give);
   font-weight: 600;
   cursor: pointer;
   outline: none;
@@ -53,7 +53,7 @@
 }
 
 .searchBtn {
-  background: var(--teal);
+  background: var(--give);
   color: white;
   border: none;
   border-radius: 0.75rem;
@@ -67,7 +67,7 @@
 }
 
 .searchBtn:hover {
-  background: var(--teal-dark);
+  background: var(--give-dark);
 }
 
 /* ── Category filter chips ── */
@@ -100,13 +100,13 @@
 }
 
 .chip:hover {
-  border-color: var(--teal);
-  color: var(--teal);
+  border-color: var(--give);
+  color: var(--give);
 }
 
 .chipActive {
-  background: var(--teal);
-  border-color: var(--teal);
+  background: var(--give);
+  border-color: var(--give);
   color: white;
 }
 
@@ -179,7 +179,7 @@
 
 .distance {
   font-size: 0.8125rem;
-  color: var(--teal);
+  color: var(--give);
   font-weight: 600;
   flex-shrink: 0;
 }
@@ -208,8 +208,8 @@
 .tag {
   font-size: 0.75rem;
   font-weight: 600;
-  background: var(--teal-light);
-  color: var(--teal-dark);
+  background: var(--give-light);
+  color: var(--give-dark);
   border-radius: 2rem;
   padding: 0.2rem 0.625rem;
 }
@@ -236,7 +236,7 @@
 }
 
 .donateSearch:focus-within {
-  border-color: var(--teal);
+  border-color: var(--give);
 }
 
 .clearBtn {
@@ -309,8 +309,8 @@
 .categoryBadge {
   font-size: 0.75rem;
   font-weight: 600;
-  background: var(--teal-light);
-  color: var(--teal-dark);
+  background: var(--give-light);
+  color: var(--give-dark);
   border-radius: 2rem;
   padding: 0.2rem 0.625rem;
 }
@@ -353,7 +353,7 @@
 }
 
 .donateBtn {
-  background: var(--teal);
+  background: var(--give);
   color: white;
   border: none;
   border-radius: 0.625rem;
@@ -367,7 +367,7 @@
 }
 
 .donateBtn:hover {
-  background: var(--teal-dark);
+  background: var(--give-dark);
 }
 
 /* Empty state */
