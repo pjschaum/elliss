@@ -1,0 +1,149 @@
+import { useParams, useNavigate } from 'react-router-dom'
+import { PROGRAMS } from '../data/programs'
+import d from './Detail.module.css'
+
+export default function ProgramDetail() {
+  const { id } = useParams()
+  const navigate = useNavigate()
+  const program = PROGRAMS.find(p => p.id === Number(id))
+
+  if (!program) {
+    return (
+      <div className={d.page}>
+        <header className={d.header}>
+          <button className={d.back} onClick={() => navigate(-1)}>← Back</button>
+          <span className={d.headerTitle}>Program Not Found</span>
+        </header>
+        <div style={{ padding: '2rem 1rem', textAlign: 'center', color: '#888' }}>
+          This program could not be found.
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className={d.page}>
+      {/* Header */}
+      <header className={d.header}>
+        <button className={d.back} onClick={() => navigate(-1)}>← Back</button>
+        <span className={d.headerTitle}>Program</span>
+      </header>
+
+      <div className={d.body}>
+        {/* Hero */}
+        <div className={d.hero}>
+          <div className={d.heroLogo} style={{ background: program.color }}>
+            {program.initials}
+          </div>
+          <div className={d.heroInfo}>
+            <h1 className={d.heroName}>{program.name}</h1>
+            <div className={d.heroBadges}>
+              <span className={`${d.badge} ${d.badgeHelp}`}>{program.category}</span>
+              {program.govt && <span className={`${d.badge} ${d.badgeGovt}`}>Gov't Program</span>}
+            </div>
+          </div>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Agency */}
+        <div className={d.section}>
+          <div className={d.infoRow}>
+            <span className={d.infoIcon}>🏛️</span>
+            <div className={d.infoContent}>
+              <p className={d.infoLabel}>Administered by</p>
+              <p className={d.infoValue}>{program.agency}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Description */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>About this program</p>
+          <p className={d.sectionText}>{program.desc}</p>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Benefit amount */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>Benefit amount</p>
+          <p className={d.sectionText}>{program.benefitAmount}</p>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Eligibility */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>Who qualifies</p>
+          <p className={d.sectionText}>{program.eligibility}</p>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* How to apply */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>How to apply</p>
+          <p className={d.sectionText}>{program.howToApply}</p>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Required documents */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>Documents you'll need</p>
+          <ul className={d.bulletList}>
+            {program.requiredDocs.map((doc, i) => (
+              <li key={i} className={d.bulletItem}>
+                <span className={d.bulletDot} />
+                {doc}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Processing time */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>Processing time</p>
+          <p className={d.sectionText}>{program.processingTime}</p>
+        </div>
+
+        <div className={d.divider} />
+
+        {/* Contact */}
+        <div className={d.section}>
+          <p className={d.sectionTitle}>Contact</p>
+          <div className={d.infoList}>
+            {program.phone && (
+              <div className={d.infoRow}>
+                <span className={d.infoIcon}>📞</span>
+                <div className={d.infoContent}>
+                  <p className={d.infoLabel}>Phone</p>
+                  <a href={`tel:${program.phone}`} className={d.infoLink}>{program.phone}</a>
+                </div>
+              </div>
+            )}
+            <div className={d.infoRow}>
+              <span className={d.infoIcon}>🌐</span>
+              <div className={d.infoContent}>
+                <p className={d.infoLabel}>Website</p>
+                <span className={d.infoLink}>{program.website}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Sticky bottom */}
+      <div className={d.bottomBar}>
+        <button className={`${d.actionBtn} ${d.actionBtnHelp}`}>
+          Apply Now
+        </button>
+      </div>
+    </div>
+  )
+}

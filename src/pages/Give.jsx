@@ -3,77 +3,17 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Interface.module.css'
 import g from './Give.module.css'
 import BottomNav from '../components/BottomNav'
+import { EVENTS } from '../data/events'
+import { ORGS } from '../data/orgs'
 
 /* ════════════════════════════════
-   VOLUNTEER TAB — data & component
+   VOLUNTEER TAB
    ════════════════════════════════ */
 
 const VOL_CATEGORIES = ['All', 'Food Bank', 'Environment', 'Education', 'Youth', 'Seniors', 'Animals', 'Health']
 
-const EVENTS = [
-  {
-    id: 1,
-    org: 'Greater Chicago Food Depository',
-    initials: 'GC',
-    color: '#76479c',
-    title: 'Community Food Sort & Pack',
-    date: 'Sat, Jul 12',
-    time: '9:00 AM – 12:00 PM',
-    distance: '2.3 mi',
-    tags: ['Food Bank', 'Community'],
-    spots: 12,
-  },
-  {
-    id: 2,
-    org: 'Lincoln Park Zoo',
-    initials: 'LP',
-    color: '#2D7D46',
-    title: 'Conservation Habitat Cleanup',
-    date: 'Sun, Jul 13',
-    time: '8:00 AM – 11:00 AM',
-    distance: '4.7 mi',
-    tags: ['Environment', 'Animals'],
-    spots: 8,
-  },
-  {
-    id: 3,
-    org: 'Literacy Works Chicago',
-    initials: 'LW',
-    color: '#E07B2A',
-    title: 'Adult Literacy Tutoring Session',
-    date: 'Tue, Jul 15',
-    time: '6:00 PM – 8:00 PM',
-    distance: '1.8 mi',
-    tags: ['Education'],
-    spots: 4,
-  },
-  {
-    id: 4,
-    org: 'Senior Care Chicago',
-    initials: 'SC',
-    color: '#7B5EA7',
-    title: 'Companion Visits Program',
-    date: 'Wed, Jul 16',
-    time: '2:00 PM – 4:00 PM',
-    distance: '3.1 mi',
-    tags: ['Seniors', 'Health'],
-    spots: 6,
-  },
-  {
-    id: 5,
-    org: 'Chicago Youth Programs',
-    initials: 'CY',
-    color: '#D94F3D',
-    title: 'After-School Mentorship',
-    date: 'Thu, Jul 17',
-    time: '3:30 PM – 5:30 PM',
-    distance: '0.9 mi',
-    tags: ['Youth', 'Education'],
-    spots: 3,
-  },
-]
-
 function VolunteerTab() {
+  const navigate = useNavigate()
   const [location, setLocation] = useState('')
   const [radius, setRadius] = useState('10')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -127,7 +67,12 @@ function VolunteerTab() {
 
       <div className={g.eventList}>
         {filtered.map(event => (
-          <div key={event.id} className={g.eventCard}>
+          <div
+            key={event.id}
+            className={g.eventCard}
+            onClick={() => navigate(`/give/event/${event.id}`)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className={g.orgLogo} style={{ background: event.color }}>
               {event.initials}
             </div>
@@ -153,95 +98,12 @@ function VolunteerTab() {
 }
 
 /* ════════════════════════════════
-   DONATE TAB — data & component
+   DONATE TAB
    ════════════════════════════════ */
 
 const DONATE_CATEGORIES = [
   'All', 'Food & Hunger', 'Animals & Pets', 'Poverty', 'Education',
   'Health', 'Environment', 'Youth', 'Elderly', 'Housing', 'Veterans', 'Disaster Relief',
-]
-
-const ORGS = [
-  {
-    id: 1,
-    name: 'Greater Chicago Food Depository',
-    initials: 'GC',
-    color: '#76479c',
-    category: 'Food & Hunger',
-    desc: 'Fighting hunger across Chicagoland, distributing food to 800,000+ people every year through a network of 700+ pantries and programs.',
-    ein: '36-2554726',
-    rating: 4,
-  },
-  {
-    id: 2,
-    name: 'Anti-Cruelty Society',
-    initials: 'AC',
-    color: '#E07B2A',
-    category: 'Animals & Pets',
-    desc: "Chicago's oldest and most comprehensive animal welfare organization, providing shelter, adoption services, and humane education.",
-    ein: '36-2167760',
-    rating: 4,
-  },
-  {
-    id: 3,
-    name: 'Habitat for Humanity Chicago',
-    initials: 'HH',
-    color: '#1565C0',
-    category: 'Housing',
-    desc: 'Building strength, stability, and self-reliance through affordable homeownership across Chicago and Cook County.',
-    ein: '36-3363171',
-    rating: 4,
-  },
-  {
-    id: 4,
-    name: 'After School Matters',
-    initials: 'AS',
-    color: '#D94F3D',
-    category: 'Youth',
-    desc: 'Providing Chicago teens with high-quality after-school and summer programs in the arts, science, sports, and communications.',
-    ein: '36-3945972',
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: 'Chicago Coalition for the Homeless',
-    initials: 'CC',
-    color: '#5C6BC0',
-    category: 'Poverty',
-    desc: 'Advocating for policies and practices that prevent and end homelessness in Chicago through research, organizing, and direct services.',
-    ein: '36-3150560',
-    rating: 4,
-  },
-  {
-    id: 6,
-    name: 'Misericordia Heart of Mercy',
-    initials: 'MH',
-    color: '#7B5EA7',
-    category: 'Health',
-    desc: 'Supporting adults and children with developmental disabilities through residential care, day programs, and community integration.',
-    ein: '36-2167222',
-    rating: 5,
-  },
-  {
-    id: 7,
-    name: 'The Conservation Foundation',
-    initials: 'CF',
-    color: '#2D7D46',
-    category: 'Environment',
-    desc: 'Protecting natural lands and clean water in the greater Chicago region for current and future generations.',
-    ein: '36-6109783',
-    rating: 4,
-  },
-  {
-    id: 8,
-    name: 'Illinois Veterans Foundation',
-    initials: 'IV',
-    color: '#37474F',
-    category: 'Veterans',
-    desc: 'Providing emergency financial assistance, housing support, and resources to Illinois veterans and their families in need.',
-    ein: '20-1345678',
-    rating: 4,
-  },
 ]
 
 function StarRating({ count }) {
@@ -253,6 +115,7 @@ function StarRating({ count }) {
 }
 
 function DonateTab() {
+  const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
 
@@ -314,7 +177,12 @@ function DonateTab() {
       ) : (
         <div className={g.orgList}>
           {filtered.map(org => (
-            <div key={org.id} className={g.orgCard}>
+            <div
+              key={org.id}
+              className={g.orgCard}
+              onClick={() => navigate(`/give/org/${org.id}`)}
+              style={{ cursor: 'pointer' }}
+            >
               <div className={g.orgCardTop}>
                 <div className={g.orgLogo} style={{ background: org.color }}>
                   {org.initials}
@@ -335,7 +203,15 @@ function DonateTab() {
                   <StarRating count={org.rating} />
                   <span className={g.einLabel}>EIN {org.ein}</span>
                 </div>
-                <button className={g.donateBtn}>Donate</button>
+                <button
+                  className={g.donateBtn}
+                  onClick={e => {
+                    e.stopPropagation() // don't also trigger the card navigate
+                    navigate(`/give/org/${org.id}`)
+                  }}
+                >
+                  Donate
+                </button>
               </div>
             </div>
           ))}
