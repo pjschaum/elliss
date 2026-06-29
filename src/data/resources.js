@@ -1,3 +1,9 @@
+// filters schema:
+// ageGroups: 'all' | string[] — 'children' (0-12), 'teens' (13-17), 'adults' (18-64), 'seniors' (65+)
+// specialized: string[]       — 'veterans','disabilities','immigrants','lgbtq','women','single_parents','homeless','pregnant','justice_involved'
+// community: string[]         — 'bipoc','hispanic','black','asian','native'
+// income: 'any' | 'low_income'
+
 export const RESOURCES = [
   {
     id: 1,
@@ -14,6 +20,7 @@ export const RESOURCES = [
     website: 'gcfd.org',
     eligibility: 'Anyone in need. No income verification required at many partner pantries.',
     howToGet: 'Use the food pantry locator at gcfd.org or call 2-1-1 to find the nearest location.',
+    filters: { ageGroups: 'all', specialized: [], community: [], income: 'any' },
   },
   {
     id: 2,
@@ -30,6 +37,7 @@ export const RESOURCES = [
     website: 'thecha.org',
     eligibility: 'Low-income individuals and families meeting CHA income limits (typically 50–80% AMI).',
     howToGet: 'Call the main line or visit in person. Emergency shelter referrals available through 2-1-1.',
+    filters: { ageGroups: ['adults'], specialized: ['homeless'], community: [], income: 'low_income' },
   },
   {
     id: 3,
@@ -46,6 +54,7 @@ export const RESOURCES = [
     website: 'chicagofreeclinic.org',
     eligibility: 'Uninsured or underinsured adults 18+ in the Chicago area. No appointment needed.',
     howToGet: 'Walk in during clinic hours. Bring a photo ID if available. All services are completely free.',
+    filters: { ageGroups: ['adults'], specialized: ['disabilities'], community: [], income: 'low_income' },
   },
   {
     id: 4,
@@ -62,6 +71,7 @@ export const RESOURCES = [
     website: 'namichicago.org',
     eligibility: 'Open to anyone affected by mental illness — individuals, families, and caregivers.',
     howToGet: 'Call the helpline, visit the website to find a support group, or walk in during office hours.',
+    filters: { ageGroups: 'all', specialized: ['disabilities', 'veterans'], community: [], income: 'any' },
   },
   {
     id: 5,
@@ -78,6 +88,7 @@ export const RESOURCES = [
     website: 'chicagoreadymade.org',
     eligibility: 'Anyone in need of clothing, with priority for job seekers and school-aged children.',
     howToGet: 'Schedule an appointment online or by phone. Walk-ins accepted based on availability.',
+    filters: { ageGroups: ['adults', 'children'], specialized: [], community: [], income: 'any' },
   },
   {
     id: 6,
@@ -94,6 +105,7 @@ export const RESOURCES = [
     website: 'illinoislegalaid.org',
     eligibility: 'Low-income Illinois residents (generally below 200% federal poverty level). Immigration issues: all income levels.',
     howToGet: 'Visit illinoislegalaid.org to use self-help tools or find a legal aid provider near you.',
+    filters: { ageGroups: ['adults'], specialized: ['immigrants', 'veterans'], community: [], income: 'low_income' },
   },
   {
     id: 7,
@@ -110,6 +122,7 @@ export const RESOURCES = [
     website: 'ventrachicago.com',
     eligibility: 'Low-income riders (must show proof of income), seniors 65+, riders with qualifying disabilities.',
     howToGet: 'Apply online at ventrachicago.com or visit a CTA rail station with valid ID and proof of eligibility.',
+    filters: { ageGroups: ['seniors', 'adults'], specialized: ['disabilities'], community: [], income: 'low_income' },
   },
   {
     id: 8,
@@ -126,5 +139,6 @@ export const RESOURCES = [
     website: 'dhs.illinois.gov/ccap',
     eligibility: 'Illinois families earning at or below 185% of federal poverty level with children under 13.',
     howToGet: 'Apply online at abe.illinois.gov or call the DHS helpline. You\'ll need proof of income, employment/training, and child\'s age.',
+    filters: { ageGroups: ['children'], specialized: ['single_parents'], community: [], income: 'low_income' },
   },
 ]

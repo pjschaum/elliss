@@ -1,0 +1,90 @@
+/* ── Header actions ── */
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.clearBtn {
+  background: none;
+  border: none;
+  color: var(--help);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-family: inherit;
+  transition: background 0.1s;
+}
+.clearBtn:active { background: var(--help-light); }
+
+/* ── Filter sections ── */
+.section {
+  margin-bottom: 1.25rem;
+}
+
+.sectionTitle {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #aaa;
+  margin: 0 0 0.5rem;
+}
+
+/* ── Chips ── */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.425rem 0.75rem;
+  border-radius: 99px;
+  border: 1.5px solid #e0e0e0;
+  background: #fafafa;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.chip:active {
+  opacity: 0.8;
+}
+
+.chipActive {
+  border-color: var(--help);
+  background: var(--help-light);
+  color: var(--help-dark);
+}
+
+.checkmark {
+  font-size: 0.7rem;
+}
+
+/* ── Footer button ── */
+.showResultsBtn {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: var(--help);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: opacity 0.15s;
+}
+
+.showResultsBtn:active {
+  opacity: 0.85;
+}

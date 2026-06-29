@@ -3,9 +3,58 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Interface.module.css'
 import h from './Help.module.css'
 import BottomNav from '../components/BottomNav'
+import HelpFilterSheet, {
+  EMPTY_FILTERS,
+  countActiveFilters,
+  applyHelpFilters,
+  AGE_OPTIONS,
+  SPECIALIZED_OPTIONS,
+  COMMUNITY_OPTIONS,
+  INCOME_OPTIONS,
+} from '../components/HelpFilterSheet'
 import { RESOURCES } from '../data/resources'
 import { PROGRAMS } from '../data/programs'
 import { COURSES } from '../data/courses'
+
+// ─── Shared active filter pills ──────────────────────────────
+// Maps filter key → human label across all option groups
+const ALL_FILTER_LABELS = Object.fromEntries([
+  ...AGE_OPTIONS,
+  ...SPECIALIZED_OPTIONS,
+  ...COMMUNITY_OPTIONS,
+  ...INCOME_OPTIONS,
+].map(o => [o.key, o.label]))
+
+function ActivePills({ filters, onChange }) {
+  const pills = [
+    ...filters.ageGroups.map(k => ({ group: 'ageGroups', key: k })),
+    ...filters.specialized.map(k => ({ group: 'specialized', key: k })),
+    ...filters.community.map(k => ({ group: 'community', key: k })),
+    ...filters.income.map(k => ({ group: 'income', key: k })),
+  ]
+  if (pills.length === 0) return null
+
+  function removePill(group, key) {
+    onChange({ ...filters, [group]: filters[group].filter(k => k !== key) })
+  }
+
+  return (
+    <div className={h.activePillRow}>
+      {pills.map(({ group, key }) => (
+        <span key={`${group}-${key}`} className={h.activePill}>
+          {ALL_FILTER_LABELS[key] || key}
+          <button
+            className={h.activePillX}
+            onClick={() => removePill(group, key)}
+            aria-label={`Remove ${key} filter`}
+          >
+            ✕
+          </button>
+        </span>
+      ))}
+    </div>
+  )
+}
 
 /* ════════════════════════════════
    RESOURCES TAB
@@ -21,30 +70,48 @@ function ResourcesTab() {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
+  const [filters, setFilters] = useState({ ...EMPTY_FILTERS })
+  const [showFilters, setShowFilters] = useState(false)
 
-  const filtered = RESOURCES.filter(r => {
-    const matchesCat = activeCategory === 'All' || r.category === activeCategory
-    const q = query.toLowerCase()
-    const matchesQ = !q || r.org.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q) || r.category.toLowerCase().includes(q)
-    return matchesCat && matchesQ
-  })
+  const activeCount = countActiveFilters(filters)
+
+  const filtered = applyHelpFilters(
+    RESOURCES.filter(r => {
+      const matchesCat = activeCategory === 'All' || r.category === activeCategory
+      const q = query.toLowerCase()
+      const matchesQ = !q || r.org.toLowerCase().includes(q) || r.desc.toLowerCase().includes(q) || r.category.toLowerCase().includes(q)
+      return matchesCat && matchesQ
+    }),
+    filters
+  )
 
   return (
     <>
       <h1 className={styles.title}>Resources</h1>
       <p className={styles.subtitle}>Find local support services near you.</p>
 
-      <div className={h.searchBar}>
-        <span className={h.searchIcon}>🔍</span>
-        <input
-          className={h.searchInput}
-          type="text"
-          placeholder="Search resources or services…"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
-        {query && <button className={h.clearBtn} onClick={() => setQuery('')}>✕</button>}
+      <div className={h.searchRow}>
+        <div className={h.searchBar}>
+          <span className={h.searchIcon}>🔍</span>
+          <input
+            className={h.searchInput}
+            type="text"
+            placeholder="Search resources or services…"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
+          {query && <button className={h.clearBtn} onClick={() => setQuery('')}>✕</button>}
+        </div>
+        <button
+          className={`${h.filterBtn} ${activeCount > 0 ? h.filterBtnActive : ''}`}
+          onClick={() => setShowFilters(true)}
+        >
+          ⚙ Filters
+          {activeCount > 0 && <span className={h.filterBadge}>{activeCount}</span>}
+        </button>
       </div>
+
+      <ActivePills filters={filters} onChange={setFilters} />
 
       <div className={h.filters}>
         {RESOURCE_CATS.map(cat => (
@@ -95,6 +162,15 @@ function ResourcesTab() {
           ))}
         </div>
       )}
+
+      {showFilters && (
+        <HelpFilterSheet
+          filters={filters}
+          onChange={setFilters}
+          resultCount={filtered.length}
+          onClose={() => setShowFilters(false)}
+        />
+      )}
     </>
   )
 }
@@ -112,30 +188,48 @@ function ProgramsTab() {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
+  const [filters, setFilters] = useState({ ...EMPTY_FILTERS })
+  const [showFilters, setShowFilters] = useState(false)
 
-  const filtered = PROGRAMS.filter(p => {
-    const matchesCat = activeCategory === 'All' || p.category === activeCategory
-    const q = query.toLowerCase()
-    const matchesQ = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.agency.toLowerCase().includes(q)
-    return matchesCat && matchesQ
-  })
+  const activeCount = countActiveFilters(filters)
+
+  const filtered = applyHelpFilters(
+    PROGRAMS.filter(p => {
+      const matchesCat = activeCategory === 'All' || p.category === activeCategory
+      const q = query.toLowerCase()
+      const matchesQ = !q || p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q) || p.category.toLowerCase().includes(q) || p.agency.toLowerCase().includes(q)
+      return matchesCat && matchesQ
+    }),
+    filters
+  )
 
   return (
     <>
       <h1 className={styles.title}>Programs</h1>
       <p className={styles.subtitle}>Government and community assistance programs.</p>
 
-      <div className={h.searchBar}>
-        <span className={h.searchIcon}>🔍</span>
-        <input
-          className={h.searchInput}
-          type="text"
-          placeholder="Search programs or benefits…"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
-        {query && <button className={h.clearBtn} onClick={() => setQuery('')}>✕</button>}
+      <div className={h.searchRow}>
+        <div className={h.searchBar}>
+          <span className={h.searchIcon}>🔍</span>
+          <input
+            className={h.searchInput}
+            type="text"
+            placeholder="Search programs or benefits…"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
+          {query && <button className={h.clearBtn} onClick={() => setQuery('')}>✕</button>}
+        </div>
+        <button
+          className={`${h.filterBtn} ${activeCount > 0 ? h.filterBtnActive : ''}`}
+          onClick={() => setShowFilters(true)}
+        >
+          ⚙ Filters
+          {activeCount > 0 && <span className={h.filterBadge}>{activeCount}</span>}
+        </button>
       </div>
+
+      <ActivePills filters={filters} onChange={setFilters} />
 
       <div className={h.filters}>
         {PROGRAM_CATS.map(cat => (
@@ -188,6 +282,15 @@ function ProgramsTab() {
           ))}
         </div>
       )}
+
+      {showFilters && (
+        <HelpFilterSheet
+          filters={filters}
+          onChange={setFilters}
+          resultCount={filtered.length}
+          onClose={() => setShowFilters(false)}
+        />
+      )}
     </>
   )
 }
@@ -206,41 +309,59 @@ function CoursesTab() {
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
   const [costFilter, setCostFilter] = useState('All')
+  const [filters, setFilters] = useState({ ...EMPTY_FILTERS })
+  const [showFilters, setShowFilters] = useState(false)
 
-  const filtered = COURSES.filter(c => {
-    const matchesCat = activeCategory === 'All' || c.category === activeCategory
-    const matchesCost = costFilter === 'All' || (costFilter === 'Free' && c.cost.startsWith('Free')) || (costFilter === 'Paid' && !c.cost.startsWith('Free'))
-    const q = query.toLowerCase()
-    const matchesQ = !q || c.title.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
-    return matchesCat && matchesCost && matchesQ
-  })
+  const activeCount = countActiveFilters(filters)
+
+  const filtered = applyHelpFilters(
+    COURSES.filter(c => {
+      const matchesCat = activeCategory === 'All' || c.category === activeCategory
+      const matchesCost = costFilter === 'All' || (costFilter === 'Free' && c.cost.startsWith('Free')) || (costFilter === 'Paid' && !c.cost.startsWith('Free'))
+      const q = query.toLowerCase()
+      const matchesQ = !q || c.title.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
+      return matchesCat && matchesCost && matchesQ
+    }),
+    filters
+  )
 
   return (
     <>
       <h1 className={styles.title}>Courses</h1>
       <p className={styles.subtitle}>Free and low-cost learning opportunities.</p>
 
-      <div className={h.searchBar}>
-        <span className={h.searchIcon}>🔍</span>
-        <input
-          className={h.searchInput}
-          type="text"
-          placeholder="Search courses or providers…"
-          value={query}
-          onChange={e => setQuery(e.target.value)}
-        />
-        {query && <button className={h.clearBtn} onClick={() => setQuery('')}>✕</button>}
+      <div className={h.searchRow}>
+        <div className={h.searchBar}>
+          <span className={h.searchIcon}>🔍</span>
+          <input
+            className={h.searchInput}
+            type="text"
+            placeholder="Search courses or providers…"
+            value={query}
+            onChange={e => setQuery(e.target.value)}
+          />
+          {query && <button className={h.clearBtn} onClick={() => setQuery('')}>✕</button>}
+        </div>
+        <button
+          className={`${h.filterBtn} ${activeCount > 0 ? h.filterBtnActive : ''}`}
+          onClick={() => setShowFilters(true)}
+        >
+          ⚙ Filters
+          {activeCount > 0 && <span className={h.filterBadge}>{activeCount}</span>}
+        </button>
       </div>
+
+      <ActivePills filters={filters} onChange={setFilters} />
 
       {/* Cost toggle */}
       <div className={h.filters} style={{ marginBottom: '0.625rem' }}>
-        {['All', 'Free', 'Paid'].map(f => (
+        {['All', 'Free', 'Paid'].map(cf => (
           <button
-            key={f}
-            className={`${h.chip} ${costFilter === f ? h.chipActive : ''}`}
-            onClick={() => setCostFilter(f)}
+            key={cf}
+            className={`${h.chip} ${costFilter === cf ? h.chipActive : ''}`}
+            onClick={() => setCostFilter(cf)}
           >
-            {f === 'All' ? 'Any Cost' : f === 'Free' ? '🆓 Free' : '💳 Paid'}
+            {cf === 'All' ? 'Any Cost' : cf === 'Free' ? '🆓 Free' : '💳 Paid'}
           </button>
         ))}
       </div>
@@ -306,6 +427,15 @@ function CoursesTab() {
           ))}
         </div>
       )}
+
+      {showFilters && (
+        <HelpFilterSheet
+          filters={filters}
+          onChange={setFilters}
+          resultCount={filtered.length}
+          onClose={() => setShowFilters(false)}
+        />
+      )}
     </>
   )
 }
@@ -319,7 +449,7 @@ function EmptyState() {
     <div className={h.emptyState}>
       <p className={h.emptyIcon}>🔎</p>
       <p className={h.emptyTitle}>No results found</p>
-      <p className={h.emptyDesc}>Try a different search term or category.</p>
+      <p className={h.emptyDesc}>Try adjusting your filters or search term.</p>
     </div>
   )
 }
