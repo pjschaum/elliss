@@ -484,9 +484,7 @@ export default function Help() {
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate('/home')}>← Back</button>
         <div className={styles.wordmark}>
-          <div className={styles.headerTorchClip}>
-            <img src="/torch-help.svg" alt="" className={styles.headerTorch} />
-          </div>
+          <img src="/flame-help.svg" alt="" className={styles.headerFlame} />
           <span style={{ color: 'var(--help-dark)' }}>elliss</span>
         </div>
       </header>

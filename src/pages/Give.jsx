@@ -273,9 +273,7 @@ export default function Give() {
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate('/home')}>← Back</button>
         <div className={styles.wordmark}>
-          <div className={styles.headerTorchClip}>
-            <img src="/torch-give.svg" alt="" className={styles.headerTorch} />
-          </div>
+          <img src="/flame-give.svg" alt="" className={styles.headerFlame} />
           <span style={{ color: 'var(--give)' }}>elliss</span>
         </div>
       </header>

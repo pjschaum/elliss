@@ -96,25 +96,18 @@
     flex-shrink: 0;
   }
 
-  /* Torch + wordmark side-by-side lockup */
+  /* Flame + wordmark side-by-side lockup */
   .navLockup {
     display: flex;
     align-items: center;
     gap: 0.625rem;
   }
 
-  /* Clip window: shows only the flame (top ~42% of the tall torch SVG) */
-  .navTorchClip {
-    width: 22px;
-    height: 30px;
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .navTorch {
-    width: 22px;
-    height: auto; /* full SVG ~64px tall; clip hides the handle below */
+  .navFlame {
+    width: 18px;
+    height: auto;
     display: block;
+    flex-shrink: 0;
   }
 
   .navWordmark {

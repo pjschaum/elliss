@@ -53,19 +53,11 @@
   letter-spacing: -0.03em;
 }
 
-/* Torch flame clip: shows only the top ~42% of the tall torch SVG */
-.headerTorchClip {
-  width: 14px;
-  height: 19px;
-  overflow: hidden;
-  flex-shrink: 0;
-  line-height: 0;
-}
-
-.headerTorch {
-  width: 14px;
-  height: auto; /* SVG is ~41px tall at this width; overflow hides the handle */
+.headerFlame {
+  width: 13px;
+  height: auto;
   display: block;
+  flex-shrink: 0;
 }
 
 /* ── Main content ── */
