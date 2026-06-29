@@ -21,24 +21,29 @@
 }
 
 :root {
-  /* ── Elliss brand palette (Samantha Schaum's logo files, June 2026) ── */
-  --brand-blue:       #2b4b81;   /* Primary — wordmark, torch stem, nav active */
-  --brand-blue-dark:  #1e3560;   /* Deep contrast / hover */
+  /* ── Elliss brand palette (Samantha Schaum brand guide, June 2026) ── */
+  --brand-blue:       #324a7d;   /* Primary — wordmark, torch stem, nav active */
+  --brand-blue-dark:  #243760;   /* Deep contrast / hover */
   --brand-blue-light: #e8edf6;   /* Subtle blue tint */
 
   /* ── Give side — purple flame ── */
-  --give:        #76479c;
-  --give-dark:   #5d3580;
-  --give-light:  #f0ebf7;
+  --give:        #6f4997;
+  --give-dark:   #573a78;
+  --give-light:  #f0ebf8;
 
   /* ── Help side — green flame ── */
-  --help:        #92c19d;
-  --help-dark:   #5e8f6a;
-  --help-light:  #e8f5eb;
+  --help:        #9cbf9f;
+  --help-dark:   #6a9470;
+  --help-light:  #eaf5eb;
+
+  /* ── Gold — accent / highlight ── */
+  --gold:        #f4c04b;
+  --gold-dark:   #d4a030;
+  --gold-light:  #fdf3d6;
 
   /* ── Neutrals ── */
-  --text:      #2c2c2e;   /* Dark charcoal body text */
-  --bg:        #f8f8f6;   /* Warm off-white app background */
+  --text:      #31333a;   /* Dark charcoal body text */
+  --bg:        #faf8f5;   /* Warm off-white app background */
   --white:     #ffffff;
   --gray-100:  #f8f9fa;
   --gray-200:  #e9ecef;
@@ -57,9 +62,9 @@
   --teal:        #3d8a74;   /* Action green for forms & sheets */
   --teal-dark:   #2a6254;
   --teal-light:  #e6f4f0;
-  --brand-cream: #f8f8f6;   /* Same as --bg */
-  --brand-dark:  #2c2c2e;   /* Same as --text */
-  --brand-plum:  #76479c;   /* Same as --give */
+  --brand-cream: #faf8f5;   /* Same as --bg */
+  --brand-dark:  #31333a;   /* Same as --text */
+  --brand-plum:  #6f4997;   /* Same as --give */
 }
 
 body {

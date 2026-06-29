@@ -10,18 +10,18 @@
  *   variant   — 'colored' | 'white' | 'give' | 'help'
  *                 colored = gradient flame (default, primary logo)
  *                 white   = all white (for dark / photo backgrounds)
- *                 give    = purple flame (#76479c)
- *                 help    = green flame (#92c19d)
+ *                 give    = purple flame (#6f4997)
+ *                 help    = green flame (#9cbf9f)
  *   className — optional CSS class
  */
 export default function EllissLogo({ width = 180, variant = 'colored', className = '' }) {
   const height = Math.round(width * (418.3 / 792))
 
   const configs = {
-    colored: { text: '#2b4b81', stem: '#2b4b81', flame: 'url(#elliss-grad)', showGrad: true },
+    colored: { text: '#324a7d', stem: '#324a7d', flame: 'url(#elliss-grad)', showGrad: true },
     white:   { text: '#ffffff', stem: '#ffffff', flame: '#ffffff',            showGrad: false },
-    give:    { text: '#2b4b81', stem: '#2b4b81', flame: '#76479c',            showGrad: false },
-    help:    { text: '#2b4b81', stem: '#2b4b81', flame: '#92c19d',            showGrad: false },
+    give:    { text: '#324a7d', stem: '#324a7d', flame: '#6f4997',            showGrad: false },
+    help:    { text: '#324a7d', stem: '#324a7d', flame: '#9cbf9f',            showGrad: false },
   }
   const c = configs[variant] ?? configs.colored
 
@@ -39,8 +39,8 @@ export default function EllissLogo({ width = 180, variant = 'colored', className
       {c.showGrad && (
         <defs>
           <linearGradient id="elliss-grad" x1="415.7" y1="102.5" x2="505" y2="102.5" gradientUnits="userSpaceOnUse">
-            <stop offset=".2" stopColor="#76479c"/>
-            <stop offset=".8" stopColor="#92c19d"/>
+            <stop offset=".2" stopColor="#6f4997"/>
+            <stop offset=".8" stopColor="#9cbf9f"/>
           </linearGradient>
         </defs>
       )}
