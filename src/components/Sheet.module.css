@@ -16,7 +16,8 @@
   background: var(--brand-cream);
   border-radius: 20px 20px 0 0;
   z-index: 50;
-  max-height: 90dvh;
+  max-height: 90vh;        /* dvh has patchy iOS support; vh is safer */
+  height: 90vh;            /* force it to fill so flex layout is predictable */
   display: flex;
   flex-direction: column;
   animation: slideUp 0.25s ease;
@@ -320,8 +321,11 @@
   line-height: 1.5;
 }
 
-/* ─── Footer ─── */
+/* ─── Footer — always pinned to bottom of sheet ─── */
 .footer {
+  position: sticky;
+  bottom: 0;
+  background: var(--brand-cream);
   padding: 0.875rem 1.25rem;
   padding-bottom: calc(0.875rem + env(safe-area-inset-bottom));
   border-top: 1px solid rgba(0,0,0,0.07);
