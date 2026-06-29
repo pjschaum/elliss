@@ -45,9 +45,27 @@
 .help .wordmark { color: var(--help-dark); }
 
 .wordmark {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   font-size: 1.25rem;
   font-weight: 700;
   letter-spacing: -0.03em;
+}
+
+/* Torch flame clip: shows only the top ~42% of the tall torch SVG */
+.headerTorchClip {
+  width: 14px;
+  height: 19px;
+  overflow: hidden;
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.headerTorch {
+  width: 14px;
+  height: auto; /* SVG is ~41px tall at this width; overflow hides the handle */
+  display: block;
 }
 
 /* ── Main content ── */
@@ -73,8 +91,8 @@
   margin-bottom: 0.5rem;
 }
 
-.give .title  { color: var(--teal-dark); }
-.help .title  { color: var(--purple-dark); }
+.give .title  { color: var(--give-dark); }
+.help .title  { color: var(--help-dark); }
 
 .subtitle {
   font-size: 1rem;
@@ -141,5 +159,42 @@
 @media (min-width: 1400px) {
   .main {
     padding: 3rem 4rem;
+  }
+}
+
+
+/* ═══════════════════════════════════════════
+   TORCH WATERMARK — fixed in viewport corner
+   Faint brand presence on every Give/Help screen.
+   ═══════════════════════════════════════════ */
+
+.give::before,
+.help::before {
+  content: '';
+  position: fixed;
+  top: 72px;        /* clears the mobile sticky header */
+  right: 12px;
+  width: 68px;
+  height: 199px;    /* 68 × 612/208.9 ≈ 199px — full torch proportions */
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: contain;
+  opacity: 0.045;   /* subtle — visible on tinted bg, nearly invisible over white cards */
+  pointer-events: none;
+  z-index: 1;
+}
+
+.give::before { background-image: url('/torch-give.svg'); }
+.help::before { background-image: url('/torch-help.svg'); }
+
+/* Desktop: slightly larger, clear of sidebar header */
+@media (min-width: 768px) {
+  .give::before,
+  .help::before {
+    top: 48px;
+    right: 32px;
+    width: 88px;
+    height: 258px;  /* 88 × 612/208.9 ≈ 258px */
+    opacity: 0.04;  /* fractionally softer on the larger desktop canvas */
   }
 }

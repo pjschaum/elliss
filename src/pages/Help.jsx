@@ -483,7 +483,12 @@ export default function Help() {
     <div className={`${styles.page} ${styles.help} ${styles.hasSidebar}`}>
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate('/home')}>← Back</button>
-        <div className={styles.wordmark}>elliss</div>
+        <div className={styles.wordmark}>
+          <div className={styles.headerTorchClip}>
+            <img src="/torch-help.svg" alt="" className={styles.headerTorch} />
+          </div>
+          <span style={{ color: 'var(--help-dark)' }}>elliss</span>
+        </div>
       </header>
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>

@@ -30,7 +30,17 @@ export default function BottomNav({ variant, active, onChange }) {
     >
       {/* Wordmark — hidden on mobile, shown in sidebar on desktop */}
       <div className={s.navBrand}>
-        <span className={s.navWordmark} style={{ color: activeColor }}>elliss</span>
+        <div className={s.navLockup}>
+          {/* Torch: clip container shows only the flame (top 42% of the tall SVG) */}
+          <div className={s.navTorchClip}>
+            <img
+              src={variant === 'give' ? '/torch-give.svg' : '/torch-help.svg'}
+              alt=""
+              className={s.navTorch}
+            />
+          </div>
+          <span className={s.navWordmark} style={{ color: activeColor }}>elliss</span>
+        </div>
       </div>
 
       {/* Tab items */}
