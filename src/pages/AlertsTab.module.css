@@ -72,8 +72,8 @@
 .deliveryOption:active { transform: scale(0.97); }
 
 .deliveryOptionActive {
-  border-color: var(--give);
-  background: var(--give-light);
+  border-color: var(--alert-accent, var(--give));
+  background: var(--alert-accent-light, var(--give-light));
 }
 
 .deliveryIcon  { font-size: 1.375rem; line-height: 1; }
@@ -84,7 +84,7 @@
   top: 0.35rem;
   right: 0.5rem;
   font-size: 0.7rem;
-  color: var(--give);
+  color: var(--alert-accent, var(--give));
   font-weight: 800;
 }
 
@@ -155,7 +155,7 @@
 }
 
 .toggleOn {
-  background: var(--give);
+  background: var(--alert-accent, var(--give));
 }
 
 .toggle:disabled {
@@ -206,7 +206,7 @@
 }
 
 .unreadBadge {
-  background: var(--give);
+  background: var(--alert-accent, var(--give));
   color: white;
   font-size: 0.65rem;
   font-weight: 800;
@@ -217,7 +217,7 @@
 .markAllBtn {
   font-size: 0.75rem;
   font-weight: 600;
-  color: var(--give);
+  color: var(--alert-accent, var(--give));
   background: none;
   border: none;
   cursor: pointer;
@@ -262,14 +262,14 @@
 
 .notifRow:last-child { border-bottom: none; }
 
-.notifUnread { background: #fdf9ff; }
-.notifRow:active { background: #f5f0fa; }
+.notifUnread { background: var(--alert-accent-unread, #fdf9ff); }
+.notifRow:active { background: var(--alert-accent-active, #f5f0fa); }
 
 .notifDot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--give);
+  background: var(--alert-accent, var(--give));
   flex-shrink: 0;
   margin-top: 5px;
 }

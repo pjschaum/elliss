@@ -132,8 +132,15 @@ export default function HelpAlertsTab() {
 
   const delivery = profile?.help_alert_delivery || 'in_app'
 
+  const helpAccentVars = {
+    '--alert-accent':        'var(--help-dark)',
+    '--alert-accent-light':  'var(--help-light)',
+    '--alert-accent-unread': '#f4faf6',
+    '--alert-accent-active': '#eaf5eb',
+  }
+
   return (
-    <div className={a.page}>
+    <div className={a.page} style={helpAccentVars}>
 
       {/* ── Header ── */}
       <div>
