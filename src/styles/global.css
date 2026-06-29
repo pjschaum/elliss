@@ -52,6 +52,14 @@
 
   /* ── Layout ── */
   --radius: 1.25rem;
+
+  /* ── Sheet / form UI aliases ── */
+  --teal:        #3d8a74;   /* Action green for forms & sheets */
+  --teal-dark:   #2a6254;
+  --teal-light:  #e6f4f0;
+  --brand-cream: #f8f8f6;   /* Same as --bg */
+  --brand-dark:  #2c2c2e;   /* Same as --text */
+  --brand-plum:  #76479c;   /* Same as --give */
 }
 
 body {

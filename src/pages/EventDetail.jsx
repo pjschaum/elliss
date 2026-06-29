@@ -1,11 +1,18 @@
+import { useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { EVENTS } from '../data/events'
+import { useProfile } from '../hooks/useProfile'
+import SignUpSheet from '../components/SignUpSheet'
+import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import d from './Detail.module.css'
 
 export default function EventDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const event = EVENTS.find(e => e.id === Number(id))
+  const { profile, updateProfile } = useProfile()
+  const [showSignUp, setShowSignUp]           = useState(false)
+  const [showProfileSetup, setShowProfileSetup] = useState(false)
 
   if (!event) {
     return (
@@ -24,6 +31,15 @@ export default function EventDetail() {
   const spotsFilled = event.totalSpots - event.spots
   const fillPct = Math.round((spotsFilled / event.totalSpots) * 100)
   const almostFull = event.spots <= 3
+
+  const handleSignUpTap = () => {
+    // If volunteer profile isn't started, nudge them to fill it first
+    if (!profile?.phone) {
+      setShowProfileSetup(true)
+    } else {
+      setShowSignUp(true)
+    }
+  }
 
   return (
     <div className={d.page}>
@@ -57,9 +73,7 @@ export default function EventDetail() {
           <button
             className={d.infoLink}
             style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: '0.9rem' }}
-            onClick={() => {
-              // Future: navigate to org detail
-            }}
+            onClick={() => {}}
           >
             {event.org}
           </button>
@@ -158,10 +172,36 @@ export default function EventDetail() {
 
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
-        <button className={`${d.actionBtn} ${d.actionBtnGive}`}>
+        <button
+          className={`${d.actionBtn} ${d.actionBtnGive}`}
+          onClick={handleSignUpTap}
+        >
           Sign Up to Volunteer
         </button>
       </div>
+
+      {/* Volunteer profile setup (if profile is blank) */}
+      {showProfileSetup && (
+        <VolunteerProfileSheet
+          profile={profile}
+          updateProfile={updateProfile}
+          onClose={() => setShowProfileSetup(false)}
+          onComplete={() => {
+            setShowProfileSetup(false)
+            setShowSignUp(true)
+          }}
+        />
+      )}
+
+      {/* Tiered sign-up sheet */}
+      {showSignUp && (
+        <SignUpSheet
+          event={event}
+          profile={profile}
+          updateProfile={updateProfile}
+          onClose={() => setShowSignUp(false)}
+        />
+      )}
     </div>
   )
 }

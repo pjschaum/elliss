@@ -3,8 +3,11 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Interface.module.css'
 import g from './Give.module.css'
 import BottomNav from '../components/BottomNav'
+import VolunteerProfileBanner from '../components/VolunteerProfileBanner'
+import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
+import { useProfile } from '../hooks/useProfile'
 
 /* ════════════════════════════════
    VOLUNTEER TAB
@@ -12,11 +15,12 @@ import { ORGS } from '../data/orgs'
 
 const VOL_CATEGORIES = ['All', 'Food Bank', 'Environment', 'Education', 'Youth', 'Seniors', 'Animals', 'Health']
 
-function VolunteerTab() {
+function VolunteerTab({ profile, updateProfile }) {
   const navigate = useNavigate()
   const [location, setLocation] = useState('')
   const [radius, setRadius] = useState('10')
   const [activeCategory, setActiveCategory] = useState('All')
+  const [showProfileSheet, setShowProfileSheet] = useState(false)
 
   const filtered = activeCategory === 'All'
     ? EVENTS
@@ -24,6 +28,13 @@ function VolunteerTab() {
 
   return (
     <>
+      {/* Volunteer Profile Banner — subtle, dismissable */}
+      <VolunteerProfileBanner
+        profile={profile}
+        updateProfile={updateProfile}
+        onGetStarted={() => setShowProfileSheet(true)}
+      />
+
       <h1 className={styles.title}>Volunteer Events</h1>
       <p className={styles.subtitle}>Find opportunities near you.</p>
 
@@ -93,6 +104,16 @@ function VolunteerTab() {
           </div>
         ))}
       </div>
+
+      {/* Volunteer Profile bottom sheet */}
+      {showProfileSheet && (
+        <VolunteerProfileSheet
+          profile={profile}
+          updateProfile={updateProfile}
+          onClose={() => setShowProfileSheet(false)}
+          onComplete={() => setShowProfileSheet(false)}
+        />
+      )}
     </>
   )
 }
@@ -133,7 +154,6 @@ function DonateTab() {
       <h1 className={styles.title}>Donate</h1>
       <p className={styles.subtitle}>Find verified nonprofits and causes to support.</p>
 
-      {/* Search bar */}
       <div className={g.donateSearch}>
         <span className={g.searchIcon}>🔍</span>
         <input
@@ -150,7 +170,6 @@ function DonateTab() {
         )}
       </div>
 
-      {/* Category chips */}
       <div className={g.filters}>
         {DONATE_CATEGORIES.map(cat => (
           <button
@@ -163,7 +182,6 @@ function DonateTab() {
         ))}
       </div>
 
-      {/* Results */}
       <p className={g.resultsCount}>
         {filtered.length} {filtered.length === 1 ? 'organization' : 'organizations'} found
       </p>
@@ -206,7 +224,7 @@ function DonateTab() {
                 <button
                   className={g.donateBtn}
                   onClick={e => {
-                    e.stopPropagation() // don't also trigger the card navigate
+                    e.stopPropagation()
                     navigate(`/give/org/${org.id}`)
                   }}
                 >
@@ -245,6 +263,7 @@ function PlaceholderTab({ title, icon, desc }) {
 export default function Give() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('volunteer')
+  const { profile, updateProfile } = useProfile()
 
   return (
     <div className={`${styles.page} ${styles.give}`}>
@@ -254,7 +273,9 @@ export default function Give() {
       </header>
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>
-        {activeTab === 'volunteer'     && <VolunteerTab />}
+        {activeTab === 'volunteer'     && (
+          <VolunteerTab profile={profile} updateProfile={updateProfile} />
+        )}
         {activeTab === 'donate'        && <DonateTab />}
         {activeTab === 'activity'      && (
           <PlaceholderTab

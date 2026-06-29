@@ -1,3 +1,8 @@
+// ─── Tier definitions ────────────────────────────────────────
+// Tier 1 — Immediate confirmation: basic info + liability waiver
+// Tier 2 — Background check required: Tier 1 + background check notice + consent
+// Tier 3 — Application required: info submitted to org, status = pending approval
+
 export const EVENTS = [
   {
     id: 1,
@@ -12,10 +17,16 @@ export const EVENTS = [
     tags: ['Food Bank', 'Community'],
     spots: 12,
     totalSpots: 20,
-    desc: 'Join us for a hands-on morning sorting and packing donated food for families across Chicagoland. No experience needed — just a willingness to help. You\'ll work alongside other volunteers in a fast-paced, friendly warehouse environment.',
+    desc: 'Join us for a hands-on morning sorting and packing donated food for families across Chicagoland. No experience needed — just a willingness to help.',
     whatToBring: ['Comfortable, closed-toe shoes', 'Water bottle', 'Photo ID (for check-in)'],
     coordinator: 'Maria Lopez',
     coordinatorEmail: 'volunteers@gcfd.org',
+    // ── Sign-up requirements ──
+    tier: 1,
+    requiresBackgroundCheck: false,
+    ageMinimum: 14,
+    requiredProfileFields: ['phone'],
+    waiverText: 'I understand that volunteering involves physical activity and agree to follow all safety guidelines provided by the Greater Chicago Food Depository.',
   },
   {
     id: 2,
@@ -30,10 +41,16 @@ export const EVENTS = [
     tags: ['Environment', 'Animals'],
     spots: 8,
     totalSpots: 15,
-    desc: 'Help restore and maintain natural habitats within Lincoln Park Zoo\'s conservation areas. Tasks include invasive species removal, trail maintenance, and habitat enrichment for resident animals. A great way to give back to wildlife and the environment.',
+    desc: 'Help restore and maintain natural habitats within Lincoln Park Zoo\'s conservation areas. Tasks include invasive species removal and trail maintenance.',
     whatToBring: ['Work gloves (provided if needed)', 'Sunscreen', 'Sturdy shoes'],
     coordinator: 'James Park',
     coordinatorEmail: 'conservation@lpzoo.org',
+    // ── Sign-up requirements ──
+    tier: 1,
+    requiresBackgroundCheck: false,
+    ageMinimum: 16,
+    requiredProfileFields: ['phone'],
+    waiverText: 'I understand this activity involves outdoor physical labor and agree to follow all safety protocols provided by Lincoln Park Zoo staff.',
   },
   {
     id: 3,
@@ -48,10 +65,16 @@ export const EVENTS = [
     tags: ['Education'],
     spots: 4,
     totalSpots: 6,
-    desc: 'Work one-on-one or in small groups with adult learners building foundational reading and writing skills. Tutors are matched with learners based on availability and subject area. Training is provided — no teaching experience required.',
+    desc: 'Work one-on-one or in small groups with adult learners building foundational reading and writing skills. Training is provided.',
     whatToBring: ['Laptop or tablet (optional)', 'Patience and enthusiasm'],
     coordinator: 'Aisha Thompson',
     coordinatorEmail: 'tutor@literacyworks.org',
+    // ── Sign-up requirements ──
+    tier: 2,
+    requiresBackgroundCheck: true,
+    ageMinimum: 18,
+    requiredProfileFields: ['phone', 'date_of_birth'],
+    waiverText: 'I consent to a background check as required by Literacy Works Chicago for all volunteers working directly with program participants. Results are kept confidential.',
   },
   {
     id: 4,
@@ -66,10 +89,16 @@ export const EVENTS = [
     tags: ['Seniors', 'Health'],
     spots: 6,
     totalSpots: 10,
-    desc: 'Spend meaningful time with isolated seniors through conversation, games, reading, or light activity. Companion visits make a huge difference in the lives of older adults who may not have regular social contact. Volunteers are matched with residents based on shared interests.',
+    desc: 'Spend meaningful time with isolated seniors through conversation, games, reading, or light activity. Volunteers are matched with residents based on shared interests.',
     whatToBring: ['A warm smile and your time', 'Any games, books, or crafts you enjoy'],
     coordinator: 'Patricia Nguyen',
     coordinatorEmail: 'volunteers@seniorcarechicago.org',
+    // ── Sign-up requirements ──
+    tier: 2,
+    requiresBackgroundCheck: true,
+    ageMinimum: 18,
+    requiredProfileFields: ['phone', 'date_of_birth', 'emergency_contact_name', 'emergency_contact_phone'],
+    waiverText: 'I consent to a fingerprint-based background check required by Senior Care Chicago for all volunteers working with vulnerable adult residents. I agree to maintain confidentiality of all resident information.',
   },
   {
     id: 5,
@@ -84,9 +113,16 @@ export const EVENTS = [
     tags: ['Youth', 'Education'],
     spots: 3,
     totalSpots: 8,
-    desc: 'Mentor Chicago youth ages 10–16 in academics, life skills, and career exploration. Sessions include homework help, goal-setting conversations, and skill-building activities. Mentors commit to at least 4 sessions per month.',
+    desc: 'Mentor Chicago youth ages 10–16 in academics, life skills, and career exploration. Mentors commit to at least 4 sessions per month.',
     whatToBring: ['Photo ID', 'Enthusiasm for working with young people'],
     coordinator: 'DeShawn Harris',
     coordinatorEmail: 'mentors@chicagoyouth.org',
+    // ── Sign-up requirements ──
+    tier: 3,
+    requiresBackgroundCheck: true,
+    ageMinimum: 21,
+    requiredProfileFields: ['phone', 'date_of_birth', 'emergency_contact_name', 'emergency_contact_phone'],
+    waiverText: 'I understand this role requires working directly with minors and consent to a comprehensive background check including fingerprinting. My application will be reviewed by Chicago Youth Programs staff before confirmation.',
+    approvalNote: 'Applications are reviewed within 3–5 business days. You\'ll receive an email once approved.',
   },
 ]
