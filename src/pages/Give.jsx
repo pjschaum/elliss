@@ -285,7 +285,7 @@ export default function Give() {
         {activeTab === 'donate'        && <DonateTab />}
         {activeTab === 'activity'      && <ActivityTab />}
         {activeTab === 'notifications' && <AlertsTab />}
-        {activeTab === 'account'       && <AccountTab />}
+        {activeTab === 'account'       && <AccountTab side="give" />}
       </main>
 
       <BottomNav variant="give" active={activeTab} onChange={setActiveTab} />

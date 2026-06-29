@@ -281,6 +281,30 @@
   background: var(--help-dark);
 }
 
+/* ── Save / heart button ── */
+.saveBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  color: #ccc;
+  padding: 0.125rem 0.25rem;
+  flex-shrink: 0;
+  align-self: flex-start;
+  transition: color 0.15s, transform 0.1s;
+  margin-left: auto;
+}
+
+.saveBtn:hover {
+  color: var(--help-dark);
+  transform: scale(1.15);
+}
+
+.saveBtnActive {
+  color: var(--help-dark);
+}
+
 /* ── Empty state ── */
 .emptyState {
   text-align: center;

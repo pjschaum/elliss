@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Interface.module.css'
 import h from './Help.module.css'
 import BottomNav from '../components/BottomNav'
+import useSavedItems from '../hooks/useSavedItems'
+import HelpAlertsTab from './HelpAlertsTab'
+import AccountTab from './AccountTab'
 import HelpFilterSheet, {
   EMPTY_FILTERS,
   countActiveFilters,
@@ -63,6 +66,19 @@ function ActivePills({ filters, onChange }) {
   )
 }
 
+// ─── Heart / save button ─────────────────────────────────────
+function SaveButton({ saved, onToggle }) {
+  return (
+    <button
+      className={`${h.saveBtn} ${saved ? h.saveBtnActive : ''}`}
+      onClick={e => { e.stopPropagation(); onToggle() }}
+      aria-label={saved ? 'Remove from saved' : 'Save for later'}
+    >
+      {saved ? '♥' : '♡'}
+    </button>
+  )
+}
+
 /* ════════════════════════════════
    RESOURCES TAB
    ════════════════════════════════ */
@@ -73,7 +89,7 @@ const RESOURCE_CATS = [
   'Child Care', 'Senior Services', 'Financial Aid', 'Disability',
 ]
 
-function ResourcesTab() {
+function ResourcesTab({ savedHook }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -154,6 +170,12 @@ function ResourcesTab() {
                       : <span className={h.paidBadge}>Low Cost</span>}
                   </div>
                 </div>
+                {savedHook && (
+                  <SaveButton
+                    saved={savedHook.isItemSaved('resource', r.id)}
+                    onToggle={() => savedHook.toggleSaved('resource', r.id)}
+                  />
+                )}
               </div>
               <p className={h.cardDesc}>{r.desc}</p>
               <div className={h.cardFooter}>
@@ -191,7 +213,7 @@ const PROGRAM_CATS = [
   'Employment', 'Education', 'Disability', 'Veterans', 'Immigrants', 'Seniors',
 ]
 
-function ProgramsTab() {
+function ProgramsTab({ savedHook }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -270,6 +292,12 @@ function ProgramsTab() {
                     {p.govt && <span className={h.govtBadge}>Gov't Program</span>}
                   </div>
                 </div>
+                {savedHook && (
+                  <SaveButton
+                    saved={savedHook.isItemSaved('program', p.id)}
+                    onToggle={() => savedHook.toggleSaved('program', p.id)}
+                  />
+                )}
               </div>
               <p className={h.cardDesc}>{p.desc}</p>
               <p className={h.cardDetail}>✓ Eligibility: {p.eligibility}</p>
@@ -306,7 +334,7 @@ function ProgramsTab() {
    COURSES TAB
    ════════════════════════════════ */
 
-function CoursesTab() {
+function CoursesTab({ savedHook }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [filters, setFilters] = useState({ ...EMPTY_COURSE_FILTERS })
@@ -372,6 +400,12 @@ function CoursesTab() {
                       : <span className={h.paidBadge}>{c.cost}</span>}
                   </div>
                 </div>
+                {savedHook && (
+                  <SaveButton
+                    saved={savedHook.isItemSaved('course', c.id)}
+                    onToggle={() => savedHook.toggleSaved('course', c.id)}
+                  />
+                )}
               </div>
 
               <p className={h.cardDesc}>{c.desc}</p>
@@ -450,6 +484,7 @@ function PlaceholderTab({ title, icon, desc }) {
 export default function Help() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('resources')
+  const savedHook = useSavedItems()
 
   return (
     <div className={`${styles.page} ${styles.help} ${styles.hasSidebar}`}>
@@ -462,23 +497,11 @@ export default function Help() {
       </header>
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>
-        {activeTab === 'resources'     && <ResourcesTab />}
-        {activeTab === 'programs'      && <ProgramsTab />}
-        {activeTab === 'courses'       && <CoursesTab />}
-        {activeTab === 'notifications' && (
-          <PlaceholderTab
-            title="Alerts"
-            icon="🔔"
-            desc="Updates on resources, program deadlines, and messages from organizations."
-          />
-        )}
-        {activeTab === 'account'       && (
-          <PlaceholderTab
-            title="My Account"
-            icon="👤"
-            desc="Manage your profile, preferences, and connected accounts."
-          />
-        )}
+        {activeTab === 'resources'     && <ResourcesTab savedHook={savedHook} />}
+        {activeTab === 'programs'      && <ProgramsTab savedHook={savedHook} />}
+        {activeTab === 'courses'       && <CoursesTab savedHook={savedHook} />}
+        {activeTab === 'notifications' && <HelpAlertsTab />}
+        {activeTab === 'account'       && <AccountTab side="help" savedHook={savedHook} />}
       </main>
 
       <BottomNav variant="help" active={activeTab} onChange={setActiveTab} />

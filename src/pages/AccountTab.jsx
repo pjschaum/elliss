@@ -6,7 +6,7 @@ import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import useInstallPrompt from '../hooks/useInstallPrompt'
 import a from './AccountTab.module.css'
 
-// ─── All available causes ────────────────────────────────────
+// ─── Cause options ───────────────────────────────────────────
 const ALL_CAUSES = [
   'Food & Hunger', 'Youth & Education', 'Seniors & Elderly', 'Animals & Pets',
   'Environment', 'Health & Wellness', 'Housing & Poverty', 'Veterans',
@@ -25,6 +25,21 @@ function getInitials(name, email) {
   return email ? email.slice(0, 2).toUpperCase() : '??'
 }
 
+// Format 'YYYY-MM-DD' → 'Aug 15'
+function fmtDate(isoStr) {
+  if (!isoStr) return null
+  const [y, m, d] = isoStr.split('-').map(Number)
+  return new Date(y, m - 1, d).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+}
+
+// Returns true if isoStr is within the next 14 days
+function isUrgent(isoStr) {
+  if (!isoStr) return false
+  const deadline = new Date(isoStr)
+  const diff = (deadline - new Date()) / (1000 * 60 * 60 * 24)
+  return diff >= 0 && diff <= 14
+}
+
 function SectionHeader({ title }) {
   return <p className={a.sectionHeader}>{title}</p>
 }
@@ -40,8 +55,52 @@ function Row({ icon, label, value, onPress, danger, chevron = true }) {
   )
 }
 
+// ─── Saved item row (Help side) ───────────────────────────────
+function SavedItemRow({ name, sub, deadline, startDate, renewalDate, onRemove, onNavigate }) {
+  const deadlineLabel = deadline
+    ? (isUrgent(deadline)
+        ? `⚠️ Deadline ${fmtDate(deadline)}`
+        : `Deadline ${fmtDate(deadline)}`)
+    : null
+  const startLabel    = startDate   ? `Starts ${fmtDate(startDate)}`   : null
+  const renewalLabel  = renewalDate ? `Renewal ${fmtDate(renewalDate)}` : null
+
+  const urgentDeadline = deadline && isUrgent(deadline)
+
+  return (
+    <div className={a.savedRow} onClick={onNavigate}>
+      <div className={a.savedInfo}>
+        <p className={a.savedName}>{name}</p>
+        {sub && <p className={a.savedSub}>{sub}</p>}
+        <div className={a.savedBadges}>
+          {deadlineLabel && (
+            <span className={`${a.savedBadge} ${urgentDeadline ? a.savedBadgeUrgent : a.savedBadgeDeadline}`}>
+              {deadlineLabel}
+            </span>
+          )}
+          {startLabel && (
+            <span className={`${a.savedBadge} ${a.savedBadgeStart}`}>{startLabel}</span>
+          )}
+          {renewalLabel && (
+            <span className={`${a.savedBadge} ${a.savedBadgeRenewal}`}>{renewalLabel}</span>
+          )}
+        </div>
+      </div>
+      <button
+        className={a.savedRemoveBtn}
+        onClick={e => { e.stopPropagation(); onRemove() }}
+        aria-label="Remove from saved"
+      >
+        ♥
+      </button>
+    </div>
+  )
+}
+
 // ─── Main component ──────────────────────────────────────────
-export default function AccountTab() {
+// side: 'give' (default) | 'help'
+// savedHook: returned value of useSavedItems() — required when side='help'
+export default function AccountTab({ side = 'give', savedHook }) {
   const navigate = useNavigate()
   const { user, profile, loading, updateProfile } = useProfile()
   const [showVolProfile, setShowVolProfile] = useState(false)
@@ -75,18 +134,23 @@ export default function AccountTab() {
 
   if (loading) return <div className={a.loading}>Loading…</div>
 
-  const displayName    = profile?.full_name || user?.user_metadata?.full_name || ''
-  const email          = user?.email || ''
-  const initials       = getInitials(displayName, email)
-  const volComplete    = profile?.volunteer_profile_complete
-  const favCauses      = profile?.favorite_causes || []
+  const displayName = profile?.full_name || user?.user_metadata?.full_name || ''
+  const email       = user?.email || ''
+  const initials    = getInitials(displayName, email)
+  const volComplete = profile?.volunteer_profile_complete
+  const favCauses   = profile?.favorite_causes || []
 
-  // Volunteer profile summary line
   const volSummaryParts = []
   if (profile?.phone) volSummaryParts.push('Phone')
   if (profile?.date_of_birth) volSummaryParts.push('DOB')
   if (profile?.emergency_contact_name) volSummaryParts.push('Emergency contact')
   if ((profile?.skills || []).length > 0) volSummaryParts.push(`${profile.skills.length} skill${profile.skills.length > 1 ? 's' : ''}`)
+
+  // Help-side saved items
+  const savedResources = savedHook?.savedResources || []
+  const savedPrograms  = savedHook?.savedPrograms  || []
+  const savedCourses   = savedHook?.savedCourses   || []
+  const totalSaved     = savedResources.length + savedPrograms.length + savedCourses.length
 
   return (
     <div className={a.page}>
@@ -102,107 +166,193 @@ export default function AccountTab() {
         </div>
       </div>
 
-      {/* ── Volunteer Profile ── */}
-      <div className={a.cardGroup}>
-        <SectionHeader title="Volunteer Profile" />
-        <div className={a.card}>
-          <div className={a.profileStatusRow}>
-            <div>
-              <span className={`${a.statusBadge} ${volComplete ? a.statusComplete : a.statusIncomplete}`}>
-                {volComplete ? '✓ Complete' : '○ Incomplete'}
-              </span>
-              {volSummaryParts.length > 0 && (
-                <p className={a.profileSummary}>{volSummaryParts.join(' · ')}</p>
-              )}
-              {!volComplete && (
-                <p className={a.profileSummary}>
-                  Add your info once to pre-fill volunteer sign-ups.
-                </p>
-              )}
-            </div>
-            <button className={a.editBtn} onClick={() => setShowVolProfile(true)}>
-              {volComplete ? 'Edit' : 'Set up'}
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Assistance Profile (placeholder for Help side) ── */}
-      <div className={a.cardGroup}>
-        <SectionHeader title="Assistance Profile" />
-        <div className={a.card}>
-          <div className={a.profileStatusRow}>
-            <div>
-              <span className={`${a.statusBadge} ${a.statusIncomplete}`}>○ Not set up</span>
-              <p className={a.profileSummary}>
-                Pre-fill program applications and course enrollments on the Help side.
-              </p>
-            </div>
-            <button className={a.editBtn} disabled style={{ opacity: 0.4 }}>
-              Coming soon
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Favorite Causes ── */}
-      <div className={a.cardGroup}>
-        <SectionHeader title="Favorite Causes" />
-        <div className={a.card}>
-          {!editingCauses ? (
-            <>
-              {favCauses.length === 0 ? (
-                <p className={a.emptyHint}>No causes selected yet. Tap Edit to choose what matters to you.</p>
-              ) : (
-                <div className={a.causeChips}>
-                  {favCauses.map(c => (
-                    <span key={c} className={a.causeChip}>{c}</span>
-                  ))}
+      {/* ════ GIVE-SIDE SECTIONS ════ */}
+      {side === 'give' && (
+        <>
+          {/* ── Volunteer Profile ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Volunteer Profile" />
+            <div className={a.card}>
+              <div className={a.profileStatusRow}>
+                <div>
+                  <span className={`${a.statusBadge} ${volComplete ? a.statusComplete : a.statusIncomplete}`}>
+                    {volComplete ? '✓ Complete' : '○ Incomplete'}
+                  </span>
+                  {volSummaryParts.length > 0 && (
+                    <p className={a.profileSummary}>{volSummaryParts.join(' · ')}</p>
+                  )}
+                  {!volComplete && (
+                    <p className={a.profileSummary}>Add your info once to pre-fill volunteer sign-ups.</p>
+                  )}
                 </div>
-              )}
-              <button className={a.editCausesBtn} onClick={() => setEditingCauses(true)}>
-                {favCauses.length === 0 ? 'Choose causes →' : 'Edit causes →'}
-              </button>
-            </>
-          ) : (
-            <>
-              <p className={a.causesEditHint}>Tap causes to select or deselect. Changes save automatically.</p>
-              <div className={a.causesGrid}>
-                {ALL_CAUSES.map(cause => {
-                  const selected = favCauses.includes(cause)
-                  return (
-                    <button
-                      key={cause}
-                      className={`${a.causeTile} ${selected ? a.causeTileSelected : ''}`}
-                      onClick={() => handleToggleCause(cause)}
-                    >
-                      {selected && <span className={a.causeTileCheck}>✓ </span>}
-                      {cause}
-                    </button>
-                  )
-                })}
+                <button className={a.editBtn} onClick={() => setShowVolProfile(true)}>
+                  {volComplete ? 'Edit' : 'Set up'}
+                </button>
               </div>
-              <button className={a.doneEditBtn} onClick={() => setEditingCauses(false)}>
-                Done
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+          </div>
 
-      {/* ── Favorite Organizations ── */}
-      <div className={a.cardGroup}>
-        <SectionHeader title="Favorite Organizations" />
-        <div className={`${a.card} ${a.favOrgsCard}`}>
-          <span className={a.favOrgsIcon}>🤝</span>
-          <p className={a.favOrgsTitle}>No favorites yet</p>
-          <p className={a.favOrgsDesc}>
-            Tap the heart icon on any organization or volunteer event to save it here.
-          </p>
-        </div>
-      </div>
+          {/* ── Favorite Causes ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Favorite Causes" />
+            <div className={a.card}>
+              {!editingCauses ? (
+                <>
+                  {favCauses.length === 0 ? (
+                    <p className={a.emptyHint}>No causes selected yet. Tap Edit to choose what matters to you.</p>
+                  ) : (
+                    <div className={a.causeChips}>
+                      {favCauses.map(c => (
+                        <span key={c} className={a.causeChip}>{c}</span>
+                      ))}
+                    </div>
+                  )}
+                  <button className={a.editCausesBtn} onClick={() => setEditingCauses(true)}>
+                    {favCauses.length === 0 ? 'Choose causes →' : 'Edit causes →'}
+                  </button>
+                </>
+              ) : (
+                <>
+                  <p className={a.causesEditHint}>Tap causes to select or deselect. Changes save automatically.</p>
+                  <div className={a.causesGrid}>
+                    {ALL_CAUSES.map(cause => {
+                      const selected = favCauses.includes(cause)
+                      return (
+                        <button
+                          key={cause}
+                          className={`${a.causeTile} ${selected ? a.causeTileSelected : ''}`}
+                          onClick={() => handleToggleCause(cause)}
+                        >
+                          {selected && <span className={a.causeTileCheck}>✓ </span>}
+                          {cause}
+                        </button>
+                      )
+                    })}
+                  </div>
+                  <button className={a.doneEditBtn} onClick={() => setEditingCauses(false)}>
+                    Done
+                  </button>
+                </>
+              )}
+            </div>
+          </div>
 
-      {/* ── Install App ── */}
+          {/* ── Favorite Organizations ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Favorite Organizations" />
+            <div className={`${a.card} ${a.favOrgsCard}`}>
+              <span className={a.favOrgsIcon}>🤝</span>
+              <p className={a.favOrgsTitle}>No favorites yet</p>
+              <p className={a.favOrgsDesc}>Tap the heart icon on any organization or volunteer event to save it here.</p>
+            </div>
+          </div>
+        </>
+      )}
+
+      {/* ════ HELP-SIDE SECTIONS ════ */}
+      {side === 'help' && (
+        <>
+          {/* ── Assistance Profile placeholder ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Assistance Profile" />
+            <div className={a.card}>
+              <div className={a.profileStatusRow}>
+                <div>
+                  <span className={`${a.statusBadge} ${a.statusIncomplete}`}>○ Not set up</span>
+                  <p className={a.profileSummary}>Pre-fill program applications and course enrollments.</p>
+                </div>
+                <button className={a.editBtn} disabled style={{ opacity: 0.4 }}>Coming soon</button>
+              </div>
+            </div>
+          </div>
+
+          {/* ── Saved Resources ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Saved Resources" />
+            {savedResources.length === 0 ? (
+              <div className={`${a.card} ${a.savedEmptyCard}`}>
+                <span className={a.savedEmptyIcon}>🌱</span>
+                <p className={a.savedEmptyTitle}>No saved resources</p>
+                <p className={a.savedEmptyDesc}>Tap ♡ on any resource to save it for later.</p>
+              </div>
+            ) : (
+              <div className={a.card}>
+                {savedResources.map((r, i) => (
+                  <div key={r.id}>
+                    <SavedItemRow
+                      name={r.org}
+                      sub={r.category}
+                      deadline={r.applicationDeadline}
+                      renewalDate={r.renewalDate}
+                      onRemove={() => savedHook.unsaveItem('resource', r.id)}
+                      onNavigate={() => navigate(`/help/resource/${r.id}`)}
+                    />
+                    {i < savedResources.length - 1 && <div className={a.savedDivider} />}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* ── Saved Programs ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Saved Programs" />
+            {savedPrograms.length === 0 ? (
+              <div className={`${a.card} ${a.savedEmptyCard}`}>
+                <span className={a.savedEmptyIcon}>📋</span>
+                <p className={a.savedEmptyTitle}>No saved programs</p>
+                <p className={a.savedEmptyDesc}>Tap ♡ on any program to track application deadlines and renewals.</p>
+              </div>
+            ) : (
+              <div className={a.card}>
+                {savedPrograms.map((p, i) => (
+                  <div key={p.id}>
+                    <SavedItemRow
+                      name={p.name}
+                      sub={p.agency}
+                      deadline={p.applicationDeadline}
+                      renewalDate={p.renewalDate}
+                      onRemove={() => savedHook.unsaveItem('program', p.id)}
+                      onNavigate={() => navigate(`/help/program/${p.id}`)}
+                    />
+                    {i < savedPrograms.length - 1 && <div className={a.savedDivider} />}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* ── Saved Courses ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="Saved Courses" />
+            {savedCourses.length === 0 ? (
+              <div className={`${a.card} ${a.savedEmptyCard}`}>
+                <span className={a.savedEmptyIcon}>🎓</span>
+                <p className={a.savedEmptyTitle}>No saved courses</p>
+                <p className={a.savedEmptyDesc}>Tap ♡ on any course to get registration and start date reminders.</p>
+              </div>
+            ) : (
+              <div className={a.card}>
+                {savedCourses.map((c, i) => (
+                  <div key={c.id}>
+                    <SavedItemRow
+                      name={c.title}
+                      sub={c.provider}
+                      deadline={c.registrationDeadline}
+                      startDate={c.startDate}
+                      onRemove={() => savedHook.unsaveItem('course', c.id)}
+                      onNavigate={() => navigate(`/help/course/${c.id}`)}
+                    />
+                    {i < savedCourses.length - 1 && <div className={a.savedDivider} />}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* ── Install App (both sides) ── */}
       {!isInstalled && (
         <div className={a.cardGroup}>
           <SectionHeader title="Get the App" />
@@ -214,7 +364,6 @@ export default function AccountTab() {
                 <p className={a.installSub}>Instant access, offline support, no browser bar.</p>
               </div>
             </div>
-
             {showIosSteps ? (
               <div className={a.iosStepsWrap}>
                 <ol className={a.iosSteps}>
@@ -239,7 +388,7 @@ export default function AccountTab() {
         </div>
       )}
 
-      {/* ── Account settings ── */}
+      {/* ── Account settings (both sides) ── */}
       <div className={a.cardGroup}>
         <SectionHeader title="Account" />
         <div className={a.cardList}>
@@ -256,7 +405,7 @@ export default function AccountTab() {
         </div>
       </div>
 
-      {/* ── Sign out ── */}
+      {/* ── Sign out (both sides) ── */}
       <div className={a.cardGroup}>
         <div className={a.cardList}>
           <Row
@@ -269,10 +418,8 @@ export default function AccountTab() {
         </div>
       </div>
 
-      {/* ── App version ── */}
       <p className={a.version}>Elliss · v0.1 beta</p>
 
-      {/* ── Volunteer Profile sheet ── */}
       {showVolProfile && (
         <VolunteerProfileSheet
           profile={profile}

@@ -1,3 +1,7 @@
+// applicationDeadline: null (rolling) | 'YYYY-MM-DD'
+// renewalPeriod: null | '6 months' | '1 year' | '2 years'
+// renewalDate: null | 'YYYY-MM-DD' — next renewal due date (for saved users)
+
 export const PROGRAMS = [
   {
     id: 1,
@@ -15,6 +19,9 @@ export const PROGRAMS = [
     requiredDocs: ['Government-issued photo ID', 'Proof of address', 'Proof of income (pay stubs, tax returns)', 'Social Security numbers for all household members'],
     processingTime: 'Typically 30 days; expedited processing available within 7 days for urgent cases.',
     benefitAmount: 'Average $230/person per month, varies by household size and income.',
+    applicationDeadline: null,       // Rolling enrollment
+    renewalPeriod: '1 year',
+    renewalDate: '2026-10-01',       // Annual recertification
     filters: { ageGroups: 'all', specialized: ['seniors', 'disabilities'], community: [], income: 'low_income' },
   },
   {
@@ -33,6 +40,9 @@ export const PROGRAMS = [
     requiredDocs: ['Proof of identity', 'Proof of Illinois residency', 'Proof of income', 'Social Security number (if available)'],
     processingTime: '45 days for most applications; 90 days for disability-based applications.',
     benefitAmount: 'Full medical coverage at no or low cost depending on income level.',
+    applicationDeadline: null,       // Rolling enrollment
+    renewalPeriod: '1 year',
+    renewalDate: '2026-12-01',       // Annual renewal
     filters: { ageGroups: 'all', specialized: ['disabilities', 'pregnant', 'women', 'children'], community: [], income: 'low_income' },
   },
   {
@@ -51,6 +61,9 @@ export const PROGRAMS = [
     requiredDocs: ['Photo ID', 'Proof of income', 'Current lease agreement', 'Documentation of hardship', 'Utility bills (if applying for utility assistance)'],
     processingTime: 'Varies; typically 4–8 weeks from completed application to payment.',
     benefitAmount: 'Up to 18 months of past-due and future rent and utilities.',
+    applicationDeadline: '2026-07-31',  // Current application window closes July 31
+    renewalPeriod: null,                // One-time benefit
+    renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['homeless', 'single_parents'], community: [], income: 'low_income' },
   },
   {
@@ -69,6 +82,9 @@ export const PROGRAMS = [
     requiredDocs: ['Photo ID', 'Proof of address', 'Proof of income', 'Child\'s birth certificate (for child applicants)', 'Medical records (if available)'],
     processingTime: 'Usually same-day or within a few days of your clinic appointment.',
     benefitAmount: 'Monthly food package tailored to nutritional needs; varies by participant category.',
+    applicationDeadline: null,       // Rolling enrollment
+    renewalPeriod: '6 months',
+    renewalDate: '2026-09-15',       // 6-month recertification
     filters: { ageGroups: ['children', 'adults'], specialized: ['women', 'pregnant'], community: [], income: 'low_income' },
   },
   {
@@ -87,6 +103,9 @@ export const PROGRAMS = [
     requiredDocs: ['Photo ID', 'Proof of income for all household members', 'Social Security numbers', 'Most recent utility bill'],
     processingTime: 'Typically 30 days; crisis assistance available faster for households facing disconnection.',
     benefitAmount: 'Varies by income, household size, and energy costs. Average benefit is $500–$800 per year.',
+    applicationDeadline: '2026-10-01',  // New heating season enrollment opens Oct 1
+    renewalPeriod: '1 year',
+    renewalDate: '2027-05-31',          // Enrollment window closes May 31 each year
     filters: { ageGroups: 'all', specialized: ['seniors', 'disabilities'], community: [], income: 'low_income' },
   },
   {
@@ -105,6 +124,9 @@ export const PROGRAMS = [
     requiredDocs: ['Photo ID', 'Social Security card', 'Proof of Illinois residency', 'Employment history (if available)'],
     processingTime: 'Varies by program. Initial consultation typically within 1–2 weeks.',
     benefitAmount: 'Training is fully funded for eligible participants. Some programs include stipends during training.',
+    applicationDeadline: '2026-08-29',  // Fall cohort application deadline
+    renewalPeriod: null,
+    renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['veterans', 'justice_involved', 'disabilities'], community: [], income: 'any' },
   },
   {
@@ -123,6 +145,9 @@ export const PROGRAMS = [
     requiredDocs: ['Birth certificate', 'Social Security card', 'Medical records and doctor information', 'Work history (for SSDI)', 'Proof of income and assets (for SSI)'],
     processingTime: 'Initial decision: 3–6 months. If denied, appeals process can take 1–3 years.',
     benefitAmount: 'SSI: up to $943/month (2024). SSDI: based on work history, average ~$1,537/month.',
+    applicationDeadline: null,       // Rolling; apply any time
+    renewalPeriod: '2 years',        // Continuing disability review every 2–7 years
+    renewalDate: '2028-06-01',
     filters: { ageGroups: 'all', specialized: ['disabilities', 'veterans', 'seniors'], community: [], income: 'any' },
   },
   {
@@ -141,6 +166,9 @@ export const PROGRAMS = [
     requiredDocs: ['Social Security numbers for you, spouse, and children', 'W-2s and 1099s', 'Prior year tax return (helpful)', 'Bank account info for direct deposit'],
     processingTime: 'Refunds typically issued within 21 days of filing electronically.',
     benefitAmount: 'Up to $7,830 (2023) for families with 3+ children. Varies by income, filing status, and number of children.',
+    applicationDeadline: '2027-04-15', // Annual tax filing deadline
+    renewalPeriod: '1 year',
+    renewalDate: '2027-04-15',
     filters: { ageGroups: ['adults'], specialized: ['single_parents'], community: [], income: 'low_income' },
   },
 ]

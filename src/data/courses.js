@@ -1,3 +1,6 @@
+// registrationDeadline: null (open/self-paced) | 'YYYY-MM-DD'
+// startDate: null | 'YYYY-MM-DD' — next cohort/semester start
+
 export const COURSES = [
   {
     id: 1,
@@ -16,6 +19,8 @@ export const COURSES = [
     website: 'grow.google/certificates',
     phone: null,
     howToEnroll: 'Go to grow.google/certificates and click "Get started." Apply for financial aid during enrollment — approval typically takes 15 days.',
+    registrationDeadline: null,   // Self-paced, start any time
+    startDate: null,
     filters: { ageGroups: ['adults'], specialized: [], community: [], income: 'any' },
   },
   {
@@ -35,6 +40,8 @@ export const COURSES = [
     website: 'khanacademy.org',
     phone: null,
     howToEnroll: 'Create a free account at khanacademy.org. No sign-up fee, no credit card required.',
+    registrationDeadline: null,   // Self-paced, always open
+    startDate: null,
     filters: { ageGroups: ['teens', 'adults'], specialized: [], community: [], income: 'any' },
   },
   {
@@ -54,6 +61,8 @@ export const COURSES = [
     website: 'ccc.edu',
     phone: '(312) 553-2500',
     howToEnroll: 'Apply online at ccc.edu or visit any City Colleges campus. Financial aid (FAFSA) and workforce grants can reduce or eliminate tuition.',
+    registrationDeadline: '2026-08-01',  // Fall semester registration deadline
+    startDate: '2026-08-25',             // Fall semester start
     filters: { ageGroups: ['adults'], specialized: ['veterans'], community: [], income: 'any' },
   },
   {
@@ -73,6 +82,8 @@ export const COURSES = [
     website: 'chicookworks.org',
     phone: '(312) 603-0200',
     howToEnroll: 'Contact the Chicago Cook Workforce Partnership or visit a WorkNet center. Application includes aptitude testing and interview.',
+    registrationDeadline: '2026-07-18',  // Summer cohort application deadline
+    startDate: '2026-08-10',
     filters: { ageGroups: ['adults'], specialized: ['veterans', 'justice_involved'], community: [], income: 'any' },
   },
   {
@@ -92,6 +103,8 @@ export const COURSES = [
     website: 'score.org/chicago',
     phone: '(312) 353-7723',
     howToEnroll: 'Register online at score.org. Workshops are free and held at various Chicago locations and online.',
+    registrationDeadline: '2026-09-05',  // Fall session registration deadline
+    startDate: '2026-09-15',
     filters: { ageGroups: ['adults'], specialized: ['women', 'veterans'], community: ['bipoc', 'hispanic', 'black', 'asian', 'native'], income: 'any' },
   },
   {
@@ -111,6 +124,8 @@ export const COURSES = [
     website: 'chipublib.org/esl',
     phone: '(312) 747-4300',
     howToEnroll: 'Visit your nearest Chicago Public Library branch or call to find ESL classes near you. No registration required at most locations.',
+    registrationDeadline: null,   // Walk-in / rolling
+    startDate: '2026-09-08',      // New semester starts after Labor Day
     filters: { ageGroups: ['adults'], specialized: ['immigrants'], community: ['hispanic', 'asian', 'bipoc'], income: 'any' },
   },
   {
@@ -130,6 +145,8 @@ export const COURSES = [
     website: 'linkedin.com/learning',
     phone: null,
     howToEnroll: 'Log in with your Chicago Public Library card at chipublib.org to access LinkedIn Learning for free.',
+    registrationDeadline: null,   // Always available
+    startDate: null,
     filters: { ageGroups: ['adults'], specialized: [], community: [], income: 'any' },
   },
   {
@@ -149,6 +166,8 @@ export const COURSES = [
     website: 'afterschoolmatters.org',
     phone: '(312) 742-4182',
     howToEnroll: 'Apply online at afterschoolmatters.org during program enrollment periods (fall and spring). Stipends of up to $8.25/hour for program participants.',
+    registrationDeadline: '2026-08-22',  // Fall session application deadline
+    startDate: '2026-09-01',
     filters: { ageGroups: ['teens', 'adults'], specialized: [], community: ['bipoc', 'hispanic', 'black'], income: 'any' },
   },
 ]
