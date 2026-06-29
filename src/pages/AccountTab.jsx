@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useProfile } from '../hooks/useProfile'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
+import useInstallPrompt from '../hooks/useInstallPrompt'
 import a from './AccountTab.module.css'
 
 // ─── All available causes ────────────────────────────────────
@@ -47,6 +48,8 @@ export default function AccountTab() {
   const [editingCauses, setEditingCauses]   = useState(false)
   const [pwResetSent, setPwResetSent]       = useState(false)
   const [signingOut, setSigningOut]         = useState(false)
+  const [showIosSteps, setShowIosSteps]     = useState(false)
+  const { canPrompt, isIos, isInstalled, showInstallUI, triggerInstall } = useInstallPrompt()
 
   const handleToggleCause = async (cause) => {
     const current = profile?.favorite_causes || []
@@ -198,6 +201,43 @@ export default function AccountTab() {
           </p>
         </div>
       </div>
+
+      {/* ── Install App ── */}
+      {!isInstalled && (
+        <div className={a.cardGroup}>
+          <SectionHeader title="Get the App" />
+          <div className={a.card}>
+            <div className={a.installRow}>
+              <img src="/icon-192.png" alt="Elliss icon" className={a.installIcon} />
+              <div className={a.installInfo}>
+                <p className={a.installTitle}>Add Elliss to your home screen</p>
+                <p className={a.installSub}>Instant access, offline support, no browser bar.</p>
+              </div>
+            </div>
+
+            {showIosSteps ? (
+              <div className={a.iosStepsWrap}>
+                <ol className={a.iosSteps}>
+                  <li>Tap the <strong>Share</strong> button <span className={a.shareIcon}>⎋</span> at the bottom of Safari</li>
+                  <li>Scroll down and tap <strong>"Add to Home Screen"</strong></li>
+                  <li>Tap <strong>"Add"</strong> in the top right</li>
+                </ol>
+                <button className={a.iosStepsDone} onClick={() => setShowIosSteps(false)}>Done</button>
+              </div>
+            ) : (
+              <button
+                className={a.installBtn}
+                onClick={async () => {
+                  if (isIos) { setShowIosSteps(true); return }
+                  await triggerInstall()
+                }}
+              >
+                {isIos ? 'How to install on iPhone' : 'Install app'}
+              </button>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── Account settings ── */}
       <div className={a.cardGroup}>

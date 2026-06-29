@@ -272,3 +272,96 @@
   color: #ccc;
   margin: 0.5rem 0 0;
 }
+
+/* ── Install App section ── */
+.installRow {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.installIcon {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.installInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.installTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0 0 0.2rem;
+}
+
+.installSub {
+  font-size: 0.8125rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.installBtn {
+  width: 100%;
+  background: var(--brand-blue);
+  color: white;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s;
+}
+
+.installBtn:hover { background: #1f3a6e; }
+.installBtn:active { opacity: 0.85; }
+
+/* iOS manual steps */
+.iosStepsWrap {
+  background: #f8f8f8;
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 0.25rem;
+}
+
+.iosSteps {
+  margin: 0 0 0.875rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.iosSteps li {
+  font-size: 0.875rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.shareIcon {
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+.iosStepsDone {
+  width: 100%;
+  background: none;
+  border: 1.5px solid #ddd;
+  border-radius: 0.625rem;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  font-family: inherit;
+}
+.iosStepsDone:hover { border-color: #aaa; }

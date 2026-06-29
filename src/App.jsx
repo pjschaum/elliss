@@ -10,6 +10,7 @@ import OrgDetail from './pages/OrgDetail'
 import ResourceDetail from './pages/ResourceDetail'
 import ProgramDetail from './pages/ProgramDetail'
 import CourseDetail from './pages/CourseDetail'
+import InstallBanner from './components/InstallBanner'
 
 /* ── Session guard: redirects unauthenticated users to / ── */
 function Protected({ children }) {
@@ -31,6 +32,8 @@ function Protected({ children }) {
 
 export default function App() {
   return (
+    <>
+    <InstallBanner />
     <Routes>
       {/* Public */}
       <Route path="/" element={<Auth />} />
@@ -45,5 +48,6 @@ export default function App() {
       <Route path="/help/program/:id" element={<Protected><ProgramDetail /></Protected>} />
       <Route path="/help/course/:id" element={<Protected><CourseDetail /></Protected>} />
     </Routes>
+    </>
   )
 }
