@@ -309,9 +309,6 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
               </div>
               <span className={a.journeyChevron}>›</span>
             </div>
-            <button className={a.trackProgressBtn} onClick={() => navigate('/help/progress')}>
-              Track Your Progress →
-            </button>
           </div>
 
           {/* ── Assistance Profile placeholder ── */}
