@@ -4,7 +4,7 @@
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.4);
-  z-index: 40;
+  z-index: 110;  /* above bottom nav (z-index: 100) */
   animation: fadeIn 0.2s ease;
 }
 
@@ -15,7 +15,7 @@
   right: 0;
   background: var(--brand-cream);
   border-radius: 20px 20px 0 0;
-  z-index: 50;
+  z-index: 120;  /* above backdrop and bottom nav */
   max-height: 90vh;        /* dvh has patchy iOS support; vh is safer */
   height: 90vh;            /* force it to fill so flex layout is predictable */
   display: flex;
