@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import s from './Auth.module.css'
 import EllissLogo from '../components/EllissLogo'
+import { supabase } from '../lib/supabase'
 
 export default function Auth() {
   const navigate = useNavigate()
@@ -9,13 +10,42 @@ export default function Auth() {
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    navigate('/home')
+    setError(null)
+    setLoading(true)
+
+    try {
+      if (mode === 'signin') {
+        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        if (error) throw error
+      } else {
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: name } },
+        })
+        if (error) throw error
+      }
+      navigate('/home')
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
   }
 
-  const handleSocial = () => navigate('/home')
+  const handleSocial = async (provider) => {
+    setError(null)
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: `${window.location.origin}/home` },
+    })
+    if (error) setError(error.message)
+  }
 
   return (
     <div className={s.page}>
@@ -28,17 +58,19 @@ export default function Auth() {
         <div className={s.modeTabs}>
           <button
             className={`${s.modeTab} ${mode === 'signin' ? s.modeTabActive : ''}`}
-            onClick={() => setMode('signin')}
+            onClick={() => { setMode('signin'); setError(null) }}
           >
             Sign In
           </button>
           <button
             className={`${s.modeTab} ${mode === 'signup' ? s.modeTabActive : ''}`}
-            onClick={() => setMode('signup')}
+            onClick={() => { setMode('signup'); setError(null) }}
           >
             Sign Up
           </button>
         </div>
+
+        {error && <p className={s.errorMsg}>{error}</p>}
 
         <form className={s.form} onSubmit={handleSubmit}>
           {mode === 'signup' && (
@@ -50,6 +82,7 @@ export default function Auth() {
                 placeholder="Jane Smith"
                 value={name}
                 onChange={e => setName(e.target.value)}
+                required
               />
             </div>
           )}
@@ -62,6 +95,7 @@ export default function Auth() {
               placeholder="you@example.com"
               value={email}
               onChange={e => setEmail(e.target.value)}
+              required
             />
           </div>
 
@@ -73,6 +107,8 @@ export default function Auth() {
               placeholder="••••••••"
               value={password}
               onChange={e => setPassword(e.target.value)}
+              required
+              minLength={6}
             />
           </div>
 
@@ -80,8 +116,11 @@ export default function Auth() {
             <button type="button" className={s.forgot}>Forgot password?</button>
           )}
 
-          <button type="submit" className={s.primaryBtn}>
-            {mode === 'signin' ? 'Sign In' : 'Create Account'}
+          <button type="submit" className={s.primaryBtn} disabled={loading}>
+            {loading
+              ? (mode === 'signin' ? 'Signing in…' : 'Creating account…')
+              : (mode === 'signin' ? 'Sign In' : 'Create Account')
+            }
           </button>
         </form>
 
@@ -92,15 +131,15 @@ export default function Auth() {
         </div>
 
         <div className={s.socialBtns}>
-          <button className={s.socialBtn} onClick={handleSocial} type="button">
+          <button className={s.socialBtn} onClick={() => handleSocial('google')} type="button">
             <GoogleIcon />
             <span>Google</span>
           </button>
-          <button className={s.socialBtn} onClick={handleSocial} type="button">
+          <button className={s.socialBtn} onClick={() => handleSocial('apple')} type="button">
             <AppleIcon />
             <span>Apple</span>
           </button>
-          <button className={s.socialBtn} onClick={handleSocial} type="button">
+          <button className={s.socialBtn} onClick={() => handleSocial('facebook')} type="button">
             <FacebookIcon />
             <span>Facebook</span>
           </button>

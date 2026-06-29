@@ -66,6 +66,24 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
 }
 
+/* ── Error message ── */
+.errorMsg {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #b91c1c;
+  border-radius: 0.625rem;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+}
+
+/* ── Disabled state ── */
+.primaryBtn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
 /* ── Form ── */
 .form {
   display: flex;
