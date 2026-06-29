@@ -41,7 +41,7 @@ export default function InstallBanner() {
       <div className={s.backdrop} onClick={dismiss} />
       <div className={s.banner} role="dialog" aria-label="Install Elliss app">
         <div className={s.iconWrap}>
-          <img src="/icon-192.png" alt="Elliss icon" className={s.icon} />
+          <img src="/icon-192x192.png" alt="Elliss icon" className={s.icon} />
         </div>
 
         <div className={s.body}>

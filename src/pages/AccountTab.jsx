@@ -434,7 +434,7 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
           <SectionHeader title="Get the App" />
           <div className={a.card}>
             <div className={a.installRow}>
-              <img src="/icon-192.png" alt="Elliss icon" className={a.installIcon} />
+              <img src="/icon-192x192.png" alt="Elliss icon" className={a.installIcon} />
               <div className={a.installInfo}>
                 <p className={a.installTitle}>Add Elliss to your home screen</p>
                 <p className={a.installSub}>Instant access, offline support, no browser bar.</p>
