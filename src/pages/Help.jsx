@@ -480,7 +480,7 @@ export default function Help() {
   const [activeTab, setActiveTab] = useState('resources')
 
   return (
-    <div className={`${styles.page} ${styles.help}`}>
+    <div className={`${styles.page} ${styles.help} ${styles.hasSidebar}`}>
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate('/home')}>← Back</button>
         <div className={styles.wordmark}>elliss</div>

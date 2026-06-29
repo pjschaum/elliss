@@ -65,6 +65,15 @@
   display: none;
 }
 
+/* Desktop: chips wrap instead of scrolling horizontally */
+@media (min-width: 768px) {
+  .filters {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding-bottom: 0;
+  }
+}
+
 .chip {
   flex-shrink: 0;
   border: 1.5px solid #e0e0e0;
@@ -392,6 +401,16 @@
   border-radius: 99px;
   background: var(--help);
   color: white;
+}
+
+/* ── Desktop: 2-column card grid (≥ 1200px) ── */
+@media (min-width: 1200px) {
+  .cardList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    align-items: start;
+  }
 }
 
 /* ── Pill row (courses: duration, level, format) ── */

@@ -1,27 +1,39 @@
+import { useNavigate } from 'react-router-dom'
 import s from './BottomNav.module.css'
 
 const GIVE_TABS = [
   { id: 'volunteer',     label: 'Volunteer',     Icon: IconHandshake },
-  { id: 'donate',       label: 'Donate',        Icon: IconHeart },
-  { id: 'activity',     label: 'Activity',      Icon: IconList },
-  { id: 'notifications',label: 'Alerts',        Icon: IconBell },
-  { id: 'account',      label: 'Account',       Icon: IconPerson },
+  { id: 'donate',        label: 'Donate',        Icon: IconHeart },
+  { id: 'activity',      label: 'Activity',      Icon: IconList },
+  { id: 'notifications', label: 'Alerts',        Icon: IconBell },
+  { id: 'account',       label: 'Account',       Icon: IconPerson },
 ]
 
 const HELP_TABS = [
-  { id: 'resources',    label: 'Resources',     Icon: IconLeaf },
-  { id: 'programs',     label: 'Programs',      Icon: IconGrid },
-  { id: 'courses',      label: 'Courses',       Icon: IconBook },
-  { id: 'notifications',label: 'Alerts',        Icon: IconBell },
-  { id: 'account',      label: 'Account',       Icon: IconPerson },
+  { id: 'resources',     label: 'Resources',     Icon: IconLeaf },
+  { id: 'programs',      label: 'Programs',      Icon: IconGrid },
+  { id: 'courses',       label: 'Courses',       Icon: IconBook },
+  { id: 'notifications', label: 'Alerts',        Icon: IconBell },
+  { id: 'account',       label: 'Account',       Icon: IconPerson },
 ]
 
 export default function BottomNav({ variant, active, onChange }) {
+  const navigate = useNavigate()
   const tabs = variant === 'give' ? GIVE_TABS : HELP_TABS
   const activeColor = variant === 'give' ? 'var(--give)' : 'var(--help-dark)'
 
   return (
-    <nav className={s.nav}>
+    <nav
+      className={s.nav}
+      style={{ '--nav-active': activeColor }}
+      aria-label="Main navigation"
+    >
+      {/* Wordmark — hidden on mobile, shown in sidebar on desktop */}
+      <div className={s.navBrand}>
+        <span className={s.navWordmark} style={{ color: activeColor }}>elliss</span>
+      </div>
+
+      {/* Tab items */}
       {tabs.map(({ id, label, Icon }) => {
         const isActive = active === id
         return (
@@ -31,21 +43,28 @@ export default function BottomNav({ variant, active, onChange }) {
             style={isActive ? { color: activeColor } : {}}
             onClick={() => onChange(id)}
             aria-label={label}
+            aria-current={isActive ? 'page' : undefined}
           >
             <Icon active={isActive} />
             <span className={s.label}>{label}</span>
           </button>
         )
       })}
+
+      {/* Home link — only visible on desktop sidebar */}
+      <button className={s.homeLink} onClick={() => navigate('/home')} aria-label="Back to home">
+        <span className={s.homeLinkIcon}>←</span>
+        <span>Home</span>
+      </button>
     </nav>
   )
 }
 
 /* ── Icons ── */
 
-function IconHandshake({ active }) {
+function IconHandshake() {
   return (
-    <svg className={active ? '' : ''} width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M20.42 4.58a5.4 5.4 0 0 0-7.65 0l-.77.78-.77-.78a5.4 5.4 0 0 0-7.65 7.65l.77.78 7.65 7.65 7.65-7.65.78-.77a5.4 5.4 0 0 0 0-7.66z"/>
     </svg>
   )

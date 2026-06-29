@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════
+   MOBILE — bottom tab bar (default)
+   ═══════════════════════════════════════════ */
+
 .nav {
   position: fixed;
   bottom: 0;
@@ -44,4 +48,122 @@
   font-weight: 600;
   line-height: 1;
   letter-spacing: 0.01em;
+}
+
+/* Hidden on mobile */
+.navBrand  { display: none; }
+.homeLink  { display: none; }
+
+
+/* ═══════════════════════════════════════════
+   DESKTOP — left sidebar (≥ 768px)
+   ═══════════════════════════════════════════ */
+
+@media (min-width: 768px) {
+  .nav {
+    /* Reposition: fixed left column */
+    top: 0;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    width: 220px;
+    height: 100vh;
+    height: 100dvh;
+
+    /* Layout */
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+
+    /* Borders */
+    border-top: none;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+
+    /* Padding */
+    padding: 0;
+    padding-bottom: 0;
+
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  /* ── Brand / wordmark ── */
+  .navBrand {
+    display: block;
+    padding: 1.75rem 1.5rem 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    margin-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .navWordmark {
+    font-size: 1.375rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
+
+  /* ── Nav tabs — horizontal row layout ── */
+  .tab {
+    flex: none;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0;
+    color: #888;
+    transition: background 0.12s, color 0.12s;
+  }
+
+  .tab:hover {
+    background: rgba(0, 0, 0, 0.04);
+    color: #444;
+  }
+
+  .tabActive {
+    background: rgba(0, 0, 0, 0.05);
+    /* left accent border — width offsets padding to keep text aligned */
+    box-shadow: inset 3px 0 0 var(--nav-active, #888);
+    padding-left: calc(1.5rem - 3px);
+  }
+
+  .label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  /* ── Home link — pinned to bottom ── */
+  .homeLink {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-top: auto;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    background: none;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    cursor: pointer;
+    color: #aaa;
+    font-family: var(--font);
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color 0.15s, background 0.15s;
+    flex-shrink: 0;
+    text-align: left;
+    width: 100%;
+  }
+
+  .homeLink:hover {
+    color: #555;
+    background: rgba(0, 0, 0, 0.03);
+  }
+
+  .homeLinkIcon {
+    font-size: 1rem;
+    line-height: 1;
+  }
 }

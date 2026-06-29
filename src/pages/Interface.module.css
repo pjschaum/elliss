@@ -1,18 +1,17 @@
+/* ═══════════════════════════════════════════
+   BASE — shared across Give and Help pages
+   ═══════════════════════════════════════════ */
+
 .page {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-.give {
-  background: var(--give-light);   /* light purple tint — Give side */
-}
+.give { background: var(--give-light); }
+.help { background: var(--help-light); }
 
-.help {
-  background: var(--help-light);   /* light green tint — Help side */
-}
-
-/* Header */
+/* ── Header (mobile + detail pages) ── */
 .header {
   display: flex;
   align-items: center;
@@ -32,21 +31,18 @@
   opacity: 0.65;
   padding: 0.25rem 0;
   transition: opacity 0.15s;
+  background: none;
+  border: none;
+  font-family: var(--font);
 }
 
-.back:hover {
-  opacity: 1;
-}
+.back:hover { opacity: 1; }
 
 .give .back,
-.give .wordmark {
-  color: var(--give);
-}
+.give .wordmark { color: var(--give); }
 
 .help .back,
-.help .wordmark {
-  color: var(--help-dark);
-}
+.help .wordmark { color: var(--help-dark); }
 
 .wordmark {
   font-size: 1.25rem;
@@ -54,19 +50,22 @@
   letter-spacing: -0.03em;
 }
 
-/* Main content */
+/* ── Main content ── */
 .main {
   flex: 1;
   padding: 2rem 1.5rem;
   max-width: 680px;
   margin: 0 auto;
   width: 100%;
+  box-sizing: border-box;
 }
 
+/* Extra bottom padding for bottom nav on mobile */
 .mainWithNav {
   padding-bottom: calc(2rem + 70px);
 }
 
+/* ── Typography ── */
 .title {
   font-size: 1.875rem;
   font-weight: 700;
@@ -74,13 +73,8 @@
   margin-bottom: 0.5rem;
 }
 
-.give .title {
-  color: var(--teal-dark);
-}
-
-.help .title {
-  color: var(--purple-dark);
-}
+.give .title  { color: var(--teal-dark); }
+.help .title  { color: var(--purple-dark); }
 
 .subtitle {
   font-size: 1rem;
@@ -89,7 +83,7 @@
   line-height: 1.5;
 }
 
-/* Coming soon card */
+/* ── Coming soon card ── */
 .comingSoon {
   background: white;
   border-radius: var(--radius);
@@ -99,23 +93,53 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
 }
 
-.comingSoonIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  line-height: 1;
+.comingSoonIcon  { font-size: 3rem; margin-bottom: 1rem; line-height: 1; }
+.comingSoonTitle { font-size: 1.125rem; font-weight: 600; color: var(--gray-800); margin-bottom: 0.5rem; }
+.comingSoonDesc  { font-size: 0.9375rem; color: var(--gray-600); line-height: 1.6; max-width: 360px; margin: 0 auto; }
+
+
+/* ═══════════════════════════════════════════
+   DESKTOP — sidebar layout (≥ 768px)
+   Applied only to pages that render <BottomNav>
+   via the .hasSidebar modifier class.
+   ═══════════════════════════════════════════ */
+
+@media (min-width: 768px) {
+
+  /* Shift entire page right to clear the 220px sidebar */
+  .hasSidebar {
+    padding-left: 220px;
+  }
+
+  /* Hide the mobile top header — sidebar provides the wordmark */
+  .hasSidebar .header {
+    display: none;
+  }
+
+  /* Remove bottom-nav padding offset; use normal spacing */
+  .hasSidebar .mainWithNav {
+    padding-bottom: 3rem;
+  }
+
+  /* Wider, better-padded content area */
+  .main {
+    padding: 2.5rem 3rem;
+    max-width: 960px;
+  }
+
+  /* Slightly larger title on desktop */
+  .title {
+    font-size: 2.125rem;
+  }
+
+  .subtitle {
+    font-size: 1.0625rem;
+  }
 }
 
-.comingSoonTitle {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--gray-800);
-  margin-bottom: 0.5rem;
-}
-
-.comingSoonDesc {
-  font-size: 0.9375rem;
-  color: var(--gray-600);
-  line-height: 1.6;
-  max-width: 360px;
-  margin: 0 auto;
+/* Very wide screens — extra breathing room */
+@media (min-width: 1400px) {
+  .main {
+    padding: 3rem 4rem;
+  }
 }

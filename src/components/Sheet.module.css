@@ -373,3 +373,59 @@
   from { transform: translateY(100%) }
   to   { transform: translateY(0) }
 }
+
+@keyframes fadeScaleIn {
+  from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); }
+  to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+
+/* ═══════════════════════════════════════════
+   DESKTOP — centered modal (≥ 768px)
+   ═══════════════════════════════════════════ */
+
+@media (min-width: 768px) {
+  .sheet {
+    /* Detach from bottom, center on screen */
+    bottom: auto;
+    left: 50%;
+    right: auto;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    /* Sizing */
+    width: 540px;
+    max-width: calc(100vw - 3rem);
+    height: auto;
+    max-height: 85vh;
+
+    /* All corners rounded (not just top) */
+    border-radius: 20px;
+
+    /* Subtle shadow for floating modal feel */
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2);
+
+    /* Centered fade+scale instead of slide-up */
+    animation: fadeScaleIn 0.2s ease;
+  }
+
+  /* Hide the pull handle — not needed for mouse-driven modals */
+  .handle {
+    display: none;
+  }
+
+  /* Slightly more padding in header/body for desktop */
+  .header {
+    padding: 1.25rem 1.5rem 0;
+  }
+
+  .body {
+    padding: 1.25rem 1.5rem;
+  }
+
+  .footer {
+    padding: 1rem 1.5rem;
+    /* No safe-area inset needed on desktop */
+    padding-bottom: 1rem;
+  }
+}

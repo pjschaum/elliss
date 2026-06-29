@@ -269,7 +269,7 @@ export default function Give() {
   const { profile, updateProfile } = useProfile()
 
   return (
-    <div className={`${styles.page} ${styles.give}`}>
+    <div className={`${styles.page} ${styles.give} ${styles.hasSidebar}`}>
       <header className={styles.header}>
         <button className={styles.back} onClick={() => navigate('/home')}>← Back</button>
         <div className={styles.wordmark}>elliss</div>
