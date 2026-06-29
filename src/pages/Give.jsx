@@ -5,6 +5,7 @@ import g from './Give.module.css'
 import BottomNav from '../components/BottomNav'
 import VolunteerProfileBanner from '../components/VolunteerProfileBanner'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
+import ActivityTab from './ActivityTab'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
@@ -277,13 +278,7 @@ export default function Give() {
           <VolunteerTab profile={profile} updateProfile={updateProfile} />
         )}
         {activeTab === 'donate'        && <DonateTab />}
-        {activeTab === 'activity'      && (
-          <PlaceholderTab
-            title="My Activity"
-            icon="📋"
-            desc="Track your volunteer hours, past events, and impact over time."
-          />
-        )}
+        {activeTab === 'activity'      && <ActivityTab />}
         {activeTab === 'notifications' && (
           <PlaceholderTab
             title="Alerts"
