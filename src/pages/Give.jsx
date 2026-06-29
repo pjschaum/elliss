@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import styles from './Interface.module.css'
 import g from './Give.module.css'
 import BottomNav from '../components/BottomNav'
@@ -296,7 +296,9 @@ function PlaceholderTab({ title, icon, desc }) {
 
 export default function Give() {
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState('volunteer')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeTab = searchParams.get('tab') || 'volunteer'
+  const setActiveTab = (tab) => setSearchParams({ tab }, { replace: true })
   const { profile, updateProfile } = useProfile()
   const favoriteHook = useFavoriteOrgs()
 

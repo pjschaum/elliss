@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import styles from './Interface.module.css'
 import h from './Help.module.css'
 import BottomNav from '../components/BottomNav'
@@ -504,7 +504,9 @@ function PlaceholderTab({ title, icon, desc }) {
 
 export default function Help() {
   const navigate = useNavigate()
-  const [activeTab, setActiveTab] = useState('resources')
+  const [searchParams, setSearchParams] = useSearchParams()
+  const activeTab = searchParams.get('tab') || 'resources'
+  const setActiveTab = (tab) => setSearchParams({ tab }, { replace: true })
   const savedHook = useSavedItems()
 
   return (
