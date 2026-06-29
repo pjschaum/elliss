@@ -393,10 +393,10 @@
     top: 50%;
     transform: translate(-50%, -50%);
 
-    /* Sizing */
+    /* Sizing — fixed height (not auto) so flex scroll works correctly */
     width: 540px;
     max-width: calc(100vw - 3rem);
-    height: auto;
+    height: min(85vh, 720px);
     max-height: 85vh;
 
     /* All corners rounded (not just top) */
@@ -424,8 +424,9 @@
   }
 
   .footer {
+    /* Remove sticky — it caused the footer to float relative to the viewport,
+       not the modal. Flex column with flex-shrink: 0 keeps it pinned to bottom. */
+    position: static;
     padding: 1rem 1.5rem;
-    /* No safe-area inset needed on desktop */
-    padding-bottom: 1rem;
   }
 }
