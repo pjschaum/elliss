@@ -99,8 +99,9 @@ function SavedItemRow({ name, sub, deadline, startDate, renewalDate, onRemove, o
 
 // ─── Main component ──────────────────────────────────────────
 // side: 'give' (default) | 'help'
-// savedHook: returned value of useSavedItems() — required when side='help'
-export default function AccountTab({ side = 'give', savedHook }) {
+// savedHook:    returned value of useSavedItems()   — required when side='help'
+// favoriteHook: returned value of useFavoriteOrgs() — required when side='give'
+export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
   const navigate = useNavigate()
   const { user, profile, loading, updateProfile } = useProfile()
   const [showVolProfile, setShowVolProfile] = useState(false)
@@ -151,6 +152,9 @@ export default function AccountTab({ side = 'give', savedHook }) {
   const savedPrograms  = savedHook?.savedPrograms  || []
   const savedCourses   = savedHook?.savedCourses   || []
   const totalSaved     = savedResources.length + savedPrograms.length + savedCourses.length
+
+  // Give-side favorited orgs
+  const favoriteOrgs   = favoriteHook?.favoriteOrgs || []
 
   return (
     <div className={a.page}>
@@ -240,11 +244,41 @@ export default function AccountTab({ side = 'give', savedHook }) {
           {/* ── Favorite Organizations ── */}
           <div className={a.cardGroup}>
             <SectionHeader title="Favorite Organizations" />
-            <div className={`${a.card} ${a.favOrgsCard}`}>
-              <span className={a.favOrgsIcon}>🤝</span>
-              <p className={a.favOrgsTitle}>No favorites yet</p>
-              <p className={a.favOrgsDesc}>Tap the heart icon on any organization or volunteer event to save it here.</p>
-            </div>
+            {favoriteOrgs.length === 0 ? (
+              <div className={`${a.card} ${a.favOrgsCard}`}>
+                <span className={a.favOrgsIcon}>🤝</span>
+                <p className={a.favOrgsTitle}>No favorites yet</p>
+                <p className={a.favOrgsDesc}>Tap ♡ on any organization or volunteer event to save it here.</p>
+              </div>
+            ) : (
+              <div className={a.card}>
+                {favoriteOrgs.map((org, i) => (
+                  <div key={org.key}>
+                    <div className={a.savedRow}>
+                      <div
+                        className={a.orgLogoSmall}
+                        style={{ background: org.color }}
+                      >
+                        {org.initials}
+                      </div>
+                      <div className={a.savedInfo}>
+                        <p className={a.savedName}>{org.name}</p>
+                        {org.category && <p className={a.savedSub}>{org.category}</p>}
+                      </div>
+                      <button
+                        className={a.savedRemoveBtn}
+                        style={{ color: 'var(--give-dark)' }}
+                        onClick={() => favoriteHook.removeFavoriteOrg(org.key)}
+                        aria-label="Remove from favorites"
+                      >
+                        ♥
+                      </button>
+                    </div>
+                    {i < favoriteOrgs.length - 1 && <div className={a.savedDivider} />}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </>
       )}

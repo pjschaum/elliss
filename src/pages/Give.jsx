@@ -11,6 +11,20 @@ import AccountTab from './AccountTab'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
+import useFavoriteOrgs from '../hooks/useFavoriteOrgs'
+
+// ─── Heart / favorite button (Give purple) ───────────────────
+function FaveButton({ saved, onToggle }) {
+  return (
+    <button
+      className={`${g.faveBtn} ${saved ? g.faveBtnActive : ''}`}
+      onClick={e => { e.stopPropagation(); onToggle() }}
+      aria-label={saved ? 'Remove from favorites' : 'Add to favorites'}
+    >
+      {saved ? '♥' : '♡'}
+    </button>
+  )
+}
 
 /* ════════════════════════════════
    VOLUNTEER TAB
@@ -18,7 +32,7 @@ import { useProfile } from '../hooks/useProfile'
 
 const VOL_CATEGORIES = ['All', 'Food Bank', 'Environment', 'Education', 'Youth', 'Seniors', 'Animals', 'Health']
 
-function VolunteerTab({ profile, updateProfile }) {
+function VolunteerTab({ profile, updateProfile, favoriteHook }) {
   const navigate = useNavigate()
   const [location, setLocation] = useState('')
   const [radius, setRadius] = useState('10')
@@ -94,6 +108,12 @@ function VolunteerTab({ profile, updateProfile }) {
               <div className={g.eventHeader}>
                 <span className={g.orgName}>{event.org}</span>
                 <span className={g.distance}>📍 {event.distance}</span>
+                {favoriteHook && (
+                  <FaveButton
+                    saved={favoriteHook.isOrgFavorited(`event-${event.org.replace(/\s+/g, '_')}`)}
+                    onToggle={() => favoriteHook.toggleFavoriteOrg(favoriteHook.eventOrgToFav(event))}
+                  />
+                )}
               </div>
               <h3 className={g.eventTitle}>{event.title}</h3>
               <p className={g.eventMeta}>📅 {event.date} · {event.time}</p>
@@ -138,7 +158,7 @@ function StarRating({ count }) {
   )
 }
 
-function DonateTab() {
+function DonateTab({ favoriteHook }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -215,6 +235,12 @@ function DonateTab() {
                     <span className={g.verifiedBadge}>✓ Verified</span>
                   </div>
                 </div>
+                {favoriteHook && (
+                  <FaveButton
+                    saved={favoriteHook.isOrgFavorited(`org-${org.id}`)}
+                    onToggle={() => favoriteHook.toggleFavoriteOrg(favoriteHook.orgToFav(org))}
+                  />
+                )}
               </div>
 
               <p className={g.orgDesc}>{org.desc}</p>
@@ -267,6 +293,7 @@ export default function Give() {
   const navigate = useNavigate()
   const [activeTab, setActiveTab] = useState('volunteer')
   const { profile, updateProfile } = useProfile()
+  const favoriteHook = useFavoriteOrgs()
 
   return (
     <div className={`${styles.page} ${styles.give} ${styles.hasSidebar}`}>
@@ -280,12 +307,12 @@ export default function Give() {
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>
         {activeTab === 'volunteer'     && (
-          <VolunteerTab profile={profile} updateProfile={updateProfile} />
+          <VolunteerTab profile={profile} updateProfile={updateProfile} favoriteHook={favoriteHook} />
         )}
-        {activeTab === 'donate'        && <DonateTab />}
+        {activeTab === 'donate'        && <DonateTab favoriteHook={favoriteHook} />}
         {activeTab === 'activity'      && <ActivityTab />}
         {activeTab === 'notifications' && <AlertsTab />}
-        {activeTab === 'account'       && <AccountTab side="give" />}
+        {activeTab === 'account'       && <AccountTab side="give" favoriteHook={favoriteHook} />}
       </main>
 
       <BottomNav variant="give" active={activeTab} onChange={setActiveTab} />

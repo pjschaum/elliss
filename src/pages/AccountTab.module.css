@@ -221,6 +221,22 @@
 
 .doneEditBtn:active { opacity: 0.85; }
 
+/* ── Org logo (small, in saved rows) ── */
+.orgLogoSmall {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  letter-spacing: 0.03em;
+  align-self: center;
+}
+
 /* ── Favorite Organizations empty state ── */
 .favOrgsCard {
   display: flex;
