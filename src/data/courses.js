@@ -23,6 +23,15 @@ export const COURSES = [
     registrationDeadline: null,   // Self-paced, start any time
     startDate: null,
     filters: { ageGroups: ['adults'], specialized: [], community: [], income: 'any' },
+    impact: {
+      summary: 'Google certificates lead to entry-level tech roles with median starting salaries of $55,000–$75,000/year.',
+      opportunities: [
+        'Qualifies you for IT Support, Data Analytics, UX Design, Cybersecurity, and Project Management roles',
+        'Access to Google\'s network of 150+ employer partners actively hiring certificate graduates',
+        'Entry-level tech jobs offer remote work options, benefits, and clear paths to advancement',
+        'Certificates stack — completing one opens the door to the next, higher-paying specialization',
+      ],
+    },
   },
   {
     id: 2,
@@ -45,6 +54,15 @@ export const COURSES = [
     registrationDeadline: null,   // Self-paced, always open
     startDate: null,
     filters: { ageGroups: ['teens', 'adults'], specialized: [], community: [], income: 'any' },
+    impact: {
+      summary: 'A GED opens 80% more job opportunities than no diploma — and is the first step toward college and trade programs.',
+      opportunities: [
+        'Qualifies you for community college enrollment and vocational certification programs',
+        'Required for most apprenticeship programs, including skilled trades',
+        'Average lifetime earnings increase of $9,000/year compared to no diploma',
+        'Demonstrates persistence and capability to employers, opening doors beyond entry-level roles',
+      ],
+    },
   },
   {
     id: 3,
@@ -67,6 +85,15 @@ export const COURSES = [
     registrationDeadline: '2026-08-01',  // Fall semester registration deadline
     startDate: '2026-08-25',             // Fall semester start
     filters: { ageGroups: ['adults'], specialized: ['veterans'], community: [], income: 'any' },
+    impact: {
+      summary: 'Healthcare is one of the fastest-growing industries in the country — CNAs and Medical Assistants are in demand everywhere.',
+      opportunities: [
+        'CNA starting wage: $18–$22/hour; often includes health benefits and tuition reimbursement',
+        'Healthcare roles offer flexible scheduling — part-time, nights, and weekends to fit your life',
+        'Every credential you earn opens a path to the next: CNA → LPN → RN → beyond',
+        '85% job placement rate for program completers; many are hired before they graduate',
+      ],
+    },
   },
   {
     id: 4,
@@ -89,6 +116,15 @@ export const COURSES = [
     registrationDeadline: '2026-07-18',  // Summer cohort application deadline
     startDate: '2026-08-10',
     filters: { ageGroups: ['adults'], specialized: ['veterans', 'justice_involved'], community: [], income: 'any' },
+    impact: {
+      summary: 'Journeyman electricians, plumbers, and HVAC techs earn $32–$48/hour with union benefits — and you earn a wage the whole time you\'re training.',
+      opportunities: [
+        'Earn $20–$25/hour as an apprentice while training — no student loans, no unpaid internships',
+        'Union membership includes healthcare, pension, and job placement through the union hall',
+        'Skilled trades are recession-resistant — demand stays strong regardless of the economy',
+        'After journeyman status, you can start your own business or move into project management',
+      ],
+    },
   },
   {
     id: 5,
@@ -111,6 +147,15 @@ export const COURSES = [
     registrationDeadline: '2026-09-05',  // Fall session registration deadline
     startDate: '2026-09-15',
     filters: { ageGroups: ['adults'], specialized: ['women', 'veterans'], community: ['bipoc', 'hispanic', 'black', 'asian', 'native'], income: 'any' },
+    impact: {
+      summary: '1 in 3 SCORE graduates launches a business within 2 years. Building something of your own is one of the most powerful paths to financial independence.',
+      opportunities: [
+        'Small business ownership creates income you control and that grows with your effort',
+        'SCORE mentors stay with you after the program — ongoing support is part of the deal',
+        'Completing the program qualifies you for small business grants and microloans',
+        'A business you own can employ family members and build generational wealth',
+      ],
+    },
   },
   {
     id: 6,
@@ -133,6 +178,15 @@ export const COURSES = [
     registrationDeadline: null,   // Walk-in / rolling
     startDate: '2026-09-08',      // New semester starts after Labor Day
     filters: { ageGroups: ['adults'], specialized: ['immigrants'], community: ['hispanic', 'asian', 'bipoc'], income: 'any' },
+    impact: {
+      summary: 'English fluency opens up roughly 40% more job opportunities — and helps your children thrive at school.',
+      opportunities: [
+        'Workplace communication skills qualify you for jobs that were previously out of reach',
+        'Children whose parents speak English do better academically and socially',
+        'Everyday English reduces stress in healthcare, housing, and banking situations',
+        'ESL is the foundation for further education, certifications, and citizenship',
+      ],
+    },
   },
   {
     id: 7,
@@ -155,6 +209,15 @@ export const COURSES = [
     registrationDeadline: null,   // Always available
     startDate: null,
     filters: { ageGroups: ['adults'], specialized: [], community: [], income: 'any' },
+    impact: {
+      summary: 'Thousands of on-demand courses in business, tech, and creative skills — all free with a Chicago library card.',
+      opportunities: [
+        'Excel, PowerPoint, and project management skills are required for most office roles',
+        'Python and data skills are among the highest-ROI things you can learn on a resume',
+        'Certificate of completion on LinkedIn signals continuous learning to employers',
+        'Creative skills like design and video open up freelance income opportunities',
+      ],
+    },
   },
   {
     id: 8,
@@ -177,5 +240,14 @@ export const COURSES = [
     registrationDeadline: '2026-08-22',  // Fall session application deadline
     startDate: '2026-09-01',
     filters: { ageGroups: ['teens', 'adults'], specialized: [], community: ['bipoc', 'hispanic', 'black'], income: 'any' },
+    impact: {
+      summary: 'Creative skills are real career skills — photographers, videographers, and designers are in demand across every industry.',
+      opportunities: [
+        'Portfolio-ready work from the program can land freelance clients immediately after graduation',
+        'Digital media skills transfer to social media marketing, content creation, and brand work',
+        'Stipend during the program means you earn while you learn',
+        'Alumni network connects you to Chicago\'s creative community and working professionals',
+      ],
+    },
   },
 ]

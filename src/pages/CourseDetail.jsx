@@ -1,11 +1,24 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { COURSES } from '../data/courses'
+import useJourney from '../hooks/useJourney'
 import d from './Detail.module.css'
 
 export default function CourseDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const course = COURSES.find(c => c.id === Number(id))
+  const { addItem, isTracked } = useJourney()
+  const [snackbar, setSnackbar] = useState(false)
+
+  function handleEnroll() {
+    if (!isTracked('courses', course.id)) {
+      addItem('courses', course.id)
+      setSnackbar(true)
+      setTimeout(() => setSnackbar(false), 3000)
+    }
+    window.open(`https://${course.website}`, '_blank', 'noopener,noreferrer')
+  }
 
   if (!course) {
     return (
@@ -176,10 +189,17 @@ export default function CourseDetail() {
 
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
-        <button className={`${d.actionBtn} ${d.actionBtnHelp}`}>
-          Enroll Now
+        <button className={`${d.actionBtn} ${d.actionBtnHelp}`} onClick={handleEnroll}>
+          {isTracked('courses', course.id) ? 'Return to Enrollment Site ↗' : 'Enroll Now ↗'}
         </button>
       </div>
+
+      {/* Snackbar */}
+      {snackbar && (
+        <div className={d.snackbar}>
+          Added to your Progress Tracker ✓
+        </div>
+      )}
     </div>
   )
 }

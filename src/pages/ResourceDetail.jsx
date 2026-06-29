@@ -1,11 +1,26 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { RESOURCES } from '../data/resources'
+import useJourney from '../hooks/useJourney'
 import d from './Detail.module.css'
 
 export default function ResourceDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const resource = RESOURCES.find(r => r.id === Number(id))
+  const { addItem, isTracked } = useJourney()
+  const [snackbar, setSnackbar] = useState(false)
+
+  function handleGetHelp() {
+    if (resource && !isTracked('resources', resource.id)) {
+      addItem('resources', resource.id)
+      setSnackbar(true)
+      setTimeout(() => setSnackbar(false), 3000)
+    }
+    if (resource?.website) {
+      window.open(`https://${resource.website}`, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   if (!resource) {
     return (
@@ -135,11 +150,18 @@ export default function ResourceDetail() {
       <div className={d.bottomBar}>
         <button
           className={`${d.actionBtn} ${d.actionBtnHelp}`}
-          onClick={() => { window.location.href = `tel:${resource.phone}` }}
+          onClick={handleGetHelp}
         >
-          Call {resource.phone}
+          {isTracked('resources', resource.id) ? 'Return to Website ↗' : 'Get Help ↗'}
         </button>
       </div>
+
+      {/* Snackbar */}
+      {snackbar && (
+        <div className={d.snackbar}>
+          Added to your Progress Tracker ✓
+        </div>
+      )}
     </div>
   )
 }

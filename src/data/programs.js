@@ -24,6 +24,15 @@ export const PROGRAMS = [
     renewalPeriod: '1 year',
     renewalDate: '2026-10-01',       // Annual recertification
     filters: { ageGroups: 'all', specialized: ['seniors', 'disabilities'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'SNAP covers an average of $230/month in groceries — that\'s money you can redirect toward rent, savings, or emergencies.',
+      opportunities: [
+        'With food costs covered, redirect income toward savings, rent, or debt repayment',
+        'Food security reduces stress and improves children\'s school attendance and focus',
+        'Qualifies your household for other nutrition programs like WIC and school meals',
+        'Average annual benefit: $2,760 — the equivalent of 3 months of groceries',
+      ],
+    },
   },
   {
     id: 2,
@@ -46,6 +55,15 @@ export const PROGRAMS = [
     renewalPeriod: '1 year',
     renewalDate: '2026-12-01',       // Annual renewal
     filters: { ageGroups: 'all', specialized: ['disabilities', 'pregnant', 'women', 'children'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Free or low-cost healthcare means you can see a doctor without fear of a bill you can\'t pay.',
+      opportunities: [
+        'Preventive care stops small health problems from becoming expensive emergencies',
+        'Mental health coverage supports your ability to work, parent, and manage daily life',
+        'Children with Medicaid have better long-term educational and health outcomes',
+        'With healthcare covered, you can reallocate that budget toward savings or housing',
+      ],
+    },
   },
   {
     id: 3,
@@ -68,6 +86,15 @@ export const PROGRAMS = [
     renewalPeriod: null,                // One-time benefit
     renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['homeless', 'single_parents'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Getting rent caught up stabilizes your household — so you can stop surviving and start planning.',
+      opportunities: [
+        'Prevents eviction, which can stay on your record and make future housing harder to get',
+        'Stability at home means children\'s school attendance and performance improve',
+        'With rent current, you can focus on building savings or improving income',
+        'Many households use this program as a bridge to more affordable long-term housing',
+      ],
+    },
   },
   {
     id: 4,
@@ -90,6 +117,15 @@ export const PROGRAMS = [
     renewalPeriod: '6 months',
     renewalDate: '2026-09-15',       // 6-month recertification
     filters: { ageGroups: ['children', 'adults'], specialized: ['women', 'pregnant'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'WIC gives babies and young children the nutrition they need for a healthy start — setting them up for a lifetime of success.',
+      opportunities: [
+        'Proper early nutrition reduces hospitalizations, developmental delays, and learning gaps',
+        'WIC-enrolled children enter kindergarten better prepared than peers without access',
+        'WIC referrals connect families to healthcare, job training, and other support programs',
+        'Breastfeeding support through WIC saves families $1,200–$1,500/year on formula',
+      ],
+    },
   },
   {
     id: 5,
@@ -112,6 +148,15 @@ export const PROGRAMS = [
     renewalPeriod: '1 year',
     renewalDate: '2027-05-31',          // Enrollment window closes May 31 each year
     filters: { ageGroups: 'all', specialized: ['seniors', 'disabilities'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Energy assistance keeps the heat on and the lights on — so your family stays safe and your utilities don\'t go to collections.',
+      opportunities: [
+        'Prevents utility disconnection that can lead to fines, deposits, and damaged credit',
+        'Frees up $500–$800/year that can go toward an emergency savings fund',
+        'Energy stability improves children\'s school performance and household health outcomes',
+        'Opens eligibility for weatherization programs that permanently reduce energy bills',
+      ],
+    },
   },
   {
     id: 6,
@@ -134,6 +179,15 @@ export const PROGRAMS = [
     renewalPeriod: null,
     renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['veterans', 'justice_involved', 'disabilities'], community: [], income: 'any' },
+    impact: {
+      summary: 'Job training in a high-demand field can increase your income by $8–$15/hour — that\'s $16,000–$30,000 more per year.',
+      opportunities: [
+        'Healthcare training: average starting wage $18–$25/hour with strong job security',
+        'Skilled trades apprenticeships: journeyman wages average $32/hour and union benefits',
+        'Tech training: entry-level roles start at $45,000–$65,000 with growth potential',
+        'Program completion qualifies you for employer tuition reimbursement and advancement',
+      ],
+    },
   },
   {
     id: 7,
@@ -156,6 +210,15 @@ export const PROGRAMS = [
     renewalPeriod: '2 years',        // Continuing disability review every 2–7 years
     renewalDate: '2028-06-01',
     filters: { ageGroups: 'all', specialized: ['disabilities', 'veterans', 'seniors'], community: [], income: 'any' },
+    impact: {
+      summary: 'SSI/SSDI provides a reliable monthly income so you can meet your basic needs with dignity.',
+      opportunities: [
+        'Monthly cash income creates the financial floor needed to pursue housing and health goals',
+        'SSDI recipients gain Medicare eligibility after 24 months of benefits',
+        'SSI automatically qualifies you for Medicaid, SNAP, and other programs',
+        'Stable income enables long-term planning — savings, education, and independence',
+      ],
+    },
   },
   {
     id: 8,
@@ -178,5 +241,14 @@ export const PROGRAMS = [
     renewalPeriod: '1 year',
     renewalDate: '2027-04-15',
     filters: { ageGroups: ['adults'], specialized: ['single_parents'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'The EITC puts an average of $2,541 back in your pocket — money that\'s already yours.',
+      opportunities: [
+        'Average refund covers 3 months of groceries, a security deposit, or an emergency fund',
+        'With 3+ children, the credit can reach $7,830 — enough to change your family\'s financial picture',
+        'Combine with the Illinois EITC for an additional 20% on top of the federal credit',
+        'Many families use the refund to pay off debt, reducing monthly obligations and building stability',
+      ],
+    },
   },
 ]

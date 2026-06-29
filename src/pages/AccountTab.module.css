@@ -275,6 +275,96 @@
 .rowValue { font-size: 0.8rem; color: #aaa; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .rowChevron { color: #ccc; font-size: 1.1rem; line-height: 1; }
 
+/* ── Journey / Progress card (Help side) ── */
+.journeyCard {
+  background: linear-gradient(135deg, #2b4b81 0%, #3a6099 100%);
+  border-radius: 14px;
+  padding: 1rem 1rem 1rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  cursor: pointer;
+  transition: opacity 0.15s;
+  margin: 0 1rem;
+}
+
+.journeyCard:active { opacity: 0.88; }
+
+.journeyLeft { flex-shrink: 0; }
+
+.journeyCircle {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.journeyNum {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+  line-height: 1;
+}
+
+.journeyUnit {
+  font-size: 0.48rem;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+  white-space: pre-line;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.journeyInfo { flex: 1; min-width: 0; }
+
+.journeyLabel {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 0.2rem;
+}
+
+.journeySub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+  line-height: 1.4;
+}
+
+.journeyChevron {
+  color: rgba(255,255,255,0.5);
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.trackProgressBtn {
+  display: block;
+  width: calc(100% - 2rem);
+  margin: 0.625rem 1rem 0;
+  padding: 0.7rem;
+  background: none;
+  border: 1.5px solid var(--help-dark, #4a7c59);
+  border-radius: 10px;
+  color: var(--help-dark, #4a7c59);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  transition: background 0.15s;
+}
+
+.trackProgressBtn:hover {
+  background: rgba(74,124,89,0.06);
+}
+
 .separator {
   height: 1px;
   background: #f0f0f0;

@@ -4,6 +4,7 @@ import { supabase } from '../lib/supabase'
 import { useProfile } from '../hooks/useProfile'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import useInstallPrompt from '../hooks/useInstallPrompt'
+import useJourney from '../hooks/useJourney'
 import a from './AccountTab.module.css'
 
 // ─── Cause options ───────────────────────────────────────────
@@ -107,6 +108,7 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
   const [showVolProfile, setShowVolProfile] = useState(false)
   const [editingCauses, setEditingCauses]   = useState(false)
   const [pwResetSent, setPwResetSent]       = useState(false)
+  const journeyHook = useJourney() // used on Help side only; harmless on Give side
   const [signingOut, setSigningOut]         = useState(false)
   const [showIosSteps, setShowIosSteps]     = useState(false)
   const { canPrompt, isIos, isInstalled, showInstallUI, triggerInstall } = useInstallPrompt()
@@ -286,6 +288,32 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
       {/* ════ HELP-SIDE SECTIONS ════ */}
       {side === 'help' && (
         <>
+          {/* ── My Progress / Journey ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="My Journey" />
+            <div className={a.journeyCard} onClick={() => navigate('/help/progress')}>
+              <div className={a.journeyLeft}>
+                <div className={a.journeyCircle}>
+                  <span className={a.journeyNum}>{journeyHook.doorsOpened}</span>
+                  <span className={a.journeyUnit}>doors{'\n'}opened</span>
+                </div>
+              </div>
+              <div className={a.journeyInfo}>
+                <p className={a.journeyLabel}>{journeyHook.label}</p>
+                <p className={a.journeySub}>
+                  {journeyHook.score === 0
+                    ? 'Track programs, resources & courses you explore'
+                    : `${journeyHook.score} progress points · tap to see what you've unlocked`
+                  }
+                </p>
+              </div>
+              <span className={a.journeyChevron}>›</span>
+            </div>
+            <button className={a.trackProgressBtn} onClick={() => navigate('/help/progress')}>
+              Track Your Progress →
+            </button>
+          </div>
+
           {/* ── Assistance Profile placeholder ── */}
           <div className={a.cardGroup}>
             <SectionHeader title="Assistance Profile" />

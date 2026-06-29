@@ -11,6 +11,7 @@ import ResourceDetail from './pages/ResourceDetail'
 import ProgramDetail from './pages/ProgramDetail'
 import CourseDetail from './pages/CourseDetail'
 import HelpOrgDetail from './pages/HelpOrgDetail'
+import ProgressScreen from './pages/ProgressScreen'
 import InstallBanner from './components/InstallBanner'
 
 /* ── Session guard: redirects unauthenticated users to / ── */
@@ -49,6 +50,7 @@ export default function App() {
       <Route path="/help/program/:id" element={<Protected><ProgramDetail /></Protected>} />
       <Route path="/help/course/:id" element={<Protected><CourseDetail /></Protected>} />
       <Route path="/help/org/:id" element={<Protected><HelpOrgDetail /></Protected>} />
+      <Route path="/help/progress" element={<Protected><ProgressScreen /></Protected>} />
     </Routes>
     </>
   )

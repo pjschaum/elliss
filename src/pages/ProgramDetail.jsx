@@ -1,11 +1,26 @@
 import { useParams, useNavigate } from 'react-router-dom'
+import { useState } from 'react'
 import { PROGRAMS } from '../data/programs'
+import useJourney from '../hooks/useJourney'
 import d from './Detail.module.css'
 
 export default function ProgramDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const program = PROGRAMS.find(p => p.id === Number(id))
+  const { addItem, isTracked } = useJourney()
+  const [snackbar, setSnackbar] = useState(false)
+
+  function handleApply() {
+    if (program && !isTracked('programs', program.id)) {
+      addItem('programs', program.id)
+      setSnackbar(true)
+      setTimeout(() => setSnackbar(false), 3000)
+    }
+    if (program?.website) {
+      window.open(`https://${program.website}`, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   if (!program) {
     return (
@@ -169,10 +184,17 @@ export default function ProgramDetail() {
 
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
-        <button className={`${d.actionBtn} ${d.actionBtnHelp}`}>
-          Apply Now
+        <button className={`${d.actionBtn} ${d.actionBtnHelp}`} onClick={handleApply}>
+          {isTracked('programs', program.id) ? 'Return to Application ↗' : 'Apply Now ↗'}
         </button>
       </div>
+
+      {/* Snackbar */}
+      {snackbar && (
+        <div className={d.snackbar}>
+          Added to your Progress Tracker ✓
+        </div>
+      )}
     </div>
   )
 }

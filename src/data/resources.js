@@ -27,6 +27,14 @@ export const RESOURCES = [
     applicationDeadline: null,
     renewalDate: null,
     filters: { ageGroups: 'all', specialized: [], community: [], income: 'any' },
+    impact: {
+      summary: 'Access to free food removes one of the most stressful financial burdens — freeing you to focus on work, housing, and your family.',
+      opportunities: [
+        'With food costs covered, redirect income toward rent, savings, or debt',
+        'Nutritional security improves children\'s school performance and your work focus',
+        'Opens the door to other programs like WIC (if you have young children)',
+      ],
+    },
   },
   {
     id: 2,
@@ -47,6 +55,14 @@ export const RESOURCES = [
     applicationDeadline: '2026-08-01',   // Housing voucher waitlist opens Aug 1
     renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['homeless'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Stable, affordable housing is the foundation for everything else — health, employment, education, and safety.',
+      opportunities: [
+        'A stable address qualifies you for jobs that require proof of residency',
+        'Stable housing dramatically improves children\'s school attendance and performance',
+        'Frees up income previously spent on unstable or overpriced housing for savings and goals',
+      ],
+    },
   },
   {
     id: 3,
@@ -67,6 +83,14 @@ export const RESOURCES = [
     applicationDeadline: null,
     renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['disabilities'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Getting healthcare you\'ve been putting off can prevent small problems from becoming major, costly ones.',
+      opportunities: [
+        'Preventive care reduces ER visits that average $1,300+ out-of-pocket',
+        'Addressing health barriers removes obstacles to consistent employment',
+        'Mental health services offered alongside physical care improve overall wellbeing',
+      ],
+    },
   },
   {
     id: 4,
@@ -87,6 +111,14 @@ export const RESOURCES = [
     applicationDeadline: null,
     renewalDate: null,
     filters: { ageGroups: 'all', specialized: ['disabilities', 'veterans'], community: [], income: 'any' },
+    impact: {
+      summary: 'Getting mental health support is one of the most courageous and high-impact steps you can take for your whole life.',
+      opportunities: [
+        'Mental health treatment increases employment rates and workplace performance',
+        'Support groups connect you to a community of people who understand your experience',
+        'Addressing mental health barriers improves relationships, parenting, and daily function',
+      ],
+    },
   },
   {
     id: 5,
@@ -107,6 +139,14 @@ export const RESOURCES = [
     applicationDeadline: null,
     renewalDate: null,
     filters: { ageGroups: ['adults', 'children'], specialized: [], community: [], income: 'any' },
+    impact: {
+      summary: 'The right clothes open the right doors — especially for job interviews, school, and professional settings.',
+      opportunities: [
+        'Professional attire increases confidence and success in job interviews',
+        'Reduces one financial barrier so money can go toward other needs',
+        'School uniforms help children focus on learning without social pressure',
+      ],
+    },
   },
   {
     id: 6,
@@ -127,6 +167,14 @@ export const RESOURCES = [
     applicationDeadline: null,
     renewalDate: null,
     filters: { ageGroups: ['adults'], specialized: ['immigrants', 'veterans'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Resolving legal issues removes hidden barriers that block housing, employment, and a stable future.',
+      opportunities: [
+        'A clean legal record opens up far more housing and job opportunities',
+        'Immigration legal help can lead to work authorization and permanent residency',
+        'Resolving family law issues creates stability for children and caregivers alike',
+      ],
+    },
   },
   {
     id: 7,
@@ -147,6 +195,14 @@ export const RESOURCES = [
     applicationDeadline: null,
     renewalDate: '2026-09-30',   // Annual Ventra Reduced Fare card renewal
     filters: { ageGroups: ['seniors', 'adults'], specialized: ['disabilities'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Reliable, affordable transportation connects you to jobs, healthcare, school, and opportunity.',
+      opportunities: [
+        'Opens access to employment across the entire metro area, not just your neighborhood',
+        'Enables consistent school or training attendance without transportation stress',
+        'Saves $1,500+ per year compared to full-fare transit costs',
+      ],
+    },
   },
   {
     id: 8,
@@ -167,5 +223,13 @@ export const RESOURCES = [
     applicationDeadline: '2026-08-15',  // CCAP new enrollment window closes Aug 15
     renewalDate: '2026-12-01',          // Annual recertification due Dec 1
     filters: { ageGroups: ['children'], specialized: ['single_parents'], community: [], income: 'low_income' },
+    impact: {
+      summary: 'Affordable child care is often the single biggest barrier between a parent and consistent employment.',
+      opportunities: [
+        'With child care covered, you can work, attend job training, or go back to school',
+        'Quality early childhood care improves children\'s school readiness and long-term outcomes',
+        'Removes up to $1,200/month in child care costs, transforming your financial options',
+      ],
+    },
   },
 ]
