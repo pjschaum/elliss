@@ -241,6 +241,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
+  margin-top: auto; /* push footer to bottom of stretched grid card */
 }
 
 .metaStack {
@@ -403,13 +404,13 @@
   color: white;
 }
 
-/* ── Desktop: 2-column card grid (≥ 1200px) ── */
-@media (min-width: 1200px) {
+/* ── Desktop: 2-column card grid (≥ 1024px) ── */
+@media (min-width: 1024px) {
   .cardList {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
-    align-items: start;
+    /* default align-items: stretch → equal-height rows */
   }
 }
 
