@@ -1,0 +1,298 @@
+/* ── Page ── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 1.5rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* ── Header ── */
+.title {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: var(--brand-dark);
+  margin: 0 0 0.2rem;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  color: #888;
+  margin: 0;
+}
+
+/* ── Card ── */
+.card {
+  background: white;
+  border-radius: 16px;
+  padding: 1rem 1.125rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.cardTitle {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0;
+}
+
+/* ── Delivery method grid ── */
+.deliveryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+}
+
+.deliveryOption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.75rem 0.5rem;
+  border-radius: 12px;
+  border: 1.5px solid #e8e8e8;
+  background: #fafafa;
+  cursor: pointer;
+  position: relative;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.deliveryOption:active { transform: scale(0.97); }
+
+.deliveryOptionActive {
+  border-color: var(--give);
+  background: var(--give-light);
+}
+
+.deliveryIcon  { font-size: 1.375rem; line-height: 1; }
+.deliveryLabel { font-size: 0.8rem; font-weight: 700; color: #333; }
+
+.deliveryCheck {
+  position: absolute;
+  top: 0.35rem;
+  right: 0.5rem;
+  font-size: 0.7rem;
+  color: var(--give);
+  font-weight: 800;
+}
+
+.deliveryNote {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+  background: var(--gray-100);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+}
+
+/* ── Alert type list ── */
+.alertList {
+  display: flex;
+  flex-direction: column;
+}
+
+.alertRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 0;
+}
+
+.alertIcon {
+  font-size: 1.1rem;
+  flex-shrink: 0;
+  width: 24px;
+  text-align: center;
+}
+
+.alertText { flex: 1; min-width: 0; }
+
+.alertTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.1rem;
+}
+
+.alertDesc {
+  font-size: 0.75rem;
+  color: #999;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.divider {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 0 0 0 2.25rem;
+}
+
+/* ── Toggle switch ── */
+.toggle {
+  width: 44px;
+  height: 26px;
+  border-radius: 99px;
+  border: none;
+  background: #ddd;
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  padding: 0;
+}
+
+.toggleOn {
+  background: var(--give);
+}
+
+.toggle:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.toggleThumb {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  transition: transform 0.2s;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.toggleOn .toggleThumb {
+  transform: translateX(18px);
+}
+
+/* ── Section ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.sectionTitle {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.feedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.unreadBadge {
+  background: var(--give);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.1rem 0.4rem;
+  border-radius: 99px;
+}
+
+.markAllBtn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--give);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* ── Feed empty state ── */
+.feedEmpty {
+  background: white;
+  border-radius: 14px;
+  padding: 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.4rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.emptyIcon  { font-size: 2rem; line-height: 1; }
+.emptyTitle { font-size: 0.9rem; font-weight: 700; color: #444; margin: 0; }
+.emptyDesc  { font-size: 0.8rem; color: #aaa; margin: 0; line-height: 1.5; max-width: 240px; }
+
+/* ── Notifications list ── */
+.feedList {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.notifRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.notifRow:last-child { border-bottom: none; }
+
+.notifUnread { background: #fdf9ff; }
+.notifRow:active { background: #f5f0fa; }
+
+.notifDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--give);
+  flex-shrink: 0;
+  margin-top: 5px;
+}
+
+.notifContent { flex: 1; min-width: 0; }
+
+.notifTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.15rem;
+  line-height: 1.35;
+}
+
+.notifBody {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0 0 0.25rem;
+  line-height: 1.4;
+}
+
+.notifTime {
+  font-size: 0.7rem;
+  color: #bbb;
+  margin: 0;
+}

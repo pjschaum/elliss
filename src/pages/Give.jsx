@@ -6,6 +6,7 @@ import BottomNav from '../components/BottomNav'
 import VolunteerProfileBanner from '../components/VolunteerProfileBanner'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import ActivityTab from './ActivityTab'
+import AlertsTab from './AlertsTab'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
@@ -279,13 +280,7 @@ export default function Give() {
         )}
         {activeTab === 'donate'        && <DonateTab />}
         {activeTab === 'activity'      && <ActivityTab />}
-        {activeTab === 'notifications' && (
-          <PlaceholderTab
-            title="Alerts"
-            icon="🔔"
-            desc="Stay updated on upcoming events, reminders, and messages from organizations."
-          />
-        )}
+        {activeTab === 'notifications' && <AlertsTab />}
         {activeTab === 'account'       && (
           <PlaceholderTab
             title="My Account"
