@@ -131,11 +131,40 @@ export default function ProgramDetail() {
               <span className={d.infoIcon}>🌐</span>
               <div className={d.infoContent}>
                 <p className={d.infoLabel}>Website</p>
-                <span className={d.infoLink}>{program.website}</span>
+                <a
+                  href={`https://${program.website}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={d.infoLink}
+                >
+                  {program.website} ↗
+                </a>
               </div>
             </div>
           </div>
         </div>
+
+        {/* About the organization */}
+        {program.orgId && (
+          <>
+            <div className={d.divider} />
+            <div className={d.section}>
+              <p className={d.sectionTitle}>About the Agency</p>
+              <div className={d.linkedList}>
+                <button
+                  className={d.linkedRow}
+                  onClick={() => navigate(`/help/org/${program.orgId}`)}
+                >
+                  <div className={d.linkedInfo}>
+                    <p className={d.linkedName}>{program.agency}</p>
+                    <p className={d.linkedSub}>View mission, other programs, and contact info</p>
+                  </div>
+                  <span className={d.linkedChevron}>›</span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Sticky bottom */}

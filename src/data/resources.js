@@ -11,6 +11,7 @@ export const RESOURCES = [
   {
     id: 1,
     org: 'Greater Chicago Food Depository',
+    orgId: 1,
     initials: 'GC',
     color: '#92c19d',
     category: 'Food & Meals',
@@ -30,6 +31,7 @@ export const RESOURCES = [
   {
     id: 2,
     org: 'Chicago Housing Authority',
+    orgId: 2,
     initials: 'CH',
     color: '#1565C0',
     category: 'Housing & Shelter',
@@ -49,6 +51,7 @@ export const RESOURCES = [
   {
     id: 3,
     org: 'Chicago Free Clinic',
+    orgId: 3,
     initials: 'CF',
     color: '#C62828',
     category: 'Healthcare',
@@ -68,6 +71,7 @@ export const RESOURCES = [
   {
     id: 4,
     org: 'NAMI Chicago',
+    orgId: 4,
     initials: 'NA',
     color: '#6A1B9A',
     category: 'Mental Health',
@@ -87,6 +91,7 @@ export const RESOURCES = [
   {
     id: 5,
     org: 'Chicago ReadyMade',
+    orgId: 5,
     initials: 'CR',
     color: '#E07B2A',
     category: 'Clothing',
@@ -106,6 +111,7 @@ export const RESOURCES = [
   {
     id: 6,
     org: 'Illinois Legal Aid Online',
+    orgId: 6,
     initials: 'IL',
     color: '#37474F',
     category: 'Legal Aid',
@@ -125,6 +131,7 @@ export const RESOURCES = [
   {
     id: 7,
     org: 'CTA Reduced Fare Program',
+    orgId: 7,
     initials: 'CT',
     color: '#B71C1C',
     category: 'Transportation',
@@ -144,6 +151,7 @@ export const RESOURCES = [
   {
     id: 8,
     org: 'DHS Child Care Assistance',
+    orgId: 8,
     initials: 'DC',
     color: '#2E7D32',
     category: 'Child Care',

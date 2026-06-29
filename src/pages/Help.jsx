@@ -160,7 +160,14 @@ function ResourcesTab({ savedHook }) {
               style={{ cursor: 'pointer' }}
             >
               <div className={h.cardTop}>
-                <div className={h.orgLogo} style={{ background: r.color }}>{r.initials}</div>
+                <div
+                  className={h.orgLogo}
+                  style={{ background: r.color, cursor: r.orgId ? 'pointer' : 'default' }}
+                  onClick={e => { if (r.orgId) { e.stopPropagation(); navigate(`/help/org/${r.orgId}`) } }}
+                  title={r.orgId ? `About ${r.org}` : undefined}
+                >
+                  {r.initials}
+                </div>
                 <div className={h.cardMeta}>
                   <h3 className={h.cardName}>{r.org}</h3>
                   <div className={h.badgeRow}>
@@ -284,7 +291,14 @@ function ProgramsTab({ savedHook }) {
               style={{ cursor: 'pointer' }}
             >
               <div className={h.cardTop}>
-                <div className={h.orgLogo} style={{ background: p.color }}>{p.initials}</div>
+                <div
+                  className={h.orgLogo}
+                  style={{ background: p.color, cursor: p.orgId ? 'pointer' : 'default' }}
+                  onClick={e => { if (p.orgId) { e.stopPropagation(); navigate(`/help/org/${p.orgId}`) } }}
+                  title={p.orgId ? `About ${p.agency}` : undefined}
+                >
+                  {p.initials}
+                </div>
                 <div className={h.cardMeta}>
                   <h3 className={h.cardName}>{p.name}</h3>
                   <div className={h.badgeRow}>
@@ -390,7 +404,14 @@ function CoursesTab({ savedHook }) {
               style={{ cursor: 'pointer' }}
             >
               <div className={h.cardTop}>
-                <div className={h.orgLogo} style={{ background: c.color }}>{c.initials}</div>
+                <div
+                  className={h.orgLogo}
+                  style={{ background: c.color, cursor: c.orgId ? 'pointer' : 'default' }}
+                  onClick={e => { if (c.orgId) { e.stopPropagation(); navigate(`/help/org/${c.orgId}`) } }}
+                  title={c.orgId ? `About ${c.provider}` : undefined}
+                >
+                  {c.initials}
+                </div>
                 <div className={h.cardMeta}>
                   <h3 className={h.cardName}>{c.title}</h3>
                   <div className={h.badgeRow}>

@@ -359,3 +359,73 @@
 }
 
 .actionBtn:active { opacity: 0.85; }
+
+/* ─── Neutral badge (org type) ─── */
+.badgeNeutral {
+  background: #f5f5f5;
+  color: #555;
+}
+
+/* ─── Linked item list (org → related resources/programs/courses/events) ─── */
+.linkedList {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.linkedRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: background 0.1s;
+}
+
+.linkedRow:last-child {
+  border-bottom: none;
+}
+
+.linkedRow:active {
+  background: #f9f9f9;
+}
+
+.linkedInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.linkedName {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkedSub {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.linkedChevron {
+  color: #ccc;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  line-height: 1;
+}

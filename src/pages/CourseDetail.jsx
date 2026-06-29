@@ -138,11 +138,40 @@ export default function CourseDetail() {
               <span className={d.infoIcon}>🌐</span>
               <div className={d.infoContent}>
                 <p className={d.infoLabel}>Website</p>
-                <span className={d.infoLink}>{course.website}</span>
+                <a
+                  href={`https://${course.website}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={d.infoLink}
+                >
+                  {course.website} ↗
+                </a>
               </div>
             </div>
           </div>
         </div>
+
+        {/* About the provider */}
+        {course.orgId && (
+          <>
+            <div className={d.divider} />
+            <div className={d.section}>
+              <p className={d.sectionTitle}>About the Provider</p>
+              <div className={d.linkedList}>
+                <button
+                  className={d.linkedRow}
+                  onClick={() => navigate(`/help/org/${course.orgId}`)}
+                >
+                  <div className={d.linkedInfo}>
+                    <p className={d.linkedName}>{course.provider}</p>
+                    <p className={d.linkedSub}>View mission, other courses, and contact info</p>
+                  </div>
+                  <span className={d.linkedChevron}>›</span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Sticky bottom */}

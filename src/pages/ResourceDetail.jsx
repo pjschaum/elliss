@@ -107,6 +107,28 @@ export default function ResourceDetail() {
           <p className={d.sectionTitle}>How to get help</p>
           <p className={d.sectionText}>{resource.howToGet}</p>
         </div>
+
+        {/* About the organization */}
+        {resource.orgId && (
+          <>
+            <div className={d.divider} />
+            <div className={d.section}>
+              <p className={d.sectionTitle}>About the Organization</p>
+              <div className={d.linkedList}>
+                <button
+                  className={d.linkedRow}
+                  onClick={() => navigate(`/help/org/${resource.orgId}`)}
+                >
+                  <div className={d.linkedInfo}>
+                    <p className={d.linkedName}>{resource.org}</p>
+                    <p className={d.linkedSub}>View mission, contact info, and more</p>
+                  </div>
+                  <span className={d.linkedChevron}>›</span>
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Sticky bottom */}

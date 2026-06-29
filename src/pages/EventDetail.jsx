@@ -72,10 +72,10 @@ export default function EventDetail() {
           <p className={d.sectionTitle}>Organization</p>
           <button
             className={d.infoLink}
-            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: '0.9rem' }}
-            onClick={() => {}}
+            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: '0.9rem', fontFamily: 'inherit' }}
+            onClick={() => event.orgId && navigate(`/give/org/${event.orgId}`)}
           >
-            {event.org}
+            {event.org} {event.orgId ? '›' : ''}
           </button>
         </div>
 

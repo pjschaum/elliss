@@ -6,6 +6,7 @@ export const PROGRAMS = [
   {
     id: 1,
     name: 'SNAP — Food Assistance',
+    orgId: 8,
     initials: 'SN',
     color: '#2E7D32',
     agency: 'IL Dept. of Human Services',
@@ -27,6 +28,7 @@ export const PROGRAMS = [
   {
     id: 2,
     name: 'Medicaid / All Kids',
+    orgId: 9,
     initials: 'MD',
     color: '#1565C0',
     agency: 'IL Dept. of Healthcare & Family Services',
@@ -48,6 +50,7 @@ export const PROGRAMS = [
   {
     id: 3,
     name: 'Illinois Rental Payment Program',
+    orgId: 10,
     initials: 'IR',
     color: '#C62828',
     agency: 'IL Housing Development Authority',
@@ -69,6 +72,7 @@ export const PROGRAMS = [
   {
     id: 4,
     name: 'WIC Nutrition Program',
+    orgId: 8,
     initials: 'WI',
     color: '#E07B2A',
     agency: 'IL Dept. of Human Services',
@@ -90,6 +94,7 @@ export const PROGRAMS = [
   {
     id: 5,
     name: 'LIHEAP Energy Assistance',
+    orgId: 11,
     initials: 'LI',
     color: '#F57F17',
     agency: 'IL Community Services',
@@ -111,6 +116,7 @@ export const PROGRAMS = [
   {
     id: 6,
     name: 'Illinois Works Job Training',
+    orgId: 12,
     initials: 'IW',
     color: '#37474F',
     agency: 'IL Dept. of Commerce & Economic Opportunity',
@@ -132,6 +138,7 @@ export const PROGRAMS = [
   {
     id: 7,
     name: 'SSI / SSDI Benefits',
+    orgId: 13,
     initials: 'SS',
     color: '#4A148C',
     agency: 'Social Security Administration',
@@ -153,6 +160,7 @@ export const PROGRAMS = [
   {
     id: 8,
     name: 'Earned Income Tax Credit',
+    orgId: 14,
     initials: 'EI',
     color: '#1B5E20',
     agency: 'IRS / IL Dept. of Revenue',

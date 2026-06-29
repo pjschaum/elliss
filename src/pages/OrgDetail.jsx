@@ -1,5 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import { ORGS } from '../data/orgs'
+import { EVENTS } from '../data/events'
 import d from './Detail.module.css'
 
 function StarRating({ count }) {
@@ -14,6 +15,7 @@ export default function OrgDetail() {
   const { id } = useParams()
   const navigate = useNavigate()
   const org = ORGS.find(o => o.id === Number(id))
+  const orgEvents = EVENTS.filter(e => e.orgId === Number(id))
 
   if (!org) {
     return (
@@ -130,11 +132,43 @@ export default function OrgDetail() {
               <span className={d.infoIcon}>🌐</span>
               <div className={d.infoContent}>
                 <p className={d.infoLabel}>Website</p>
-                <span className={d.infoLink}>{org.website}</span>
+                <a
+                  href={`https://${org.website}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={d.infoLink}
+                >
+                  {org.website} ↗
+                </a>
               </div>
             </div>
           </div>
         </div>
+
+        {/* Volunteer events from this org */}
+        {orgEvents.length > 0 && (
+          <>
+            <div className={d.divider} />
+            <div className={d.section}>
+              <p className={d.sectionTitle}>Volunteer Opportunities</p>
+              <div className={d.linkedList}>
+                {orgEvents.map(event => (
+                  <button
+                    key={event.id}
+                    className={d.linkedRow}
+                    onClick={() => navigate(`/give/event/${event.id}`)}
+                  >
+                    <div className={d.linkedInfo}>
+                      <p className={d.linkedName}>{event.title}</p>
+                      <p className={d.linkedSub}>📅 {event.date} · {event.time}</p>
+                    </div>
+                    <span className={d.linkedChevron}>›</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Sticky bottom */}

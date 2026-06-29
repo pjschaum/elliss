@@ -10,6 +10,7 @@ import OrgDetail from './pages/OrgDetail'
 import ResourceDetail from './pages/ResourceDetail'
 import ProgramDetail from './pages/ProgramDetail'
 import CourseDetail from './pages/CourseDetail'
+import HelpOrgDetail from './pages/HelpOrgDetail'
 import InstallBanner from './components/InstallBanner'
 
 /* ── Session guard: redirects unauthenticated users to / ── */
@@ -47,6 +48,7 @@ export default function App() {
       <Route path="/help/resource/:id" element={<Protected><ResourceDetail /></Protected>} />
       <Route path="/help/program/:id" element={<Protected><ProgramDetail /></Protected>} />
       <Route path="/help/course/:id" element={<Protected><CourseDetail /></Protected>} />
+      <Route path="/help/org/:id" element={<Protected><HelpOrgDetail /></Protected>} />
     </Routes>
     </>
   )

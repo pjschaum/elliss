@@ -5,6 +5,7 @@ export const COURSES = [
   {
     id: 1,
     title: 'Google Career Certificates',
+    orgId: 15,
     provider: 'Google / Coursera',
     initials: 'GC',
     color: '#1A73E8',
@@ -26,6 +27,7 @@ export const COURSES = [
   {
     id: 2,
     title: 'Khan Academy GED Prep',
+    orgId: 16,
     provider: 'Khan Academy',
     initials: 'KA',
     color: '#14BF96',
@@ -47,6 +49,7 @@ export const COURSES = [
   {
     id: 3,
     title: 'Healthcare Careers Fast Track',
+    orgId: 17,
     provider: 'City Colleges of Chicago',
     initials: 'CC',
     color: '#C62828',
@@ -68,6 +71,7 @@ export const COURSES = [
   {
     id: 4,
     title: 'Skilled Trades Apprenticeship',
+    orgId: 18,
     provider: 'Chicago Cook Workforce Partnership',
     initials: 'CW',
     color: '#E07B2A',
@@ -89,6 +93,7 @@ export const COURSES = [
   {
     id: 5,
     title: 'Small Business Essentials',
+    orgId: 19,
     provider: 'SCORE Chicago',
     initials: 'SC',
     color: '#1565C0',
@@ -110,6 +115,7 @@ export const COURSES = [
   {
     id: 6,
     title: 'English as a Second Language',
+    orgId: 20,
     provider: 'Chicago Public Library',
     initials: 'CP',
     color: '#37474F',
@@ -131,6 +137,7 @@ export const COURSES = [
   {
     id: 7,
     title: 'LinkedIn Learning',
+    orgId: 21,
     provider: 'LinkedIn',
     initials: 'LI',
     color: '#0A66C2',
@@ -152,6 +159,7 @@ export const COURSES = [
   {
     id: 8,
     title: 'Digital Arts & Media Production',
+    orgId: 22,
     provider: 'After School Matters',
     initials: 'AS',
     color: '#7B1FA2',

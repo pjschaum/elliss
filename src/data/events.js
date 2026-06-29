@@ -7,6 +7,7 @@ export const EVENTS = [
   {
     id: 1,
     org: 'Greater Chicago Food Depository',
+    orgId: 1,
     initials: 'GC',
     color: '#76479c',
     title: 'Community Food Sort & Pack',
@@ -34,6 +35,7 @@ export const EVENTS = [
   {
     id: 2,
     org: 'Lincoln Park Zoo',
+    orgId: 9,
     initials: 'LP',
     color: '#2D7D46',
     title: 'Conservation Habitat Cleanup',
@@ -61,6 +63,7 @@ export const EVENTS = [
   {
     id: 3,
     org: 'Literacy Works Chicago',
+    orgId: 10,
     initials: 'LW',
     color: '#E07B2A',
     title: 'Adult Literacy Tutoring Session',
@@ -88,6 +91,7 @@ export const EVENTS = [
   {
     id: 4,
     org: 'Senior Care Chicago',
+    orgId: 11,
     initials: 'SC',
     color: '#7B5EA7',
     title: 'Companion Visits Program',
@@ -115,6 +119,7 @@ export const EVENTS = [
   {
     id: 5,
     org: 'Chicago Youth Programs',
+    orgId: 12,
     initials: 'CY',
     color: '#D94F3D',
     title: 'After-School Mentorship',

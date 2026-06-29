@@ -101,7 +101,12 @@ function VolunteerTab({ profile, updateProfile, favoriteHook }) {
             onClick={() => navigate(`/give/event/${event.id}`)}
             style={{ cursor: 'pointer' }}
           >
-            <div className={g.orgLogo} style={{ background: event.color }}>
+            <div
+              className={g.orgLogo}
+              style={{ background: event.color, cursor: event.orgId ? 'pointer' : 'default' }}
+              onClick={e => { if (event.orgId) { e.stopPropagation(); navigate(`/give/org/${event.orgId}`) } }}
+              title={event.orgId ? `About ${event.org}` : undefined}
+            >
               {event.initials}
             </div>
             <div className={g.eventInfo}>
