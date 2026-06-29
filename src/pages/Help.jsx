@@ -11,6 +11,12 @@ import HelpFilterSheet, {
   SPECIALIZED_OPTIONS,
   COMMUNITY_OPTIONS,
   INCOME_OPTIONS,
+  EMPTY_COURSE_FILTERS,
+  countActiveCourseFilters,
+  applyCourseFilters,
+  COURSE_SUBJECT_OPTIONS,
+  COURSE_FORMAT_OPTIONS,
+  COURSE_COST_OPTIONS,
 } from '../components/HelpFilterSheet'
 import { RESOURCES } from '../data/resources'
 import { PROGRAMS } from '../data/programs'
@@ -23,15 +29,16 @@ const ALL_FILTER_LABELS = Object.fromEntries([
   ...SPECIALIZED_OPTIONS,
   ...COMMUNITY_OPTIONS,
   ...INCOME_OPTIONS,
+  ...COURSE_SUBJECT_OPTIONS,
+  ...COURSE_FORMAT_OPTIONS,
+  ...COURSE_COST_OPTIONS,
 ].map(o => [o.key, o.label]))
 
 function ActivePills({ filters, onChange }) {
-  const pills = [
-    ...filters.ageGroups.map(k => ({ group: 'ageGroups', key: k })),
-    ...filters.specialized.map(k => ({ group: 'specialized', key: k })),
-    ...filters.community.map(k => ({ group: 'community', key: k })),
-    ...filters.income.map(k => ({ group: 'income', key: k })),
-  ]
+  // Works for both service filters (ageGroups/specialized/etc.) and course filters (subject/format/cost)
+  const pills = Object.entries(filters).flatMap(([group, val]) =>
+    Array.isArray(val) ? val.map(key => ({ group, key })) : []
+  )
   if (pills.length === 0) return null
 
   function removePill(group, key) {
@@ -299,28 +306,18 @@ function ProgramsTab() {
    COURSES TAB
    ════════════════════════════════ */
 
-const COURSE_CATS = [
-  'All', 'Job Skills', 'Technology', 'Healthcare', 'Business',
-  'Language', 'GED & Literacy', 'Trades', 'Creative Arts', 'Personal Development',
-]
-
 function CoursesTab() {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
-  const [activeCategory, setActiveCategory] = useState('All')
-  const [costFilter, setCostFilter] = useState('All')
-  const [filters, setFilters] = useState({ ...EMPTY_FILTERS })
+  const [filters, setFilters] = useState({ ...EMPTY_COURSE_FILTERS })
   const [showFilters, setShowFilters] = useState(false)
 
-  const activeCount = countActiveFilters(filters)
+  const activeCount = countActiveCourseFilters(filters)
 
-  const filtered = applyHelpFilters(
+  const filtered = applyCourseFilters(
     COURSES.filter(c => {
-      const matchesCat = activeCategory === 'All' || c.category === activeCategory
-      const matchesCost = costFilter === 'All' || (costFilter === 'Free' && c.cost.startsWith('Free')) || (costFilter === 'Paid' && !c.cost.startsWith('Free'))
       const q = query.toLowerCase()
-      const matchesQ = !q || c.title.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
-      return matchesCat && matchesCost && matchesQ
+      return !q || c.title.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
     }),
     filters
   )
@@ -352,32 +349,6 @@ function CoursesTab() {
       </div>
 
       <ActivePills filters={filters} onChange={setFilters} />
-
-      {/* Cost toggle */}
-      <div className={h.filters} style={{ marginBottom: '0.625rem' }}>
-        {['All', 'Free', 'Paid'].map(cf => (
-          <button
-            key={cf}
-            className={`${h.chip} ${costFilter === cf ? h.chipActive : ''}`}
-            onClick={() => setCostFilter(cf)}
-          >
-            {cf === 'All' ? 'Any Cost' : cf === 'Free' ? '🆓 Free' : '💳 Paid'}
-          </button>
-        ))}
-      </div>
-
-      {/* Subject filters */}
-      <div className={h.filters}>
-        {COURSE_CATS.map(cat => (
-          <button
-            key={cat}
-            className={`${h.chip} ${activeCategory === cat ? h.chipActive : ''}`}
-            onClick={() => setActiveCategory(cat)}
-          >
-            {cat}
-          </button>
-        ))}
-      </div>
 
       <p className={h.resultsCount}>{filtered.length} {filtered.length === 1 ? 'course' : 'courses'} found</p>
 
@@ -430,6 +401,7 @@ function CoursesTab() {
 
       {showFilters && (
         <HelpFilterSheet
+          type="course"
           filters={filters}
           onChange={setFilters}
           resultCount={filtered.length}

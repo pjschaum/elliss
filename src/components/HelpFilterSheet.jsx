@@ -1,7 +1,9 @@
+import { useEffect } from 'react'
 import f from './HelpFilterSheet.module.css'
 import s from './Sheet.module.css'
 
-// ─── Filter config ────────────────────────────────────────────
+// ─── Service filters (Resources + Programs) ───────────────────
+
 export const AGE_OPTIONS = [
   { key: 'children', label: 'Children (0–12)' },
   { key: 'teens',    label: 'Teens (13–17)' },
@@ -34,7 +36,6 @@ export const INCOME_OPTIONS = [
   { key: 'any',        label: 'No income requirement' },
 ]
 
-// ─── Empty state helper ───────────────────────────────────────
 export const EMPTY_FILTERS = {
   ageGroups:   [],
   specialized: [],
@@ -51,7 +52,6 @@ export function countActiveFilters(filters) {
   )
 }
 
-// ─── Filter logic ─────────────────────────────────────────────
 export function applyHelpFilters(items, activeFilters) {
   const { ageGroups, specialized, community, income } = activeFilters
   const hasFilters = ageGroups.length || specialized.length || community.length || income.length
@@ -61,26 +61,18 @@ export function applyHelpFilters(items, activeFilters) {
     const fi = item.filters
     if (!fi) return true
 
-    // Age: 'all' string means serves everyone; array means specific groups
     if (ageGroups.length > 0) {
       const itemAges = fi.ageGroups
       if (itemAges !== 'all' && !ageGroups.some(a => itemAges.includes(a))) return false
     }
-
-    // Specialized: item must serve at least one selected population
     if (specialized.length > 0) {
       const itemSpec = fi.specialized || []
       if (!specialized.some(s => itemSpec.includes(s))) return false
     }
-
-    // Community: if item has specific communities, at least one must match
-    // If item has empty community array, it's open to all → always passes
     if (community.length > 0) {
       const itemComm = fi.community || []
       if (itemComm.length > 0 && !community.some(c => itemComm.includes(c))) return false
     }
-
-    // Income: match on exactly selected income keys
     if (income.length > 0) {
       const itemIncome = fi.income || 'any'
       if (!income.includes(itemIncome)) return false
@@ -90,7 +82,61 @@ export function applyHelpFilters(items, activeFilters) {
   })
 }
 
-// ─── Section heading ──────────────────────────────────────────
+
+// ─── Course filters ───────────────────────────────────────────
+
+export const COURSE_SUBJECT_OPTIONS = [
+  { key: 'Technology',           label: 'Technology & Digital Skills' },
+  { key: 'Job Skills',           label: 'Job & Career Skills' },
+  { key: 'Healthcare',           label: 'Healthcare' },
+  { key: 'Business',             label: 'Business & Entrepreneurship' },
+  { key: 'Language',             label: 'English (ESL)' },
+  { key: 'Trades',               label: 'Skilled Trades' },
+  { key: 'Creative Arts',        label: 'Creative Arts & Media' },
+  { key: 'GED & Literacy',       label: 'GED & Adult Literacy' },
+  { key: 'Personal Development', label: 'Personal Development' },
+]
+
+export const COURSE_FORMAT_OPTIONS = [
+  { key: 'Online',     label: 'Online' },
+  { key: 'In-Person',  label: 'In-Person' },
+  { key: 'Hybrid',     label: 'Hybrid' },
+]
+
+export const COURSE_COST_OPTIONS = [
+  { key: 'free',  label: 'Free / Free w/ Aid' },
+  { key: 'paid',  label: 'Low Cost / Paid' },
+]
+
+export const EMPTY_COURSE_FILTERS = {
+  subject: [],
+  format:  [],
+  cost:    [],
+}
+
+export function countActiveCourseFilters(filters) {
+  return filters.subject.length + filters.format.length + filters.cost.length
+}
+
+export function applyCourseFilters(courses, activeFilters) {
+  const { subject, format, cost } = activeFilters
+  if (!subject.length && !format.length && !cost.length) return courses
+
+  return courses.filter(course => {
+    if (subject.length && !subject.includes(course.category)) return false
+    if (format.length && !format.includes(course.format)) return false
+    if (cost.length) {
+      const isFree = course.cost.startsWith('Free')
+      if (cost.includes('free') && !cost.includes('paid') && !isFree) return false
+      if (cost.includes('paid') && !cost.includes('free') && isFree) return false
+    }
+    return true
+  })
+}
+
+
+// ─── Shared sub-components ────────────────────────────────────
+
 function FilterSection({ title, children }) {
   return (
     <div className={f.section}>
@@ -112,8 +158,19 @@ function FilterChip({ label, active, onToggle }) {
   )
 }
 
+
 // ─── Main component ───────────────────────────────────────────
-export default function HelpFilterSheet({ filters, onChange, resultCount, onClose }) {
+// type: 'service' (default) → Resources & Programs demographic filters
+// type: 'course'            → Courses subject/format/cost filters
+
+export default function HelpFilterSheet({ filters, onChange, resultCount, onClose, type = 'service' }) {
+
+  // Lock background scroll while modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden'
+    return () => { document.body.style.overflow = '' }
+  }, [])
+
   function toggle(group, key) {
     const current = filters[group]
     const updated = current.includes(key)
@@ -123,10 +180,12 @@ export default function HelpFilterSheet({ filters, onChange, resultCount, onClos
   }
 
   function clearAll() {
-    onChange({ ...EMPTY_FILTERS })
+    onChange(type === 'course' ? { ...EMPTY_COURSE_FILTERS } : { ...EMPTY_FILTERS })
   }
 
-  const totalActive = countActiveFilters(filters)
+  const totalActive = type === 'course'
+    ? countActiveCourseFilters(filters)
+    : countActiveFilters(filters)
 
   return (
     <>
@@ -146,49 +205,90 @@ export default function HelpFilterSheet({ filters, onChange, resultCount, onClos
 
         <div className={s.body}>
 
-          <FilterSection title="Age group">
-            {AGE_OPTIONS.map(o => (
-              <FilterChip
-                key={o.key}
-                label={o.label}
-                active={filters.ageGroups.includes(o.key)}
-                onToggle={() => toggle('ageGroups', o.key)}
-              />
-            ))}
-          </FilterSection>
+          {type === 'course' ? (
+            /* ── Course filters ── */
+            <>
+              <FilterSection title="Subject">
+                {COURSE_SUBJECT_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.subject.includes(o.key)}
+                    onToggle={() => toggle('subject', o.key)}
+                  />
+                ))}
+              </FilterSection>
 
-          <FilterSection title="Specialized for">
-            {SPECIALIZED_OPTIONS.map(o => (
-              <FilterChip
-                key={o.key}
-                label={o.label}
-                active={filters.specialized.includes(o.key)}
-                onToggle={() => toggle('specialized', o.key)}
-              />
-            ))}
-          </FilterSection>
+              <FilterSection title="Format">
+                {COURSE_FORMAT_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.format.includes(o.key)}
+                    onToggle={() => toggle('format', o.key)}
+                  />
+                ))}
+              </FilterSection>
 
-          <FilterSection title="Community">
-            {COMMUNITY_OPTIONS.map(o => (
-              <FilterChip
-                key={o.key}
-                label={o.label}
-                active={filters.community.includes(o.key)}
-                onToggle={() => toggle('community', o.key)}
-              />
-            ))}
-          </FilterSection>
+              <FilterSection title="Cost">
+                {COURSE_COST_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.cost.includes(o.key)}
+                    onToggle={() => toggle('cost', o.key)}
+                  />
+                ))}
+              </FilterSection>
+            </>
+          ) : (
+            /* ── Service filters (Resources + Programs) ── */
+            <>
+              <FilterSection title="Age group">
+                {AGE_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.ageGroups.includes(o.key)}
+                    onToggle={() => toggle('ageGroups', o.key)}
+                  />
+                ))}
+              </FilterSection>
 
-          <FilterSection title="Income eligibility">
-            {INCOME_OPTIONS.map(o => (
-              <FilterChip
-                key={o.key}
-                label={o.label}
-                active={filters.income.includes(o.key)}
-                onToggle={() => toggle('income', o.key)}
-              />
-            ))}
-          </FilterSection>
+              <FilterSection title="Specialized for">
+                {SPECIALIZED_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.specialized.includes(o.key)}
+                    onToggle={() => toggle('specialized', o.key)}
+                  />
+                ))}
+              </FilterSection>
+
+              <FilterSection title="Community">
+                {COMMUNITY_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.community.includes(o.key)}
+                    onToggle={() => toggle('community', o.key)}
+                  />
+                ))}
+              </FilterSection>
+
+              <FilterSection title="Income eligibility">
+                {INCOME_OPTIONS.map(o => (
+                  <FilterChip
+                    key={o.key}
+                    label={o.label}
+                    active={filters.income.includes(o.key)}
+                    onToggle={() => toggle('income', o.key)}
+                  />
+                ))}
+              </FilterSection>
+            </>
+          )}
 
         </div>
 
