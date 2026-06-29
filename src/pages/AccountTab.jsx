@@ -5,6 +5,7 @@ import { useProfile } from '../hooks/useProfile'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import useInstallPrompt from '../hooks/useInstallPrompt'
 import useJourney from '../hooks/useJourney'
+import DocumentsSection from '../components/DocumentsSection'
 import a from './AccountTab.module.css'
 
 // ─── Cause options ───────────────────────────────────────────
@@ -282,6 +283,14 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
               </div>
             )}
           </div>
+
+          {/* ── My Documents (Give) ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="My Documents" />
+            <div className={a.card}>
+              <DocumentsSection side="give" />
+            </div>
+          </div>
         </>
       )}
 
@@ -407,6 +416,14 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
                 ))}
               </div>
             )}
+          </div>
+
+          {/* ── My Documents (Help) ── */}
+          <div className={a.cardGroup}>
+            <SectionHeader title="My Documents" />
+            <div className={a.card}>
+              <DocumentsSection side="help" />
+            </div>
           </div>
         </>
       )}

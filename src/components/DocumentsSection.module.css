@@ -1,0 +1,297 @@
+/* ── Section wrapper ── */
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.loading {
+  text-align: center;
+  color: #aaa;
+  font-size: 0.875rem;
+  padding: 1.5rem 0;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.intro {
+  font-size: 0.85rem;
+  color: #555;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.introSub {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.introSub::before {
+  content: '🔒';
+  font-size: 0.75rem;
+}
+
+/* ── Progress bar ── */
+.progress {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.25rem;
+}
+
+.progressBar {
+  flex: 1;
+  height: 5px;
+  background: #e8e8e8;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.progressFillGive { background: var(--give); }
+.progressFillHelp { background: var(--help-dark); }
+
+.progressLabel {
+  font-size: 0.75rem;
+  color: #aaa;
+  white-space: nowrap;
+}
+
+/* ── Error banner ── */
+.errorBanner {
+  background: #fff3f3;
+  border: 1px solid #f5c6c6;
+  border-radius: 10px;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.82rem;
+  color: #c62828;
+  line-height: 1.4;
+}
+
+/* ── Format note ── */
+.formatNote {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  color: #999;
+  line-height: 1.5;
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 0.5rem 0.625rem;
+}
+
+.formatIcon { flex-shrink: 0; }
+
+/* ── Slot list ── */
+.slotList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+/* ── Individual slot ── */
+.slot {
+  background: white;
+  border: 1.5px solid #ebebeb;
+  border-radius: 13px;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  transition: border-color 0.15s;
+}
+
+.slotFilled {
+  border-color: #c8e6c9;
+  background: #fafffe;
+}
+
+.slotRow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.slotIcon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  line-height: 1;
+  margin-top: 0.1rem;
+}
+
+.slotInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.slotTitleRow {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.2rem;
+}
+
+.slotLabel {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+  flex: 1;
+}
+
+.requiredBadge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #c62828;
+  background: #ffeaea;
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.helpToggle {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  background: none;
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: #999;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+  padding: 0;
+  line-height: 1;
+}
+
+.helpToggle:hover {
+  border-color: var(--help-dark);
+  color: var(--help-dark);
+}
+
+.slotDesc {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.slotMeta {
+  font-size: 0.75rem;
+  color: #4a7c59;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* ── Plain-language expansion (Help side) ── */
+.plainCard {
+  background: #f4faf6;
+  border-radius: 9px;
+  padding: 0.625rem 0.75rem;
+  border-left: 3px solid var(--help-dark);
+}
+
+.plainText {
+  font-size: 0.82rem;
+  color: #444;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Action buttons ── */
+.slotActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.actionBtn {
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 20px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+}
+
+.actionUpload {
+  color: white;
+  border: none;
+}
+
+.actionUploadGive {
+  background: var(--give);
+}
+
+.actionUploadGive:hover { opacity: 0.88; }
+
+.actionUploadHelp {
+  background: var(--help-dark);
+}
+
+.actionUploadHelp:hover { opacity: 0.88; }
+
+.actionUpload:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.actionView {
+  background: none;
+  border-color: #ccc;
+  color: #555;
+}
+
+.actionView:hover {
+  border-color: #999;
+  color: #333;
+}
+
+.actionReplace {
+  background: none;
+  border-color: #ccc;
+  color: #555;
+}
+
+.actionReplace:hover {
+  border-color: #999;
+  color: #333;
+}
+
+.actionDelete {
+  background: none;
+  border-color: transparent;
+  color: #e57373;
+}
+
+.actionDelete:hover {
+  color: #c62828;
+}
+
+/* ── Hidden file input ── */
+.hiddenInput {
+  display: none;
+}
