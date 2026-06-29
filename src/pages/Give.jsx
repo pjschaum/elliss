@@ -7,6 +7,7 @@ import VolunteerProfileBanner from '../components/VolunteerProfileBanner'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import ActivityTab from './ActivityTab'
 import AlertsTab from './AlertsTab'
+import AccountTab from './AccountTab'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
@@ -242,7 +243,7 @@ function DonateTab() {
 }
 
 /* ════════════════════════════════
-   PLACEHOLDER TAB
+   PLACEHOLDER TAB (kept for Help side parity)
    ════════════════════════════════ */
 
 function PlaceholderTab({ title, icon, desc }) {
@@ -281,13 +282,7 @@ export default function Give() {
         {activeTab === 'donate'        && <DonateTab />}
         {activeTab === 'activity'      && <ActivityTab />}
         {activeTab === 'notifications' && <AlertsTab />}
-        {activeTab === 'account'       && (
-          <PlaceholderTab
-            title="My Account"
-            icon="👤"
-            desc="Manage your profile, preferences, and connected accounts."
-          />
-        )}
+        {activeTab === 'account'       && <AccountTab />}
       </main>
 
       <BottomNav variant="give" active={activeTab} onChange={setActiveTab} />

@@ -1,0 +1,274 @@
+/* ── Page ── */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 2rem;
+}
+
+.loading {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #999;
+  font-size: 0.9rem;
+}
+
+/* ── Profile header ── */
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0 1rem;
+}
+
+.avatar {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: var(--give);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarInitials {
+  font-size: 1.375rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+.profileInfo { flex: 1; min-width: 0; }
+
+.profileName {
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--brand-dark);
+  margin: 0 0 0.15rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profileEmail {
+  font-size: 0.8125rem;
+  color: #999;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── Section header ── */
+.sectionHeader {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #aaa;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin: 0.75rem 0 0.375rem 0.25rem;
+}
+
+.cardGroup {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Card ── */
+.card {
+  background: white;
+  border-radius: 14px;
+  padding: 0.875rem 1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+.cardList {
+  background: white;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}
+
+/* ── Volunteer / Assistance profile row ── */
+.profileStatusRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.statusBadge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.625rem;
+  border-radius: 99px;
+  margin-bottom: 0.3rem;
+}
+
+.statusComplete   { background: #e8f5e9; color: #2e7d32; }
+.statusIncomplete { background: #fff8e1; color: #e65100; }
+
+.profileSummary {
+  font-size: 0.78rem;
+  color: #999;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.editBtn {
+  background: var(--give-light);
+  color: var(--give-dark);
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.875rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.editBtn:active { opacity: 0.75; }
+
+/* ── Favorite Causes ── */
+.emptyHint {
+  font-size: 0.8125rem;
+  color: #aaa;
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+}
+
+.causeChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.causeChip {
+  background: var(--give-light);
+  color: var(--give-dark);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.625rem;
+  border-radius: 99px;
+}
+
+.editCausesBtn {
+  background: none;
+  border: none;
+  color: var(--give);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+}
+
+/* Cause editing mode */
+.causesEditHint {
+  font-size: 0.775rem;
+  color: #aaa;
+  margin: 0 0 0.75rem;
+  line-height: 1.4;
+}
+
+.causesGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-bottom: 0.875rem;
+}
+
+.causeTile {
+  padding: 0.5rem 0.625rem;
+  border-radius: 10px;
+  border: 1.5px solid #e8e8e8;
+  background: #fafafa;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.15s;
+  line-height: 1.3;
+}
+
+.causeTileSelected {
+  border-color: var(--give);
+  background: var(--give-light);
+  color: var(--give-dark);
+}
+
+.causeTileCheck { font-size: 0.7rem; }
+
+.doneEditBtn {
+  width: 100%;
+  padding: 0.625rem;
+  background: var(--give);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.doneEditBtn:active { opacity: 0.85; }
+
+/* ── Favorite Organizations empty state ── */
+.favOrgsCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.3rem;
+  padding: 1.25rem 1rem;
+}
+
+.favOrgsIcon  { font-size: 1.75rem; line-height: 1; }
+.favOrgsTitle { font-size: 0.875rem; font-weight: 700; color: #444; margin: 0; }
+.favOrgsDesc  { font-size: 0.78rem; color: #aaa; margin: 0; line-height: 1.5; max-width: 220px; }
+
+/* ── Account settings rows ── */
+.row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1rem;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.1s;
+}
+
+.row:active { background: #f5f5f5; }
+
+.rowDanger .rowLabel { color: #c62828; }
+
+.rowIcon  { font-size: 1rem; flex-shrink: 0; width: 20px; text-align: center; }
+.rowLabel { flex: 1; font-size: 0.9rem; font-weight: 600; color: #1a1a1a; }
+.rowValue { font-size: 0.8rem; color: #aaa; max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.rowChevron { color: #ccc; font-size: 1.1rem; line-height: 1; }
+
+.separator {
+  height: 1px;
+  background: #f0f0f0;
+  margin: 0 1rem;
+}
+
+/* ── Version ── */
+.version {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #ccc;
+  margin: 0.5rem 0 0;
+}
