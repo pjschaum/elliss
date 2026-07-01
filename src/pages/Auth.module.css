@@ -204,6 +204,27 @@
   border-color: #ccc;
 }
 
+/* ── Quick Resources link ── */
+.quickResourcesLink {
+  display: block;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #324a7d;
+  text-decoration: none;
+  padding: 0.625rem 1rem;
+  border: 1.5px solid rgba(50,74,125,0.2);
+  border-radius: 12px;
+  transition: background 0.15s, border-color 0.15s;
+  width: 100%;
+  max-width: 360px;
+}
+
+.quickResourcesLink:hover {
+  background: rgba(50,74,125,0.05);
+  border-color: rgba(50,74,125,0.35);
+}
+
 /* ── Terms ── */
 .terms {
   font-size: 0.8125rem;

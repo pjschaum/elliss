@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import s from './Auth.module.css'
 import EllissLogo from '../components/EllissLogo'
 import { supabase } from '../lib/supabase'
@@ -151,6 +151,10 @@ export default function Auth() {
         <span className={s.link}>Terms of Service</span> and{' '}
         <span className={s.link}>Privacy Policy</span>.
       </p>
+
+      <Link to="/quick-resources" className={s.quickResourcesLink}>
+        📞 Quick Resources — Local phone numbers &amp; directions
+      </Link>
     </div>
   )
 }

@@ -12,6 +12,7 @@ import ProgramDetail from './pages/ProgramDetail'
 import CourseDetail from './pages/CourseDetail'
 import HelpOrgDetail from './pages/HelpOrgDetail'
 import ProgressScreen from './pages/ProgressScreen'
+import QuickResources from './pages/QuickResources'
 import InstallBanner from './components/InstallBanner'
 
 /* ── Session guard: redirects unauthenticated users to / ── */
@@ -39,6 +40,7 @@ export default function App() {
     <Routes>
       {/* Public */}
       <Route path="/" element={<Auth />} />
+      <Route path="/quick-resources" element={<QuickResources />} />
 
       {/* Protected */}
       <Route path="/home" element={<Protected><Home /></Protected>} />

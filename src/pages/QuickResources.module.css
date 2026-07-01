@@ -1,0 +1,233 @@
+.page {
+  min-height: 100dvh;
+  background: #f5f5f7;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+.header {
+  background: white;
+  padding: 1rem 1rem 0.875rem;
+  border-bottom: 1px solid #ebebeb;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.backBtn {
+  background: none;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #324a7d;
+  cursor: pointer;
+  padding: 0.25rem 0;
+  font-family: inherit;
+  white-space: nowrap;
+  margin-top: 0.1rem;
+}
+
+.headerText { flex: 1; }
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin: 0 0 0.1rem;
+}
+
+.subtitle {
+  font-size: 0.82rem;
+  color: #888;
+  margin: 0;
+}
+
+/* ── Location bar ── */
+.locationBar {
+  background: white;
+  padding: 0.625rem 1rem;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.locationBadge {
+  font-size: 0.82rem;
+  color: #888;
+  display: block;
+}
+
+.locationFound {
+  color: #2e7d4f;
+}
+
+.locationWarn {
+  color: #b45309;
+}
+
+/* ── Content ── */
+.content {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* ── Category section ── */
+.categorySection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid #324a7d;
+}
+
+.categoryIcon { font-size: 1.1rem; line-height: 1; }
+
+.categoryTitle {
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #333;
+  margin: 0;
+}
+
+.cardList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* ── Service card ── */
+.serviceCard {
+  background: white;
+  border-radius: 13px;
+  padding: 0.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.cardMain { display: flex; flex-direction: column; gap: 0.2rem; }
+
+.serviceName {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.serviceDesc {
+  font-size: 0.78rem;
+  color: #888;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.serviceAddr {
+  font-size: 0.75rem;
+  color: #aaa;
+  margin: 0;
+}
+
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.callBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.875rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  letter-spacing: 0.01em;
+  flex-shrink: 0;
+}
+
+.mapBtn,
+.webBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #555;
+  text-decoration: none;
+  background: #f2f2f2;
+  border: 1.5px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+.mapBtn:hover,
+.webBtn:hover { background: #e8e8e8; }
+
+/* ── Area label divider ── */
+.areaLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #bbb;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.areaLabel::before,
+.areaLabel::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e0e0e0;
+}
+
+/* ── No area card ── */
+.noAreaCard {
+  background: #fffbeb;
+  border: 1.5px solid #fcd34d;
+  border-radius: 13px;
+  padding: 1rem 1.125rem;
+}
+
+.noAreaTitle {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #92400e;
+  margin: 0 0 0.4rem;
+}
+
+.noAreaDesc {
+  font-size: 0.82rem;
+  color: #78350f;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Disclaimer ── */
+.disclaimer {
+  font-size: 0.75rem;
+  color: #bbb;
+  line-height: 1.6;
+  text-align: center;
+  padding: 0.5rem 0 1rem;
+  margin: 0;
+}

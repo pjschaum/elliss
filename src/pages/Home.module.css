@@ -99,6 +99,28 @@
   margin-top: 0.25rem;
 }
 
+.quickResourcesBtn {
+  display: block;
+  width: 100%;
+  margin-top: 0.875rem;
+  padding: 0.75rem 1rem;
+  background: none;
+  border: 1.5px solid rgba(50,74,125,0.2);
+  border-radius: 14px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #324a7d;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: center;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.quickResourcesBtn:hover {
+  background: rgba(50,74,125,0.05);
+  border-color: rgba(50,74,125,0.4);
+}
+
 .footer {
   text-align: center;
   padding: 1.5rem;

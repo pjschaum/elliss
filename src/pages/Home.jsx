@@ -40,6 +40,13 @@ export default function Home() {
             <span className={styles.cardArrow}>→</span>
           </button>
         </div>
+
+        <button
+          className={styles.quickResourcesBtn}
+          onClick={() => navigate('/quick-resources')}
+        >
+          📞 Quick Resources — Local phone numbers &amp; directions
+        </button>
       </main>
 
       <footer className={styles.footer}>
