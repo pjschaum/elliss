@@ -46,14 +46,17 @@ function SectionHeader({ title }) {
   return <p className={a.sectionHeader}>{title}</p>
 }
 
-function CollapsibleSection({ title, badge, defaultOpen = false, children }) {
+function CollapsibleSection({ title, description, icon, defaultOpen = false, children }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
     <div className={a.cardGroup}>
-      <button className={a.collapsibleHeader} onClick={() => setOpen(v => !v)}>
-        <span className={a.collapsibleTitle}>{title}</span>
-        {badge != null && <span className={a.collapsibleBadge}>{badge}</span>}
-        <span className={`${a.collapsibleChevron} ${open ? a.collapsibleChevronOpen : ''}`}>›</span>
+      <SectionHeader title={title} />
+      <button className={`${a.card} ${a.collapsibleCard}`} onClick={() => setOpen(v => !v)}>
+        <div className={a.collapsibleCardTop}>
+          {icon && <span className={a.collapsibleCardIcon}>{icon}</span>}
+          <p className={a.collapsibleCardDesc}>{description}</p>
+          <span className={`${a.collapsibleChevron} ${open ? a.collapsibleChevronOpen : ''}`}>›</span>
+        </div>
       </button>
       {open && <div className={a.card}>{children}</div>}
     </div>
@@ -299,7 +302,11 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
           </div>
 
           {/* ── My Documents (Give) ── */}
-          <CollapsibleSection title="My Documents">
+          <CollapsibleSection
+            title="My Documents"
+            icon="📁"
+            description="Upload your documents once and share them with any organization you volunteer with. Many orgs require IDs, certifications, and background check authorization before you can start."
+          >
             <DocumentsSection side="give" />
           </CollapsibleSection>
         </>
@@ -430,7 +437,11 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
           </div>
 
           {/* ── My Documents (Help) ── */}
-          <CollapsibleSection title="My Documents">
+          <CollapsibleSection
+            title="My Documents"
+            icon="📁"
+            description="Upload your documents here so they're ready when you need them. Many programs ask for the same documents — having them saved saves you time. Your documents are private and secure."
+          >
             <DocumentsSection side="help" />
           </CollapsibleSection>
         </>
