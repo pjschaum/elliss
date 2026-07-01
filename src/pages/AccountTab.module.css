@@ -106,6 +106,29 @@
   transform: rotate(270deg);
 }
 
+/* ── Show more / collapse button ── */
+.showMoreBtn {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: none;
+  border: 1.5px solid #e8e8e8;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #888;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s, color 0.15s;
+  text-align: center;
+}
+
+.showMoreBtn:hover {
+  border-color: #ccc;
+  color: #555;
+}
+
 .sectionHeader {
   font-size: 0.7rem;
   font-weight: 800;

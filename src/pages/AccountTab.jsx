@@ -46,6 +46,30 @@ function SectionHeader({ title }) {
   return <p className={a.sectionHeader}>{title}</p>
 }
 
+// Shows previewCount items, then a "View all N" toggle
+function ShowMore({ items, previewCount = 3, label = 'items', renderItem, divider = true }) {
+  const [expanded, setExpanded] = useState(false)
+  const visible = expanded ? items : items.slice(0, previewCount)
+  const hasMore = items.length > previewCount
+  return (
+    <>
+      {visible.map((item, i) => (
+        <div key={item.id ?? item.key ?? i}>
+          {renderItem(item, i)}
+          {divider && i < visible.length - 1 && <div className={a.savedDivider} />}
+        </div>
+      ))}
+      {hasMore && (
+        <button className={a.showMoreBtn} onClick={() => setExpanded(v => !v)}>
+          {expanded
+            ? 'Show less ↑'
+            : `View all ${items.length} ${label} ↓`}
+        </button>
+      )}
+    </>
+  )
+}
+
 function CollapsibleSection({ title, description, icon, defaultOpen = false, children }) {
   const [open, setOpen] = useState(defaultOpen)
   return (
@@ -125,6 +149,8 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
   const { user, profile, loading, updateProfile } = useProfile()
   const [showVolProfile, setShowVolProfile] = useState(false)
   const [editingCauses, setEditingCauses]   = useState(false)
+  const [causesExpanded, setCausesExpanded] = useState(false)
+  const CAUSE_PREVIEW = 6
   const [pwResetSent, setPwResetSent]       = useState(false)
   const journeyHook = useJourney() // used on Help side only; harmless on Give side
   const [signingOut, setSigningOut]         = useState(false)
@@ -225,11 +251,18 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
                   {favCauses.length === 0 ? (
                     <p className={a.emptyHint}>No causes selected yet. Tap Edit to choose what matters to you.</p>
                   ) : (
-                    <div className={a.causeChips}>
-                      {favCauses.map(c => (
-                        <span key={c} className={a.causeChip}>{c}</span>
-                      ))}
-                    </div>
+                    <>
+                      <div className={a.causeChips}>
+                        {(causesExpanded ? favCauses : favCauses.slice(0, CAUSE_PREVIEW)).map(c => (
+                          <span key={c} className={a.causeChip}>{c}</span>
+                        ))}
+                      </div>
+                      {favCauses.length > CAUSE_PREVIEW && (
+                        <button className={a.showMoreBtn} onClick={() => setCausesExpanded(v => !v)}>
+                          {causesExpanded ? 'Show less ↑' : `View all ${favCauses.length} causes ↓`}
+                        </button>
+                      )}
+                    </>
                   )}
                   <button className={a.editCausesBtn} onClick={() => setEditingCauses(true)}>
                     {favCauses.length === 0 ? 'Choose causes →' : 'Edit causes →'}
@@ -272,13 +305,13 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
               </div>
             ) : (
               <div className={a.card}>
-                {favoriteOrgs.map((org, i) => (
-                  <div key={org.key}>
+                <ShowMore
+                  items={favoriteOrgs}
+                  previewCount={3}
+                  label="organizations"
+                  renderItem={org => (
                     <div className={a.savedRow}>
-                      <div
-                        className={a.orgLogoSmall}
-                        style={{ background: org.color }}
-                      >
+                      <div className={a.orgLogoSmall} style={{ background: org.color }}>
                         {org.initials}
                       </div>
                       <div className={a.savedInfo}>
@@ -290,13 +323,10 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
                         style={{ color: 'var(--give-dark)' }}
                         onClick={() => favoriteHook.removeFavoriteOrg(org.key)}
                         aria-label="Remove from favorites"
-                      >
-                        ♥
-                      </button>
+                      >♥</button>
                     </div>
-                    {i < favoriteOrgs.length - 1 && <div className={a.savedDivider} />}
-                  </div>
-                ))}
+                  )}
+                />
               </div>
             )}
           </div>
@@ -363,8 +393,11 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
               </div>
             ) : (
               <div className={a.card}>
-                {savedResources.map((r, i) => (
-                  <div key={r.id}>
+                <ShowMore
+                  items={savedResources}
+                  previewCount={3}
+                  label="resources"
+                  renderItem={r => (
                     <SavedItemRow
                       name={r.org}
                       sub={r.category}
@@ -373,9 +406,8 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
                       onRemove={() => savedHook.unsaveItem('resource', r.id)}
                       onNavigate={() => navigate(`/help/resource/${r.id}`)}
                     />
-                    {i < savedResources.length - 1 && <div className={a.savedDivider} />}
-                  </div>
-                ))}
+                  )}
+                />
               </div>
             )}
           </div>
@@ -391,8 +423,11 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
               </div>
             ) : (
               <div className={a.card}>
-                {savedPrograms.map((p, i) => (
-                  <div key={p.id}>
+                <ShowMore
+                  items={savedPrograms}
+                  previewCount={3}
+                  label="programs"
+                  renderItem={p => (
                     <SavedItemRow
                       name={p.name}
                       sub={p.agency}
@@ -401,9 +436,8 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
                       onRemove={() => savedHook.unsaveItem('program', p.id)}
                       onNavigate={() => navigate(`/help/program/${p.id}`)}
                     />
-                    {i < savedPrograms.length - 1 && <div className={a.savedDivider} />}
-                  </div>
-                ))}
+                  )}
+                />
               </div>
             )}
           </div>
@@ -419,8 +453,11 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
               </div>
             ) : (
               <div className={a.card}>
-                {savedCourses.map((c, i) => (
-                  <div key={c.id}>
+                <ShowMore
+                  items={savedCourses}
+                  previewCount={3}
+                  label="courses"
+                  renderItem={c => (
                     <SavedItemRow
                       name={c.title}
                       sub={c.provider}
@@ -429,9 +466,8 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
                       onRemove={() => savedHook.unsaveItem('course', c.id)}
                       onNavigate={() => navigate(`/help/course/${c.id}`)}
                     />
-                    {i < savedCourses.length - 1 && <div className={a.savedDivider} />}
-                  </div>
-                ))}
+                  )}
+                />
               </div>
             )}
           </div>
