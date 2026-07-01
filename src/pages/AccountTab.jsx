@@ -46,6 +46,20 @@ function SectionHeader({ title }) {
   return <p className={a.sectionHeader}>{title}</p>
 }
 
+function CollapsibleSection({ title, badge, defaultOpen = false, children }) {
+  const [open, setOpen] = useState(defaultOpen)
+  return (
+    <div className={a.cardGroup}>
+      <button className={a.collapsibleHeader} onClick={() => setOpen(v => !v)}>
+        <span className={a.collapsibleTitle}>{title}</span>
+        {badge != null && <span className={a.collapsibleBadge}>{badge}</span>}
+        <span className={`${a.collapsibleChevron} ${open ? a.collapsibleChevronOpen : ''}`}>›</span>
+      </button>
+      {open && <div className={a.card}>{children}</div>}
+    </div>
+  )
+}
+
 function Row({ icon, label, value, onPress, danger, chevron = true }) {
   return (
     <button className={`${a.row} ${danger ? a.rowDanger : ''}`} onClick={onPress}>
@@ -285,12 +299,9 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
           </div>
 
           {/* ── My Documents (Give) ── */}
-          <div className={a.cardGroup}>
-            <SectionHeader title="My Documents" />
-            <div className={a.card}>
-              <DocumentsSection side="give" />
-            </div>
-          </div>
+          <CollapsibleSection title="My Documents">
+            <DocumentsSection side="give" />
+          </CollapsibleSection>
         </>
       )}
 
@@ -419,12 +430,9 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
           </div>
 
           {/* ── My Documents (Help) ── */}
-          <div className={a.cardGroup}>
-            <SectionHeader title="My Documents" />
-            <div className={a.card}>
-              <DocumentsSection side="help" />
-            </div>
-          </div>
+          <CollapsibleSection title="My Documents">
+            <DocumentsSection side="help" />
+          </CollapsibleSection>
         </>
       )}
 
