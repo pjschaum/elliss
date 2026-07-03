@@ -6,6 +6,8 @@ import BottomNav from '../components/BottomNav'
 import useSavedItems from '../hooks/useSavedItems'
 import HelpAlertsTab from './HelpAlertsTab'
 import AccountTab from './AccountTab'
+import AssistanceProfileSheet from '../components/AssistanceProfileSheet'
+import useAssistanceProfile from '../hooks/useAssistanceProfile'
 import HelpFilterSheet, {
   EMPTY_FILTERS,
   countActiveFilters,
@@ -516,6 +518,7 @@ export default function Help() {
   const activeTab = searchParams.get('tab') || 'resources'
   const setActiveTab = (tab) => setSearchParams({ tab }, { replace: true })
   const savedHook = useSavedItems()
+  const assistanceProfile = useAssistanceProfile()
 
   return (
     <div className={`${styles.page} ${styles.help} ${styles.hasSidebar}`}>
@@ -532,10 +535,18 @@ export default function Help() {
         {activeTab === 'programs'      && <ProgramsTab savedHook={savedHook} />}
         {activeTab === 'courses'       && <CoursesTab savedHook={savedHook} />}
         {activeTab === 'notifications' && <HelpAlertsTab />}
-        {activeTab === 'account'       && <AccountTab side="help" savedHook={savedHook} />}
+        {activeTab === 'account'       && <AccountTab side="help" savedHook={savedHook} assistanceProfile={assistanceProfile} />}
       </main>
 
       <BottomNav variant="help" active={activeTab} onChange={setActiveTab} />
+
+      {/* Assistance Profile intake — shown on first Help visit */}
+      {assistanceProfile.shouldShowIntake && (
+        <AssistanceProfileSheet
+          onComplete={(answers) => assistanceProfile.completeProfile(answers)}
+          onSkip={() => assistanceProfile.skipProfile()}
+        />
+      )}
     </div>
   )
 }

@@ -4,8 +4,24 @@ import s from './Auth.module.css'
 import EllissLogo from '../components/EllissLogo'
 import { supabase } from '../lib/supabase'
 
+function getInitialStep() {
+  const lang = localStorage.getItem('elliss_language')
+  const age = localStorage.getItem('elliss_age_verified')
+
+  if (!lang) return 'language'
+  if (!age) return 'age'
+  if (age === 'minor') return 'minor'
+  return 'auth'
+}
+
 export default function Auth() {
   const navigate = useNavigate()
+  const [step, setStep] = useState(getInitialStep)
+
+  // Language step state
+  const [selectedLang, setSelectedLang] = useState(null)
+
+  // Auth step state (unchanged)
   const [mode, setMode] = useState('signin')
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -13,6 +29,39 @@ export default function Auth() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  // ── Language step handlers ──
+  const handleLangContinue = () => {
+    const langValue = selectedLang === 'en' ? 'en' : selectedLang === 'es' ? 'es' : 'en'
+    localStorage.setItem('elliss_language', selectedLang)
+    document.documentElement.lang = langValue
+
+    const age = localStorage.getItem('elliss_age_verified')
+    if (!age) {
+      setStep('age')
+    } else if (age === 'minor') {
+      setStep('minor')
+    } else {
+      setStep('auth')
+    }
+  }
+
+  // ── Age step handlers ──
+  const handleAgeYes = () => {
+    localStorage.setItem('elliss_age_verified', 'adult')
+    setStep('auth')
+  }
+
+  const handleAgeNo = () => {
+    localStorage.setItem('elliss_age_verified', 'minor')
+    setStep('minor')
+  }
+
+  const handleResetAge = () => {
+    localStorage.removeItem('elliss_age_verified')
+    setStep('age')
+  }
+
+  // ── Auth step handlers (unchanged) ──
   const handleSubmit = async (e) => {
     e.preventDefault()
     setError(null)
@@ -47,6 +96,136 @@ export default function Auth() {
     if (error) setError(error.message)
   }
 
+  // ── Step: Language Selection ──
+  if (step === 'language') {
+    return (
+      <div className={s.page}>
+        <div className={s.top}>
+          <EllissLogo size={44} />
+          <p className={s.tagline}>Kind Hearts. Better Lives.</p>
+        </div>
+
+        <div className={s.card}>
+          <h2 className={s.gateHeading}>Choose your language</h2>
+          <p className={s.gateSubheading}>Elige tu idioma</p>
+
+          <div className={s.langOptions}>
+            <button
+              type="button"
+              className={`${s.optionCard} ${selectedLang === 'en' ? s.optionCardSelected : ''}`}
+              onClick={() => setSelectedLang('en')}
+            >
+              <span className={s.optionFlag}>🇺🇸</span>
+              <span className={s.optionLabel}>English</span>
+            </button>
+
+            <button
+              type="button"
+              className={`${s.optionCard} ${selectedLang === 'es' ? s.optionCardSelected : ''}`}
+              onClick={() => setSelectedLang('es')}
+            >
+              <span className={s.optionFlag}>🇪🇸</span>
+              <span className={s.optionLabel}>Español</span>
+            </button>
+
+            <button
+              type="button"
+              className={`${s.optionCard} ${selectedLang === 'other' ? s.optionCardSelected : ''}`}
+              onClick={() => setSelectedLang('other')}
+            >
+              <span className={s.optionFlag}>🌐</span>
+              <span className={s.optionLabel}>Other language</span>
+            </button>
+          </div>
+
+          {selectedLang === 'other' && (
+            <p className={s.otherLangNote}>
+              We're adding more languages soon. Continuing in English.
+            </p>
+          )}
+
+          <button
+            type="button"
+            className={s.primaryBtn}
+            disabled={!selectedLang}
+            onClick={handleLangContinue}
+          >
+            Continue
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Step: Age Verification ──
+  if (step === 'age') {
+    return (
+      <div className={s.page}>
+        <div className={s.top}>
+          <EllissLogo size={44} />
+          <p className={s.tagline}>Kind Hearts. Better Lives.</p>
+        </div>
+
+        <div className={s.card}>
+          <h2 className={s.gateHeading}>Before we continue</h2>
+          <p className={s.gateQuestion}>Are you 18 or older?</p>
+          <p className={s.gateNote}>
+            Some features require you to be an adult. Younger users can still access emergency resources.
+          </p>
+
+          <div className={s.ageOptions}>
+            <button
+              type="button"
+              className={s.ageBtn}
+              onClick={handleAgeYes}
+            >
+              Yes, I'm 18 or older
+            </button>
+            <button
+              type="button"
+              className={`${s.ageBtn} ${s.ageBtnMinor}`}
+              onClick={handleAgeNo}
+            >
+              No, I'm under 18
+            </button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Step: Minor Restricted Screen ──
+  if (step === 'minor') {
+    return (
+      <div className={s.page}>
+        <div className={s.top}>
+          <EllissLogo size={44} />
+          <p className={s.tagline}>Kind Hearts. Better Lives.</p>
+        </div>
+
+        <div className={s.card}>
+          <h2 className={s.gateHeading}>Welcome to Elliss</h2>
+          <p className={s.gateNote} style={{ marginBottom: '1.5rem' }}>
+            You can still access emergency resources without an account.
+          </p>
+
+          <Link to="/quick-resources" className={s.primaryBtn} style={{ display: 'block', textAlign: 'center', textDecoration: 'none' }}>
+            📞 View Quick Resources
+          </Link>
+
+          <button
+            type="button"
+            className={s.resetAgeLink}
+            onClick={handleResetAge}
+          >
+            I'm actually 18 or older
+          </button>
+        </div>
+      </div>
+    )
+  }
+
+  // ── Step: Auth (Sign In / Sign Up) — unchanged ──
   return (
     <div className={s.page}>
       <div className={s.top}>
@@ -148,8 +327,8 @@ export default function Auth() {
 
       <p className={s.terms}>
         By continuing, you agree to our{' '}
-        <span className={s.link}>Terms of Service</span> and{' '}
-        <span className={s.link}>Privacy Policy</span>.
+        <Link to="/terms" className={s.link}>Terms of Service</Link> and{' '}
+        <Link to="/privacy" className={s.link}>Privacy Policy</Link>.
       </p>
 
       <Link to="/quick-resources" className={s.quickResourcesLink}>

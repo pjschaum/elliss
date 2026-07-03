@@ -239,6 +239,149 @@
   cursor: pointer;
 }
 
+/* ── Gate screens (language + age) ── */
+.gateHeading {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 0.25rem;
+}
+
+.gateSubheading {
+  font-size: 1rem;
+  color: var(--gray-600, #666);
+  text-align: center;
+  margin: 0 0 1.5rem;
+}
+
+.gateQuestion {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  text-align: center;
+  margin: 0 0 0.5rem;
+}
+
+.gateNote {
+  font-size: 0.875rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+  margin: 0 0 1.5rem;
+}
+
+/* ── Language option cards ── */
+.langOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.optionCard {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border: 2px solid #e5e5e5;
+  border-radius: 0.875rem;
+  background: white;
+  cursor: pointer;
+  font-family: var(--font);
+  transition: border-color 0.15s, background 0.15s;
+  text-align: left;
+  width: 100%;
+}
+
+.optionCard:hover {
+  border-color: #c5cfe8;
+  background: #f7f9fd;
+}
+
+.optionCardSelected {
+  border-color: #324a7d;
+  background: rgba(50, 74, 125, 0.06);
+}
+
+.optionFlag {
+  font-size: 1.75rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.optionLabel {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.otherLangNote {
+  font-size: 0.8125rem;
+  color: #666;
+  text-align: center;
+  line-height: 1.5;
+  margin: -0.5rem 0 1.25rem;
+  background: #f5f5f5;
+  border-radius: 0.625rem;
+  padding: 0.625rem 0.875rem;
+}
+
+/* ── Age option buttons ── */
+.ageOptions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ageBtn {
+  padding: 1rem 1.25rem;
+  border: 2px solid #324a7d;
+  border-radius: 0.875rem;
+  background: white;
+  color: #324a7d;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.ageBtn:hover {
+  background: #324a7d;
+  color: white;
+}
+
+.ageBtnMinor {
+  border-color: #e5e5e5;
+  color: #666;
+}
+
+.ageBtnMinor:hover {
+  background: #f5f5f5;
+  color: #444;
+}
+
+/* ── Minor reset link ── */
+.resetAgeLink {
+  display: block;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  color: var(--brand-blue, #324a7d);
+  font-weight: 500;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font);
+  background: none;
+  border: none;
+  padding: 0;
+  width: 100%;
+}
+
+.resetAgeLink:hover {
+  text-decoration: underline;
+}
+
 /* ── Mobile ── */
 @media (max-width: 480px) {
   .page {
