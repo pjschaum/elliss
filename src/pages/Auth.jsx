@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import s from './Auth.module.css'
 import EllissLogo from '../components/EllissLogo'
 import { supabase } from '../lib/supabase'
+import { sendNotification } from '../lib/sendNotification'
 
 function getInitialStep() {
   const lang = localStorage.getItem('elliss_language')
@@ -72,12 +73,14 @@ export default function Auth() {
         const { error } = await supabase.auth.signInWithPassword({ email, password })
         if (error) throw error
       } else {
-        const { error } = await supabase.auth.signUp({
+        const { data: signUpData, error } = await supabase.auth.signUp({
           email,
           password,
           options: { data: { full_name: name } },
         })
         if (error) throw error
+        // Fire-and-forget welcome email — does not block navigation
+        sendNotification('welcome', email, name)
       }
       navigate('/home')
     } catch (err) {

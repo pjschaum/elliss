@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
+import { sendNotification } from '../lib/sendNotification'
 import s from './Sheet.module.css'
 
 // ── Field labels for display ──────────────────────────────────
@@ -104,6 +105,19 @@ export default function SignUpSheet({ event, profile, updateProfile, onClose }) 
     // For Tier 2, note that background check consent was given
     if (tier === 2) {
       await updateProfile({ background_check_consent: true })
+    }
+
+    // Send confirmation email — fire-and-forget, non-blocking
+    const { data: { user } } = await supabase.auth.getUser()
+    if (user?.email) {
+      sendNotification('event_signup_confirmation', user.email, profile?.full_name || user.email, {
+        title:   event.title,
+        org:     event.org,
+        date:    event.date,
+        time:    event.time,
+        address: event.address,
+        tier,
+      })
     }
 
     setStep(tier === 3 ? 'pending' : 'success')
