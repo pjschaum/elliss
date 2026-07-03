@@ -9,6 +9,7 @@ import ActivityTab from './ActivityTab'
 import AlertsTab from './AlertsTab'
 import AccountTab from './AccountTab'
 import CommunityTab from '../components/CommunityTab'
+import SocialLinks from '../components/SocialLinks'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
@@ -311,6 +312,7 @@ export default function Give() {
           <img src="/flame-give.svg" alt="" className={styles.headerFlame} />
           <span style={{ color: 'var(--give)' }}>elliss</span>
         </div>
+        <SocialLinks color="var(--give)" />
       </header>
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>

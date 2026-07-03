@@ -7,6 +7,7 @@ import useSavedItems from '../hooks/useSavedItems'
 import HelpAlertsTab from './HelpAlertsTab'
 import AccountTab from './AccountTab'
 import AssistanceProfileSheet from '../components/AssistanceProfileSheet'
+import SocialLinks from '../components/SocialLinks'
 import useAssistanceProfile from '../hooks/useAssistanceProfile'
 import HelpFilterSheet, {
   EMPTY_FILTERS,
@@ -529,6 +530,7 @@ export default function Help() {
           <img src="/flame-help.svg" alt="" className={styles.headerFlame} />
           <span style={{ color: 'var(--help-dark)' }}>elliss</span>
         </div>
+        <SocialLinks color="var(--help-dark)" />
       </header>
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>
