@@ -8,6 +8,7 @@ import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
 import ActivityTab from './ActivityTab'
 import AlertsTab from './AlertsTab'
 import AccountTab from './AccountTab'
+import CommunityTab from '../components/CommunityTab'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
@@ -317,6 +318,7 @@ export default function Give() {
           <VolunteerTab profile={profile} updateProfile={updateProfile} favoriteHook={favoriteHook} />
         )}
         {activeTab === 'donate'        && <DonateTab favoriteHook={favoriteHook} />}
+        {activeTab === 'community'     && <CommunityTab />}
         {activeTab === 'activity'      && <ActivityTab />}
         {activeTab === 'notifications' && <AlertsTab />}
         {activeTab === 'account'       && <AccountTab side="give" favoriteHook={favoriteHook} />}

@@ -50,6 +50,12 @@
   letter-spacing: 0.01em;
 }
 
+/* Compact layout when 6 tabs — smaller labels to keep everything legible */
+.navSix .label {
+  font-size: 0.5625rem;
+  letter-spacing: 0;
+}
+
 /* Hidden on mobile */
 .navBrand  { display: none; }
 .homeLink  { display: none; }

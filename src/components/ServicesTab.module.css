@@ -1,0 +1,352 @@
+/* ServicesTab — Affordable Services (phone, internet, streaming, devices) */
+
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--gray-50, #f8f8f8);
+  border: 1.5px solid rgba(0,0,0,0.1);
+  border-radius: 12px;
+  padding: 0.625rem 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.searchIcon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  opacity: 0.5;
+}
+
+.searchInput {
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.9375rem;
+  font-family: var(--font);
+  color: var(--gray-900, #111);
+  outline: none;
+}
+
+.searchInput::placeholder {
+  color: #aaa;
+}
+
+.clearBtn {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #aaa;
+  font-size: 0.875rem;
+  padding: 0;
+  line-height: 1;
+}
+
+/* ── Category Pills ── */
+
+.pills {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.pills::-webkit-scrollbar { display: none; }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.375rem 0.875rem;
+  border-radius: 20px;
+  border: 1.5px solid rgba(0,0,0,0.12);
+  background: white;
+  font-family: var(--font);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #555;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.14s, color 0.14s, border-color 0.14s;
+  flex-shrink: 0;
+}
+
+.pill:hover {
+  background: rgba(61, 138, 116, 0.06);
+  border-color: var(--help-dark, #6a9470);
+  color: var(--help-dark, #6a9470);
+}
+
+.pillActive {
+  background: var(--help-dark, #6a9470);
+  border-color: var(--help-dark, #6a9470);
+  color: white;
+}
+
+.pillActive:hover {
+  background: var(--help-dark, #6a9470);
+  color: white;
+}
+
+.pillIcon {
+  font-size: 0.875rem;
+}
+
+/* ── Count ── */
+
+.count {
+  font-size: 0.8125rem;
+  color: #888;
+  margin-bottom: 0.75rem;
+}
+
+/* ── Cards ── */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.07);
+  overflow: hidden;
+  transition: box-shadow 0.15s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.cardOpen {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.cardTop {
+  display: flex;
+  gap: 0.875rem;
+  padding: 1rem 1rem 0;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+  letter-spacing: 0.02em;
+}
+
+.cardMeta {
+  flex: 1;
+  min-width: 0;
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.cardName {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--gray-900, #111);
+  line-height: 1.2;
+}
+
+.costBadge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--help-dark, #6a9470);
+  background: rgba(61,138,116,0.1);
+  padding: 0.2rem 0.5rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tagline {
+  font-size: 0.8125rem;
+  color: #666;
+  margin: 0 0 0.5rem;
+  line-height: 1.35;
+}
+
+.tagRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.categoryPill {
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--help-dark, #6a9470);
+  color: white;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
+.tag {
+  font-size: 0.7rem;
+  font-weight: 500;
+  background: rgba(0,0,0,0.06);
+  color: #555;
+  padding: 0.15rem 0.5rem;
+  border-radius: 20px;
+}
+
+/* ── Description (always visible) ── */
+
+.desc {
+  font-size: 0.8625rem;
+  color: #555;
+  line-height: 1.55;
+  padding: 0.625rem 1rem 0;
+}
+
+/* ── Expanded details ── */
+
+.details {
+  padding: 0.75rem 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  margin-top: 0.75rem;
+}
+
+.detailSection {}
+
+.detailLabel {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--help-dark, #6a9470);
+  margin-bottom: 0.25rem;
+}
+
+.detailText {
+  font-size: 0.8375rem;
+  color: #444;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.featureList {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.8375rem;
+  color: #444;
+  line-height: 1.75;
+}
+
+.impactBanner {
+  background: rgba(61,138,116,0.08);
+  border-left: 3px solid var(--help-dark, #6a9470);
+  border-radius: 0 8px 8px 0;
+  padding: 0.625rem 0.875rem;
+  font-size: 0.8125rem;
+  color: #3d5e3a;
+  font-weight: 500;
+}
+
+/* ── Card footer ── */
+
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.expandBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--help-dark, #6a9470);
+  padding: 0;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.callBtn,
+.learnBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.875rem;
+  border-radius: 20px;
+  font-family: var(--font);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.14s;
+}
+
+.callBtn {
+  background: rgba(61,138,116,0.1);
+  color: var(--help-dark, #6a9470);
+  border: 1.5px solid rgba(61,138,116,0.3);
+}
+
+.callBtn:hover {
+  background: rgba(61,138,116,0.18);
+}
+
+.learnBtn {
+  background: var(--help-dark, #6a9470);
+  color: white;
+  border: none;
+}
+
+.learnBtn:hover {
+  background: #5a8060;
+}
+
+/* ── Empty state ── */
+
+.empty {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.emptyIcon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.emptyTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 0.25rem;
+}
+
+.emptyDesc {
+  font-size: 0.875rem;
+  color: #888;
+}

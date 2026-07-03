@@ -26,6 +26,7 @@ import HelpFilterSheet, {
 import { RESOURCES } from '../data/resources'
 import { PROGRAMS } from '../data/programs'
 import { COURSES } from '../data/courses'
+import ServicesTab from '../components/ServicesTab'
 
 // ─── Shared active filter pills ──────────────────────────────
 // Maps filter key → human label across all option groups
@@ -534,6 +535,7 @@ export default function Help() {
         {activeTab === 'resources'     && <ResourcesTab savedHook={savedHook} />}
         {activeTab === 'programs'      && <ProgramsTab savedHook={savedHook} />}
         {activeTab === 'courses'       && <CoursesTab savedHook={savedHook} />}
+        {activeTab === 'services'      && <ServicesTab />}
         {activeTab === 'notifications' && <HelpAlertsTab />}
         {activeTab === 'account'       && <AccountTab side="help" savedHook={savedHook} assistanceProfile={assistanceProfile} />}
       </main>

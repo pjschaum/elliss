@@ -2,29 +2,32 @@ import { useNavigate } from 'react-router-dom'
 import s from './BottomNav.module.css'
 
 const GIVE_TABS = [
-  { id: 'volunteer',     label: 'Volunteer',     Icon: IconHandshake },
-  { id: 'donate',        label: 'Donate',        Icon: IconHeart },
-  { id: 'activity',      label: 'Activity',      Icon: IconList },
-  { id: 'notifications', label: 'Alerts',        Icon: IconBell },
-  { id: 'account',       label: 'Account',       Icon: IconPerson },
+  { id: 'volunteer',     label: 'Volunteer',  Icon: IconHandshake },
+  { id: 'donate',        label: 'Donate',     Icon: IconHeart },
+  { id: 'community',     label: 'Community',  Icon: IconCommunity },
+  { id: 'activity',      label: 'Activity',   Icon: IconList },
+  { id: 'notifications', label: 'Alerts',     Icon: IconBell },
+  { id: 'account',       label: 'Account',    Icon: IconPerson },
 ]
 
 const HELP_TABS = [
-  { id: 'resources',     label: 'Resources',     Icon: IconLeaf },
-  { id: 'programs',      label: 'Programs',      Icon: IconGrid },
-  { id: 'courses',       label: 'Courses',       Icon: IconBook },
-  { id: 'notifications', label: 'Alerts',        Icon: IconBell },
-  { id: 'account',       label: 'Account',       Icon: IconPerson },
+  { id: 'resources',     label: 'Resources',  Icon: IconLeaf },
+  { id: 'programs',      label: 'Programs',   Icon: IconGrid },
+  { id: 'courses',       label: 'Courses',    Icon: IconBook },
+  { id: 'services',      label: 'Services',   Icon: IconPhone },
+  { id: 'notifications', label: 'Alerts',     Icon: IconBell },
+  { id: 'account',       label: 'Account',    Icon: IconPerson },
 ]
 
 export default function BottomNav({ variant, active, onChange }) {
   const navigate = useNavigate()
   const tabs = variant === 'give' ? GIVE_TABS : HELP_TABS
   const activeColor = variant === 'give' ? 'var(--give)' : 'var(--help-dark)'
+  const isSix = tabs.length === 6
 
   return (
     <nav
-      className={s.nav}
+      className={`${s.nav} ${isSix ? s.navSix : ''}`}
       style={{ '--nav-active': activeColor }}
       aria-label="Main navigation"
     >
@@ -140,6 +143,26 @@ function IconBook() {
     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
       <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+    </svg>
+  )
+}
+
+function IconCommunity() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+      <circle cx="9" cy="7" r="4"/>
+      <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+      <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+    </svg>
+  )
+}
+
+function IconPhone() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+      <line x1="12" y1="18" x2="12.01" y2="18"/>
     </svg>
   )
 }
