@@ -186,7 +186,10 @@ function ResourcesTab({ savedHook }) {
               </div>
               <p className={h.cardDesc}>{r.desc}</p>
               <div className={h.cardFooter}>
-                <p className={h.cardDetail}>{r.detail}</p>
+                <div className={h.metaStack}>
+                  {r.address && <span className={h.metaLabel}>📍 {r.address.split(',')[0]}</span>}
+                  {r.hours && <span className={h.metaValue}>{r.hours.split('|')[0].trim()}</span>}
+                </div>
                 <button
                   className={h.actionBtn}
                   onClick={e => { e.stopPropagation(); navigate(`/help/resource/${r.id}`) }}
@@ -359,7 +362,7 @@ function CoursesTab({ savedHook }) {
   const filtered = applyCourseFilters(
     COURSES.filter(c => {
       const q = query.toLowerCase()
-      return !q || c.title.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
+      return !q || c.name.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
     }),
     filters
   )
@@ -413,12 +416,15 @@ function CoursesTab({ savedHook }) {
                   {c.initials}
                 </div>
                 <div className={h.cardMeta}>
-                  <h3 className={h.cardName}>{c.title}</h3>
+                  <h3 className={h.cardName}>{c.name}</h3>
                   <div className={h.badgeRow}>
                     <span className={h.categoryBadge}>{c.category}</span>
-                    {c.cost.startsWith('Free')
-                      ? <span className={h.freeBadge}>{c.cost}</span>
-                      : <span className={h.paidBadge}>{c.cost}</span>}
+                    {(() => {
+                      const costLabel = c.cost.split(/[—(]/)[0].trim()
+                      return costLabel === '$0'
+                        ? <span className={h.freeBadge}>Free</span>
+                        : <span className={h.paidBadge}>{costLabel}</span>
+                    })()}
                   </div>
                 </div>
                 {savedHook && (
@@ -433,8 +439,10 @@ function CoursesTab({ savedHook }) {
 
               <div className={h.pillRow}>
                 <span className={h.pill}>📅 {c.duration}</span>
-                <span className={h.pill}>{c.format === 'Online' ? '💻' : c.format === 'In-Person' ? '📍' : '🔀'} {c.format}</span>
-                <span className={h.pill}>📊 {c.level}</span>
+                <span className={h.pill}>
+                  {c.format.toLowerCase().startsWith('online') ? '💻' : c.format.toLowerCase().startsWith('in-person') ? '📍' : '🔀'} {c.format}
+                </span>
+                {c.certType && <span className={h.pill}>🏅 {c.certType.split('+')[0].trim()}</span>}
               </div>
 
               <div className={h.cardFooter}>
