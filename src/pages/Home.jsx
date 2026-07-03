@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import styles from './Home.module.css'
 import EllissLogo from '../components/EllissLogo'
 
@@ -51,6 +51,11 @@ export default function Home() {
 
       <footer className={styles.footer}>
         <p>elliss.app &middot; Kind Hearts. Better Lives.</p>
+        <p>
+          <Link to="/terms" className={styles.footerLink}>Terms of Service</Link>
+          {' · '}
+          <Link to="/privacy" className={styles.footerLink}>Privacy Policy</Link>
+        </p>
       </footer>
     </div>
   )

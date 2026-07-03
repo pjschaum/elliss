@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useProfile } from '../hooks/useProfile'
 import VolunteerProfileSheet from '../components/VolunteerProfileSheet'
@@ -548,6 +548,12 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
           />
         </div>
       </div>
+
+      <p className={a.legalLinks}>
+        <Link to="/terms" className={a.legalLink}>Terms of Service</Link>
+        {' · '}
+        <Link to="/privacy" className={a.legalLink}>Privacy Policy</Link>
+      </p>
 
       <p className={a.version}>Elliss · v0.1 beta</p>
 
