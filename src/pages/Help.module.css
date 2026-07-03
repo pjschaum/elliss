@@ -212,6 +212,25 @@
   padding: 0.2rem 0.625rem;
 }
 
+/* ── Smart-sort badges ── */
+.forYouBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  background: #fff8e1;
+  color: #b07800;
+  border: 1px solid #ffe082;
+  border-radius: 2rem;
+  padding: 0.175rem 0.5rem;
+  white-space: nowrap;
+}
+
+.personalizedNote {
+  font-size: 0.75rem;
+  color: var(--help-dark);
+  margin: -0.5rem 0 0.75rem;
+  opacity: 0.8;
+}
+
 .onlineBadge {
   font-size: 0.75rem;
   font-weight: 600;

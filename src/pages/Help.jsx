@@ -29,6 +29,7 @@ import { RESOURCES } from '../data/resources'
 import { PROGRAMS } from '../data/programs'
 import { COURSES } from '../data/courses'
 import ServicesTab from '../components/ServicesTab'
+import useSmartSort, { RECOMMENDED_THRESHOLD } from '../hooks/useSmartSort'
 
 // ─── Shared active filter pills ──────────────────────────────
 // Maps filter key → human label across all option groups
@@ -94,7 +95,7 @@ const RESOURCE_CATS = [
   'Child Care', 'Senior Services', 'Financial Aid', 'Disability',
 ]
 
-function ResourcesTab({ savedHook }) {
+function ResourcesTab({ savedHook, profile }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -103,7 +104,7 @@ function ResourcesTab({ savedHook }) {
 
   const activeCount = countActiveFilters(filters)
 
-  const filtered = applyHelpFilters(
+  const preSort = applyHelpFilters(
     RESOURCES.filter(r => {
       const matchesCat = activeCategory === 'All' || r.category === activeCategory
       const q = query.toLowerCase()
@@ -112,6 +113,8 @@ function ResourcesTab({ savedHook }) {
     }),
     filters
   )
+
+  const { sorted: filtered, isPersonalized } = useSmartSort(preSort, profile, 'resource')
 
   return (
     <>
@@ -154,6 +157,7 @@ function ResourcesTab({ savedHook }) {
       </div>
 
       <p className={h.resultsCount}>{filtered.length} {filtered.length === 1 ? 'resource' : 'resources'} found</p>
+      {isPersonalized && <p className={h.personalizedNote}>✨ Sorted based on your profile</p>}
 
       {filtered.length === 0 ? <EmptyState /> : (
         <div className={h.cardList}>
@@ -180,6 +184,9 @@ function ResourcesTab({ savedHook }) {
                     {r.free
                       ? <span className={h.freeBadge}>Free</span>
                       : <span className={h.paidBadge}>Low Cost</span>}
+                    {r._score >= RECOMMENDED_THRESHOLD && (
+                      <span className={h.forYouBadge}>✦ For you</span>
+                    )}
                   </div>
                 </div>
                 {savedHook && (
@@ -228,7 +235,7 @@ const PROGRAM_CATS = [
   'Employment', 'Education', 'Disability', 'Veterans', 'Immigrants', 'Seniors',
 ]
 
-function ProgramsTab({ savedHook }) {
+function ProgramsTab({ savedHook, profile }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('All')
@@ -237,7 +244,7 @@ function ProgramsTab({ savedHook }) {
 
   const activeCount = countActiveFilters(filters)
 
-  const filtered = applyHelpFilters(
+  const preSort = applyHelpFilters(
     PROGRAMS.filter(p => {
       const matchesCat = activeCategory === 'All' || p.category === activeCategory
       const q = query.toLowerCase()
@@ -246,6 +253,8 @@ function ProgramsTab({ savedHook }) {
     }),
     filters
   )
+
+  const { sorted: filtered, isPersonalized } = useSmartSort(preSort, profile, 'program')
 
   return (
     <>
@@ -288,6 +297,7 @@ function ProgramsTab({ savedHook }) {
       </div>
 
       <p className={h.resultsCount}>{filtered.length} {filtered.length === 1 ? 'program' : 'programs'} found</p>
+      {isPersonalized && <p className={h.personalizedNote}>✨ Sorted based on your profile</p>}
 
       {filtered.length === 0 ? <EmptyState /> : (
         <div className={h.cardList}>
@@ -312,6 +322,9 @@ function ProgramsTab({ savedHook }) {
                   <div className={h.badgeRow}>
                     <span className={h.categoryBadge}>{p.category}</span>
                     {p.govt && <span className={h.govtBadge}>Gov't Program</span>}
+                    {p._score >= RECOMMENDED_THRESHOLD && (
+                      <span className={h.forYouBadge}>✦ For you</span>
+                    )}
                   </div>
                 </div>
                 {savedHook && (
@@ -356,7 +369,7 @@ function ProgramsTab({ savedHook }) {
    COURSES TAB
    ════════════════════════════════ */
 
-function CoursesTab({ savedHook }) {
+function CoursesTab({ savedHook, profile }) {
   const navigate = useNavigate()
   const [query, setQuery] = useState('')
   const [filters, setFilters] = useState({ ...EMPTY_COURSE_FILTERS })
@@ -364,13 +377,15 @@ function CoursesTab({ savedHook }) {
 
   const activeCount = countActiveCourseFilters(filters)
 
-  const filtered = applyCourseFilters(
+  const preSort = applyCourseFilters(
     COURSES.filter(c => {
       const q = query.toLowerCase()
       return !q || c.name.toLowerCase().includes(q) || c.provider.toLowerCase().includes(q) || c.desc.toLowerCase().includes(q) || c.category.toLowerCase().includes(q)
     }),
     filters
   )
+
+  const { sorted: filtered, isPersonalized } = useSmartSort(preSort, profile, 'course')
 
   return (
     <>
@@ -401,6 +416,7 @@ function CoursesTab({ savedHook }) {
       <ActivePills filters={filters} onChange={setFilters} />
 
       <p className={h.resultsCount}>{filtered.length} {filtered.length === 1 ? 'course' : 'courses'} found</p>
+      {isPersonalized && <p className={h.personalizedNote}>✨ Sorted based on your profile</p>}
 
       {filtered.length === 0 ? <EmptyState /> : (
         <div className={h.cardList}>
@@ -430,6 +446,9 @@ function CoursesTab({ savedHook }) {
                         ? <span className={h.freeBadge}>Free</span>
                         : <span className={h.paidBadge}>{costLabel}</span>
                     })()}
+                    {c._score >= RECOMMENDED_THRESHOLD && (
+                      <span className={h.forYouBadge}>✦ For you</span>
+                    )}
                   </div>
                 </div>
                 {savedHook && (
@@ -535,9 +554,9 @@ export default function Help() {
       </header>
 
       <main className={`${styles.main} ${styles.mainWithNav}`}>
-        {activeTab === 'resources'     && <ResourcesTab savedHook={savedHook} />}
-        {activeTab === 'programs'      && <ProgramsTab savedHook={savedHook} />}
-        {activeTab === 'courses'       && <CoursesTab savedHook={savedHook} />}
+        {activeTab === 'resources'     && <ResourcesTab savedHook={savedHook} profile={assistanceProfile.profile} />}
+        {activeTab === 'programs'      && <ProgramsTab savedHook={savedHook} profile={assistanceProfile.profile} />}
+        {activeTab === 'courses'       && <CoursesTab savedHook={savedHook} profile={assistanceProfile.profile} />}
         {activeTab === 'services'      && <ServicesTab />}
         {activeTab === 'notifications' && <HelpAlertsTab />}
         {activeTab === 'account'       && <AccountTab side="help" savedHook={savedHook} assistanceProfile={assistanceProfile} />}
