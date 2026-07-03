@@ -8,6 +8,7 @@ import HelpAlertsTab from './HelpAlertsTab'
 import AccountTab from './AccountTab'
 import AssistanceProfileSheet from '../components/AssistanceProfileSheet'
 import SocialLinks from '../components/SocialLinks'
+import EllissAI from '../components/EllissAI'
 import useAssistanceProfile from '../hooks/useAssistanceProfile'
 import HelpFilterSheet, {
   EMPTY_FILTERS,
@@ -543,6 +544,7 @@ export default function Help() {
       </main>
 
       <BottomNav variant="help" active={activeTab} onChange={setActiveTab} />
+      <EllissAI side="help" assistanceProfile={assistanceProfile.profile} />
 
       {/* Assistance Profile intake — shown on first Help visit */}
       {assistanceProfile.shouldShowIntake && (

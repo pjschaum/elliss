@@ -1,6 +1,6 @@
 -- ═══════════════════════════════════════════════════════════
 -- Elliss — Favorites & Causes
--- Run this in: Supabase Dashboard → SQL Editor → New query
+-- Safe to re-run: uses IF NOT EXISTS / duplicate policy guards
 -- ═══════════════════════════════════════════════════════════
 
 -- ─── FAVORITE CAUSES + ONBOARDING FLAG on profiles ───────────
@@ -22,14 +22,20 @@ create table if not exists public.favorite_orgs (
 
 alter table public.favorite_orgs enable row level security;
 
-create policy "Users can view own favorite orgs"
-  on public.favorite_orgs for select
-  using (auth.uid() = user_id);
+do $$ begin
+  create policy "Users can view own favorite orgs"
+    on public.favorite_orgs for select
+    using (auth.uid() = user_id);
+exception when duplicate_object then null; end $$;
 
-create policy "Users can insert own favorite orgs"
-  on public.favorite_orgs for insert
-  with check (auth.uid() = user_id);
+do $$ begin
+  create policy "Users can insert own favorite orgs"
+    on public.favorite_orgs for insert
+    with check (auth.uid() = user_id);
+exception when duplicate_object then null; end $$;
 
-create policy "Users can delete own favorite orgs"
-  on public.favorite_orgs for delete
-  using (auth.uid() = user_id);
+do $$ begin
+  create policy "Users can delete own favorite orgs"
+    on public.favorite_orgs for delete
+    using (auth.uid() = user_id);
+exception when duplicate_object then null; end $$;

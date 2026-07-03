@@ -10,6 +10,7 @@ import AlertsTab from './AlertsTab'
 import AccountTab from './AccountTab'
 import CommunityTab from '../components/CommunityTab'
 import SocialLinks from '../components/SocialLinks'
+import EllissAI from '../components/EllissAI'
 import { EVENTS } from '../data/events'
 import { ORGS } from '../data/orgs'
 import { useProfile } from '../hooks/useProfile'
@@ -327,6 +328,7 @@ export default function Give() {
       </main>
 
       <BottomNav variant="give" active={activeTab} onChange={setActiveTab} />
+      <EllissAI side="give" />
     </div>
   )
 }

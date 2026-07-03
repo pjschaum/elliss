@@ -1,6 +1,6 @@
 -- ═══════════════════════════════════════════════════════════
 -- Elliss — Alerts Preferences + Notifications Table
--- Run this in: Supabase Dashboard → SQL Editor → New query
+-- Safe to re-run: uses IF NOT EXISTS / duplicate policy guards
 -- ═══════════════════════════════════════════════════════════
 
 -- ─── ALERT PREFERENCES on profiles ───────────────────────────
@@ -18,21 +18,23 @@ create table if not exists public.notifications (
   id          uuid      default gen_random_uuid() primary key,
   user_id     uuid      references auth.users(id) on delete cascade not null,
   type        text      not null,
-    -- 'upcoming_event' | 'new_event_fav_org' | 'new_event_fav_cause'
-    -- | 'donation_drive_fav_org' | 'donation_drive_fav_cause' | 'system'
   title       text      not null,
   body        text,
   read        boolean   default false,
-  link_to     text,     -- deep-link path e.g. '/give/event/1'
+  link_to     text,
   created_at  timestamptz default now()
 );
 
 alter table public.notifications enable row level security;
 
-create policy "Users can view own notifications"
-  on public.notifications for select
-  using (auth.uid() = user_id);
+do $$ begin
+  create policy "Users can view own notifications"
+    on public.notifications for select
+    using (auth.uid() = user_id);
+exception when duplicate_object then null; end $$;
 
-create policy "Users can mark own notifications read"
-  on public.notifications for update
-  using (auth.uid() = user_id);
+do $$ begin
+  create policy "Users can mark own notifications read"
+    on public.notifications for update
+    using (auth.uid() = user_id);
+exception when duplicate_object then null; end $$;
