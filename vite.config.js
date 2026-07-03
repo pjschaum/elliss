@@ -36,6 +36,9 @@ export default defineConfig({
         // Don't cache Supabase API calls
         navigateFallback: '/index.html',
         navigateFallbackDenylist: [/^\/api\//],
+        // Take control immediately on next open — no need to close all tabs first
+        skipWaiting: true,
+        clientsClaim: true,
       },
     }),
   ],
