@@ -681,7 +681,7 @@ export const RESOURCES = [
   {
     id: 24,
     org: 'Madison Metro Transit — Half-Price Fare Program',
-    orgId: 23,
+    orgId: null,
     initials: 'MM',
     color: '#5C6BC0',
     category: 'Transportation',
@@ -710,7 +710,7 @@ export const RESOURCES = [
   {
     id: 25,
     org: 'Legal Action of Wisconsin — Madison',
-    orgId: 24,
+    orgId: null,
     initials: 'LA',
     color: '#C62828',
     category: 'Legal Aid',
@@ -739,7 +739,7 @@ export const RESOURCES = [
   {
     id: 26,
     org: 'Reach Dane — Head Start & Early Head Start',
-    orgId: 25,
+    orgId: null,
     initials: 'RD',
     color: '#F4C04B',
     category: 'Child Care',
@@ -768,7 +768,7 @@ export const RESOURCES = [
   {
     id: 27,
     org: 'Dane County Human Services',
-    orgId: 26,
+    orgId: null,
     initials: 'DC',
     color: '#1565C0',
     category: 'Financial Aid',
@@ -797,7 +797,7 @@ export const RESOURCES = [
   {
     id: 28,
     org: 'Energy Services Inc. (ESI) — Dane County',
-    orgId: 27,
+    orgId: null,
     initials: 'ES',
     color: '#E07B2A',
     category: 'Financial Aid',
@@ -826,7 +826,7 @@ export const RESOURCES = [
   {
     id: 29,
     org: 'Access to Independence Inc. (ATI)',
-    orgId: 28,
+    orgId: null,
     initials: 'AT',
     color: '#388E3C',
     category: 'Disability Services',
@@ -855,7 +855,7 @@ export const RESOURCES = [
   {
     id: 30,
     org: 'Dane County ADRC',
-    orgId: 29,
+    orgId: null,
     initials: 'AD',
     color: '#5C6BC0',
     category: 'Senior Services',
@@ -886,7 +886,7 @@ export const RESOURCES = [
   {
     id: 31,
     org: 'The Bridge Food & Diaper Bank',
-    orgId: 23,
+    orgId: null,
     initials: 'TB',
     color: '#2E7D32',
     category: 'Food & Meals',
@@ -915,7 +915,7 @@ export const RESOURCES = [
   {
     id: 32,
     org: 'Open Arms Free Clinic',
-    orgId: 25,
+    orgId: null,
     initials: 'OA',
     color: '#0277BD',
     category: 'Healthcare',
@@ -944,7 +944,7 @@ export const RESOURCES = [
   {
     id: 33,
     org: 'New Beginnings APFV',
-    orgId: 27,
+    orgId: null,
     initials: 'NB',
     color: '#7B1FA2',
     category: 'Crisis & Safety',
@@ -973,7 +973,7 @@ export const RESOURCES = [
   {
     id: 34,
     org: 'The Time Is Now To Help',
-    orgId: 29,
+    orgId: null,
     initials: 'TN',
     color: '#C62828',
     category: 'Financial Aid',
@@ -1002,7 +1002,7 @@ export const RESOURCES = [
   {
     id: 35,
     org: 'SMILES Equine Therapy',
-    orgId: 33,
+    orgId: null,
     initials: 'SE',
     color: '#5C6BC0',
     category: 'Disability Services',

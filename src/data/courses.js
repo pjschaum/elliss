@@ -6,7 +6,7 @@ export const COURSES = [
   {
     id: 1,
     name: 'Google Career Certificates',
-    orgId: 44,
+    orgId: null,
     initials: 'GC',
     color: '#1565C0',
     provider: 'Google / Coursera',
@@ -38,7 +38,7 @@ export const COURSES = [
   {
     id: 2,
     name: 'Goodwill Digital Career Accelerator',
-    orgId: 45,
+    orgId: null,
     initials: 'GD',
     color: '#E07B2A',
     provider: 'Goodwill Industries / Grow with Google',
@@ -70,7 +70,7 @@ export const COURSES = [
   {
     id: 3,
     name: 'freeCodeCamp — Full-Stack Web Development',
-    orgId: 46,
+    orgId: null,
     initials: 'FC',
     color: '#006400',
     provider: 'freeCodeCamp (nonprofit)',
@@ -102,7 +102,7 @@ export const COURSES = [
   {
     id: 4,
     name: 'Khan Academy — Academic Skills & SAT Prep',
-    orgId: 47,
+    orgId: null,
     initials: 'KA',
     color: '#14BF96',
     provider: 'Khan Academy (nonprofit)',
@@ -134,7 +134,7 @@ export const COURSES = [
   {
     id: 5,
     name: 'GED Online Preparation',
-    orgId: 48,
+    orgId: null,
     initials: 'GE',
     color: '#C62828',
     provider: 'GED Testing Service',
@@ -166,7 +166,7 @@ export const COURSES = [
   {
     id: 6,
     name: 'USA Learns — English for Adult Learners',
-    orgId: 49,
+    orgId: null,
     initials: 'UL',
     color: '#0277BD',
     provider: 'USA Learns (nonprofit, California Dept. of Education)',
@@ -198,7 +198,7 @@ export const COURSES = [
   {
     id: 7,
     name: 'LinkedIn Learning (Free via Library)',
-    orgId: 50,
+    orgId: null,
     initials: 'LL',
     color: '#0A66C2',
     provider: 'LinkedIn Learning / Your Public Library',
@@ -230,7 +230,7 @@ export const COURSES = [
   {
     id: 8,
     name: 'Alison — Free Diploma & Certificate Courses',
-    orgId: 51,
+    orgId: null,
     initials: 'AL',
     color: '#6f4997',
     provider: 'Alison (nonprofit edtech)',
@@ -262,7 +262,7 @@ export const COURSES = [
   {
     id: 9,
     name: 'OSHA 10-Hour Safety Training',
-    orgId: 52,
+    orgId: null,
     initials: 'OS',
     color: '#C62828',
     provider: 'OSHA / Authorized Training Providers',
@@ -294,7 +294,7 @@ export const COURSES = [
   {
     id: 10,
     name: 'Wisconsin Job Center — Career Services',
-    orgId: 53,
+    orgId: null,
     initials: 'WJ',
     color: '#388E3C',
     provider: 'Wisconsin Department of Workforce Development',
@@ -328,7 +328,7 @@ export const COURSES = [
   {
     id: 11,
     name: 'Certified Nursing Assistant (CNA)',
-    orgId: 54,
+    orgId: null,
     initials: 'CN',
     color: '#0277BD',
     provider: 'Blackhawk Technical College',
@@ -360,7 +360,7 @@ export const COURSES = [
   {
     id: 12,
     name: 'Medical Coding & Billing Specialist',
-    orgId: 54,
+    orgId: null,
     initials: 'MC',
     color: '#0277BD',
     provider: 'Blackhawk Technical College',
@@ -392,7 +392,7 @@ export const COURSES = [
   {
     id: 13,
     name: 'IT Help Desk / Technical Support Specialist',
-    orgId: 54,
+    orgId: null,
     initials: 'IT',
     color: '#0277BD',
     provider: 'Blackhawk Technical College',
@@ -424,7 +424,7 @@ export const COURSES = [
   {
     id: 14,
     name: 'Welding Technician',
-    orgId: 54,
+    orgId: null,
     initials: 'WE',
     color: '#E07B2A',
     provider: 'Blackhawk Technical College',
@@ -456,7 +456,7 @@ export const COURSES = [
   {
     id: 15,
     name: 'HVAC/R Technician',
-    orgId: 54,
+    orgId: null,
     initials: 'HV',
     color: '#E07B2A',
     provider: 'Blackhawk Technical College',
@@ -488,7 +488,7 @@ export const COURSES = [
   {
     id: 16,
     name: 'Accounting Specialist',
-    orgId: 54,
+    orgId: null,
     initials: 'AC',
     color: '#5C6BC0',
     provider: 'Blackhawk Technical College',
@@ -520,7 +520,7 @@ export const COURSES = [
   {
     id: 17,
     name: 'Early Childhood Education (ECE)',
-    orgId: 54,
+    orgId: null,
     initials: 'EC',
     color: '#9cbf9f',
     provider: 'Blackhawk Technical College',
@@ -554,7 +554,7 @@ export const COURSES = [
   {
     id: 18,
     name: 'Certified Nursing Assistant (CNA)',
-    orgId: 55,
+    orgId: null,
     initials: 'CN',
     color: '#C62828',
     provider: 'Madison College',
@@ -586,7 +586,7 @@ export const COURSES = [
   {
     id: 19,
     name: 'Medical Coding Specialist',
-    orgId: 55,
+    orgId: null,
     initials: 'MC',
     color: '#C62828',
     provider: 'Madison College',
@@ -618,7 +618,7 @@ export const COURSES = [
   {
     id: 20,
     name: 'Cybersecurity — Associate of Applied Science',
-    orgId: 55,
+    orgId: null,
     initials: 'CY',
     color: '#C62828',
     provider: 'Madison College',
@@ -650,7 +650,7 @@ export const COURSES = [
   {
     id: 21,
     name: 'Welding Technology',
-    orgId: 55,
+    orgId: null,
     initials: 'WE',
     color: '#E07B2A',
     provider: 'Madison College',
@@ -682,7 +682,7 @@ export const COURSES = [
   {
     id: 22,
     name: 'Construction & Remodeling Technology',
-    orgId: 55,
+    orgId: null,
     initials: 'CR',
     color: '#E07B2A',
     provider: 'Madison College',
@@ -714,7 +714,7 @@ export const COURSES = [
   {
     id: 23,
     name: 'Accounting — Associate of Applied Science',
-    orgId: 55,
+    orgId: null,
     initials: 'AC',
     color: '#5C6BC0',
     provider: 'Madison College',
@@ -746,7 +746,7 @@ export const COURSES = [
   {
     id: 24,
     name: 'Early Childhood Education — Associate Degree',
-    orgId: 55,
+    orgId: null,
     initials: 'EC',
     color: '#9cbf9f',
     provider: 'Madison College',

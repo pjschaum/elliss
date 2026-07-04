@@ -144,7 +144,7 @@ function SavedItemRow({ name, sub, deadline, startDate, renewalDate, onRemove, o
 // side: 'give' (default) | 'help'
 // savedHook:    returned value of useSavedItems()   — required when side='help'
 // favoriteHook: returned value of useFavoriteOrgs() — required when side='give'
-export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
+export default function AccountTab({ side = 'give', savedHook, favoriteHook, assistanceProfile }) {
   const navigate = useNavigate()
   const { user, profile, loading, updateProfile } = useProfile()
   const [showVolProfile, setShowVolProfile] = useState(false)
@@ -368,16 +368,43 @@ export default function AccountTab({ side = 'give', savedHook, favoriteHook }) {
             </div>
           </div>
 
-          {/* ── Assistance Profile placeholder ── */}
+          {/* ── Assistance Profile ── */}
           <div className={a.cardGroup}>
             <SectionHeader title="Assistance Profile" />
             <div className={a.card}>
               <div className={a.profileStatusRow}>
                 <div>
-                  <span className={`${a.statusBadge} ${a.statusIncomplete}`}>○ Not set up</span>
-                  <p className={a.profileSummary}>Pre-fill program applications and course enrollments.</p>
+                  {assistanceProfile?.profile?.completed ? (
+                    <>
+                      <span className={`${a.statusBadge} ${a.statusComplete}`}>● Complete</span>
+                      <p className={a.profileSummary}>
+                        {[
+                          assistanceProfile.profile.forWhom === 'myself' ? 'For myself'
+                            : assistanceProfile.profile.forWhom === 'someone_else' ? 'For someone else'
+                            : assistanceProfile.profile.forWhom === 'my_family' ? 'For my family'
+                            : null,
+                          assistanceProfile.profile.primaryGoal === 'find_work' ? 'Finding work'
+                            : assistanceProfile.profile.primaryGoal === 'housing' ? 'Housing'
+                            : assistanceProfile.profile.primaryGoal === 'food' ? 'Food assistance'
+                            : assistanceProfile.profile.primaryGoal === 'healthcare' ? 'Healthcare'
+                            : assistanceProfile.profile.primaryGoal === 'education' ? 'Education'
+                            : null,
+                        ].filter(Boolean).join(' · ') || 'Profile complete'}
+                      </p>
+                    </>
+                  ) : (
+                    <>
+                      <span className={`${a.statusBadge} ${a.statusIncomplete}`}>○ Not set up</span>
+                      <p className={a.profileSummary}>Help us personalize resources for your situation.</p>
+                    </>
+                  )}
                 </div>
-                <button className={a.editBtn} disabled style={{ opacity: 0.4 }}>Coming soon</button>
+                <button
+                  className={a.editBtn}
+                  onClick={() => assistanceProfile?.resetProfile?.()}
+                >
+                  {assistanceProfile?.profile?.completed ? 'Edit' : 'Set up'}
+                </button>
               </div>
             </div>
           </div>
