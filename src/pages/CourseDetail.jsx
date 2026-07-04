@@ -17,7 +17,9 @@ export default function CourseDetail() {
       setSnackbar(true)
       setTimeout(() => setSnackbar(false), 3000)
     }
-    window.open(`https://${course.website}`, '_blank', 'noopener,noreferrer')
+    if (course.website) {
+      window.open(`https://${course.website}`, '_blank', 'noopener,noreferrer')
+    }
   }
 
   if (!course) {
