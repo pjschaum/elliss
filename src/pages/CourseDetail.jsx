@@ -11,6 +11,16 @@ export default function CourseDetail() {
   const { addItem, isTracked } = useJourney()
   const [snackbar, setSnackbar] = useState(false)
 
+  function openLink(url) {
+    const a = document.createElement('a')
+    a.href = url
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
   function handleEnroll() {
     if (!isTracked('courses', course.id)) {
       addItem('courses', course.id)
@@ -18,7 +28,7 @@ export default function CourseDetail() {
       setTimeout(() => setSnackbar(false), 3000)
     }
     if (course.website) {
-      window.open(`https://${course.website}`, '_blank', 'noopener,noreferrer')
+      openLink(`https://${course.website}`)
     }
   }
 

@@ -11,6 +11,16 @@ export default function ResourceDetail() {
   const { addItem, isTracked } = useJourney()
   const [snackbar, setSnackbar] = useState(false)
 
+  function openLink(url) {
+    const a = document.createElement('a')
+    a.href = url
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
   function handleGetHelp() {
     if (resource && !isTracked('resources', resource.id)) {
       addItem('resources', resource.id)
@@ -18,7 +28,7 @@ export default function ResourceDetail() {
       setTimeout(() => setSnackbar(false), 3000)
     }
     if (resource?.website) {
-      window.open(`https://${resource.website}`, '_blank', 'noopener,noreferrer')
+      openLink(`https://${resource.website}`)
     }
   }
 

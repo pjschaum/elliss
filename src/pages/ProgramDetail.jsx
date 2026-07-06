@@ -11,6 +11,16 @@ export default function ProgramDetail() {
   const { addItem, isTracked } = useJourney()
   const [snackbar, setSnackbar] = useState(false)
 
+  function openLink(url) {
+    const a = document.createElement('a')
+    a.href = url
+    a.target = '_blank'
+    a.rel = 'noopener noreferrer'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+  }
+
   function handleApply() {
     if (program && !isTracked('programs', program.id)) {
       addItem('programs', program.id)
@@ -18,7 +28,7 @@ export default function ProgramDetail() {
       setTimeout(() => setSnackbar(false), 3000)
     }
     if (program?.website) {
-      window.open(`https://${program.website}`, '_blank', 'noopener,noreferrer')
+      openLink(`https://${program.website}`)
     }
   }
 
