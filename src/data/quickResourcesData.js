@@ -317,4 +317,156 @@ export const AREA_SERVICES = {
       },
     ],
   },
+
+  // ── Walworth County, WI ──────────────────────────────────────────────────
+  'Walworth County': {
+    label: 'Walworth County, WI',
+    categories: [
+      {
+        category: 'Non-Emergency Police & Fire',
+        icon: '🚔',
+        accent: '#2c3e8c',
+        items: [
+          {
+            name: 'Walworth County Sheriff (Non-Emergency)',
+            phone: '2627232210',
+            phoneDisplay: '(262) 723-2210',
+            address: '1800 County Road NN, Elkhorn, WI',
+            mapsQuery: 'Walworth County Sheriff Elkhorn WI',
+          },
+          {
+            name: 'Lake Geneva Police (Non-Emergency)',
+            phone: '2622484433',
+            phoneDisplay: '(262) 248-4433',
+            address: '626 Geneva St, Lake Geneva, WI',
+            mapsQuery: 'Lake Geneva Police Department Lake Geneva WI',
+          },
+          {
+            name: 'Delavan Police (Non-Emergency)',
+            phone: '2627288670',
+            phoneDisplay: '(262) 728-8670',
+            address: '123 S 2nd St, Delavan, WI',
+            mapsQuery: 'Delavan Police Department Delavan WI',
+          },
+        ],
+      },
+      {
+        category: 'Hospital & Emergency Care',
+        icon: '🏥',
+        accent: '#1a7340',
+        items: [
+          {
+            name: 'Aurora Medical Center — Lake Geneva',
+            phone: '2622482691',
+            phoneDisplay: '(262) 248-2691',
+            address: 'N5900 County Road H, Lake Geneva, WI',
+            mapsQuery: 'Aurora Medical Center Lake Geneva WI',
+            website: 'https://www.aurorahealthcare.org',
+          },
+          {
+            name: 'Mercyhealth Hospital — Walworth',
+            phone: '2627238551',
+            phoneDisplay: '(262) 723-8551',
+            address: 'N2950 WI-67, Elkhorn, WI',
+            mapsQuery: 'Mercyhealth Hospital Elkhorn WI',
+            website: 'https://www.mercyhealthsystem.org',
+          },
+        ],
+      },
+      {
+        category: 'Utilities',
+        icon: '💧',
+        accent: '#0077a8',
+        items: [
+          {
+            name: 'Alliant Energy — Power Outage',
+            phone: '18002554268',
+            phoneDisplay: '1-800-255-4268',
+            desc: 'Electric outage reporting — 24/7',
+            website: 'https://www.alliantenergy.com',
+          },
+          {
+            name: 'WE Energies — Gas Emergency',
+            phone: '18002429137',
+            phoneDisplay: '1-800-242-9137',
+            desc: 'Natural gas leak or emergency — 24/7',
+            website: 'https://www.we-energies.com',
+          },
+          {
+            name: 'Black Hills Energy — Gas Emergency',
+            phone: '18006948989',
+            phoneDisplay: '1-800-694-8989',
+            desc: 'Natural gas emergency (some Walworth areas) — 24/7',
+            website: 'https://www.blackhillsenergy.com',
+          },
+        ],
+      },
+      {
+        category: 'Government Services',
+        icon: '🏛️',
+        accent: '#5a3e8a',
+        items: [
+          {
+            name: 'Walworth County DMV',
+            phone: '2627414200',
+            phoneDisplay: '(262) 741-4200',
+            address: '1800 County Road NN, Elkhorn, WI',
+            mapsQuery: 'Walworth County DMV Elkhorn WI',
+          },
+          {
+            name: 'Walworth County Human Services',
+            phone: '2627413200',
+            phoneDisplay: '(262) 741-3200',
+            address: '1910 County Road NN, Elkhorn, WI',
+            mapsQuery: 'Walworth County Human Services Elkhorn WI',
+            website: 'https://www.co.walworth.wi.us/218/Health-Human-Services',
+          },
+          {
+            name: 'Walworth County Clerk',
+            phone: '2627414241',
+            phoneDisplay: '(262) 741-4241',
+            address: '100 W Walworth St, Elkhorn, WI',
+            mapsQuery: 'Walworth County Clerk Elkhorn WI',
+          },
+        ],
+      },
+      {
+        category: 'Food & Basic Needs',
+        icon: '🍽️',
+        accent: '#c17f24',
+        items: [
+          {
+            name: 'The Bridge Food & Diaper Bank',
+            phone: '2627494999',
+            phoneDisplay: '(262) 749-4999',
+            address: '37 Broad St, Elkhorn, WI',
+            mapsQuery: 'The Bridge Food Bank Elkhorn WI',
+            website: 'https://www.bridgeelkhorn.org',
+          },
+          {
+            name: 'The Time Is Now To Help',
+            phone: '2622491107',
+            phoneDisplay: '(262) 249-1107',
+            address: '1080 Ann St, Lake Geneva, WI',
+            mapsQuery: 'The Time Is Now To Help Lake Geneva WI',
+            website: 'https://www.thetimeisnowtohelp.org',
+          },
+        ],
+      },
+      {
+        category: 'Transportation',
+        icon: '🚌',
+        accent: '#2e7d6e',
+        items: [
+          {
+            name: 'Walworth County Transit',
+            phone: '2627413200',
+            phoneDisplay: '(262) 741-3200',
+            desc: 'Demand-response transit & medical transport',
+            website: 'https://www.co.walworth.wi.us',
+          },
+        ],
+      },
+    ],
+  },
 }
