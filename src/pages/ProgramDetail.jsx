@@ -11,24 +11,11 @@ export default function ProgramDetail() {
   const { addItem, isTracked } = useJourney()
   const [snackbar, setSnackbar] = useState(false)
 
-  function openLink(url) {
-    const a = document.createElement('a')
-    a.href = url
-    a.target = '_blank'
-    a.rel = 'noopener noreferrer'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-  }
-
-  function handleApply() {
+  function handleTrack() {
     if (program && !isTracked('programs', program.id)) {
       addItem('programs', program.id)
       setSnackbar(true)
       setTimeout(() => setSnackbar(false), 3000)
-    }
-    if (program?.website) {
-      openLink(`https://${program.website}`)
     }
   }
 
@@ -194,9 +181,15 @@ export default function ProgramDetail() {
 
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
-        <button className={`${d.actionBtn} ${d.actionBtnHelp}`} onClick={handleApply}>
+        <a
+          href={program.website ? `https://${program.website}` : undefined}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${d.actionBtn} ${d.actionBtnHelp}`}
+          onClick={handleTrack}
+        >
           {isTracked('programs', program.id) ? 'Return to Application ↗' : 'Apply Now ↗'}
-        </button>
+        </a>
       </div>
 
       {/* Snackbar */}

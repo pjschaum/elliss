@@ -359,6 +359,7 @@
 }
 
 .actionBtn:active { opacity: 0.85; }
+a.actionBtn { display: block; text-align: center; text-decoration: none; line-height: 1.4; }
 
 /* ─── Neutral badge (org type) ─── */
 .badgeNeutral {

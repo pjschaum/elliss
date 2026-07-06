@@ -11,24 +11,11 @@ export default function CourseDetail() {
   const { addItem, isTracked } = useJourney()
   const [snackbar, setSnackbar] = useState(false)
 
-  function openLink(url) {
-    const a = document.createElement('a')
-    a.href = url
-    a.target = '_blank'
-    a.rel = 'noopener noreferrer'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-  }
-
-  function handleEnroll() {
+  function handleTrack() {
     if (!isTracked('courses', course.id)) {
       addItem('courses', course.id)
       setSnackbar(true)
       setTimeout(() => setSnackbar(false), 3000)
-    }
-    if (course.website) {
-      openLink(`https://${course.website}`)
     }
   }
 
@@ -201,9 +188,15 @@ export default function CourseDetail() {
 
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
-        <button className={`${d.actionBtn} ${d.actionBtnHelp}`} onClick={handleEnroll}>
+        <a
+          href={course.website ? `https://${course.website}` : undefined}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${d.actionBtn} ${d.actionBtnHelp}`}
+          onClick={handleTrack}
+        >
           {isTracked('courses', course.id) ? 'Return to Enrollment Site ↗' : 'Enroll Now ↗'}
-        </button>
+        </a>
       </div>
 
       {/* Snackbar */}

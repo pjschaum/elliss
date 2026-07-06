@@ -11,24 +11,11 @@ export default function ResourceDetail() {
   const { addItem, isTracked } = useJourney()
   const [snackbar, setSnackbar] = useState(false)
 
-  function openLink(url) {
-    const a = document.createElement('a')
-    a.href = url
-    a.target = '_blank'
-    a.rel = 'noopener noreferrer'
-    document.body.appendChild(a)
-    a.click()
-    document.body.removeChild(a)
-  }
-
-  function handleGetHelp() {
+  function handleTrack() {
     if (resource && !isTracked('resources', resource.id)) {
       addItem('resources', resource.id)
       setSnackbar(true)
       setTimeout(() => setSnackbar(false), 3000)
-    }
-    if (resource?.website) {
-      openLink(`https://${resource.website}`)
     }
   }
 
@@ -158,12 +145,15 @@ export default function ResourceDetail() {
 
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
-        <button
+        <a
+          href={resource.website ? `https://${resource.website}` : undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           className={`${d.actionBtn} ${d.actionBtnHelp}`}
-          onClick={handleGetHelp}
+          onClick={handleTrack}
         >
           {isTracked('resources', resource.id) ? 'Return to Website ↗' : 'Get Help ↗'}
-        </button>
+        </a>
       </div>
 
       {/* Snackbar */}
