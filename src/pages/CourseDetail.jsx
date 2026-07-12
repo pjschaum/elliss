@@ -189,7 +189,7 @@ export default function CourseDetail() {
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
         <a
-          href={course.website ? `https://${course.website}` : undefined}
+          href={course.enrollUrl ? `https://${course.enrollUrl}` : course.website ? `https://${course.website}` : undefined}
           target="_blank"
           rel="noopener noreferrer"
           className={`${d.actionBtn} ${d.actionBtnHelp}`}

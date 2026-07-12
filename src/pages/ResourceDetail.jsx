@@ -98,7 +98,7 @@ export default function ResourceDetail() {
               <span className={d.infoIcon}>🌐</span>
               <div className={d.infoContent}>
                 <p className={d.infoLabel}>Website</p>
-                <span className={d.infoLink}>{resource.website}</span>
+                <a href={`https://${resource.website}`} target="_blank" rel="noopener noreferrer" className={d.infoLink}>{resource.website} ↗</a>
               </div>
             </div>
           </div>

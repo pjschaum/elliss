@@ -182,7 +182,7 @@ export default function ProgramDetail() {
       {/* Sticky bottom */}
       <div className={d.bottomBar}>
         <a
-          href={program.website ? `https://${program.website}` : undefined}
+          href={program.applyUrl ? `https://${program.applyUrl}` : program.website ? `https://${program.website}` : undefined}
           target="_blank"
           rel="noopener noreferrer"
           className={`${d.actionBtn} ${d.actionBtnHelp}`}

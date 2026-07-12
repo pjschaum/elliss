@@ -157,15 +157,19 @@ export default function EventDetail() {
                 <p className={d.infoValue}>{event.coordinator}</p>
               </div>
             </div>
-            <div className={d.infoRow}>
-              <span className={d.infoIcon}>✉️</span>
-              <div className={d.infoContent}>
-                <p className={d.infoLabel}>Email</p>
-                <a href={`mailto:${event.coordinatorEmail}`} className={d.infoLink}>
-                  {event.coordinatorEmail}
-                </a>
+            {event.coordinatorEmail ? (
+              <div className={d.infoRow}>
+                <span className={d.infoIcon}>{event.coordinatorEmail.includes('@') ? '✉️' : '🌐'}</span>
+                <div className={d.infoContent}>
+                  <p className={d.infoLabel}>{event.coordinatorEmail.includes('@') ? 'Email' : 'Volunteer Signup'}</p>
+                  {event.coordinatorEmail.includes('@') ? (
+                    <a href={`mailto:${event.coordinatorEmail}`} className={d.infoLink}>{event.coordinatorEmail}</a>
+                  ) : (
+                    <a href={`https://${event.coordinatorEmail}`} target="_blank" rel="noopener noreferrer" className={d.infoLink}>{event.coordinatorEmail} ↗</a>
+                  )}
+                </div>
               </div>
-            </div>
+            ) : null}
           </div>
         </div>
       </div>
